@@ -73,14 +73,28 @@ class Tours extends CI_Controller
         {
             $data['user'] = $this->session->userdata();
             $data['page_title'] = "Add Tour";
-            $data['categoryid'] = $id;
+            
+            // Handle string parameter for id
+            if($id == "India") {
+                $categoryId = 1;
+            } else if($id == "World") {
+                $categoryId = 2;
+            } else {
+                $categoryId = intval($id);
+            }
+            
+            $data['categoryid'] = $categoryId;
             $data['category'] = $this->category_model->getAll();
             $data['tour_types'] = $this->tourtypes_model->getAll();
             $data['continents'] = $this->category_model->getAllcontinent();
             
             // If category ID is set, pre-fetch tour categories
-            if($id > 0) {
-                $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($id);
+            if($categoryId == 1) {
+                // For India, fetch states directly
+                $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($categoryId);
+            } else if($categoryId == 2) {
+                // For World, we'll load countries via JavaScript after continent selection
+                $data['tourcategory'] = array();
             }
 
             $this->load->view('layout_admin/header', $data);
@@ -182,6 +196,29 @@ class Tours extends CI_Controller
             $response['error_message'] = "Invalid Request";
             die(json_encode($response));
         }
+    }
+
+    public function getContinentFromTourCategory()
+    {
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $tourcategory_id = isset($_POST['tourcategory_id']) ? intval($_POST['tourcategory_id']) : 0;
+        
+        if($tourcategory_id) {
+            $tourCategory = $this->tourcategory_model->getById($tourcategory_id);
+            if(!empty($tourCategory)) {
+                $response['error'] = 0;
+                $response['continent_id'] = $tourCategory['sub_category'];
+                $response['success_message'] = "Success";
+            } else {
+                $response['error'] = 1;
+                $response['error_message'] = "Tour category not found";
+            }
+        } else {
+            $response['error'] = 1;
+            $response['error_message'] = "Invalid Request";
+        }
+        
+        die(json_encode($response));
     }
 
     public function validate_images($tour_images)
