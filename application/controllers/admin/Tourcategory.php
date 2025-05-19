@@ -68,7 +68,13 @@ class Tourcategory extends CI_Controller
 
         $id = $this->security->xss_clean($this->input->post('record_id'));     
         $this->form_validation->set_rules('category','Category','trim|required|max_length[128]');
-        $this->form_validation->set_rules('continent','Continent','trim|required|max_length[128]');
+        
+        // Only validate continent field when category is 2
+        $category = $this->input->post('category');
+        if($category == '2') {
+            $this->form_validation->set_rules('continent','Continent','trim|required|max_length[128]');
+        }
+        
         $this->form_validation->set_rules('country','Country','trim|required|max_length[128]');
                 
         if($this->form_validation->run() == FALSE)
@@ -80,7 +86,13 @@ class Tourcategory extends CI_Controller
 
         $user = $this->session->userdata();
         $category = $this->security->xss_clean($this->input->post('category'));
-        $continent = $this->security->xss_clean($this->input->post('continent'));
+        
+        // For category 2, use continent value; for others, use 0
+        $continent = '0';
+        if($category == '2') {
+            $continent = $this->security->xss_clean($this->input->post('continent'));
+        }
+        
         $country = $this->security->xss_clean($this->input->post('country'));
 
         $recordInfo = array(
@@ -90,9 +102,11 @@ class Tourcategory extends CI_Controller
                 'created_by' => $user['userId']
             );
 
-        if( $id == "" )
+        // Check if it's a new record (empty id) or an update
+        if(empty($id))
         {
-            if( $this->tourcategory_model->checkRecordExists($country))
+            // It's a new record
+            if($this->tourcategory_model->checkRecordExists($country))
             {
                 $response["error"] = 1;
                 $response["error_message"] = "Record already exists.";
@@ -115,6 +129,7 @@ class Tourcategory extends CI_Controller
         }
         else
         {
+            // It's an update
             $result = $this->tourcategory_model->checkRecordExists1($country, $id);
             if( $result )
             {

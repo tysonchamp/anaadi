@@ -1,4 +1,4 @@
-  <main id="main" class="main">
+<main id="main" class="main">
 
     <section class="section dashboard">
         
@@ -78,7 +78,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <form id="addcategory" action="<?=base_url('admin/Tourcategory/save_record')?>" method="POST">
-          <input type="hidden" name="record_id" value="<?=$row['id']?>">
+          <input type="hidden" name="record_id" value="">
           <div class="modal-header">
             <h5 class="modal-title">Add Category</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -93,11 +93,11 @@
                     <?php } ?>
                 </select>
               </div>
-              <div class="col-md-10 mx-auto mb-2">
+              <div class="col-md-10 mx-auto mb-2 continent-field" style="display: none;">
                 <label for="validationDefault02" class="form-label">Continent</label>
                 <select name="continent" class="form-select">
                 <option value="0">-Select-</option>
-                    <?php  foreach($continent as $row){ ?>
+                    <?php foreach($continent as $row){ ?>
                       <option value="<?=$row['id']?>"><?=$row['continent']?></option>
                     <?php } ?>
                 </select>
@@ -126,6 +126,11 @@
     //edit customer
     $(".new-category").click(function (event) {
         event.preventDefault(); // Prevent default form submission
+        // Reset form for a new record
+        $('#addcategory')[0].reset();
+        $('#add-category input[name="record_id"]').val('');
+        $('#add-category select[name="category"]').val('0');
+        $('.continent-field').hide();
         $("#add-category").modal('show');        
     });
 
@@ -144,8 +149,16 @@
                 {
                   $('#add-category').modal('show');    
                   $('#add-category input[name="record_id"]').val(d.record.id);
-                  $('#add-category input[name="sub_category"]').val(d.record.sub_category);
                   $('#add-category select[name="category"]').val(d.record.category_id);
+                  $('#add-category select[name="continent"]').val(d.record.sub_category);
+                  $('#add-category input[name="country"]').val(d.record.country);
+                  
+                  // Show or hide continent based on category
+                  if(d.record.category_id == '2') {
+                    $('.continent-field').show();
+                  } else {
+                    $('.continent-field').hide();
+                  }
                 }
                 else
                 {
@@ -158,58 +171,56 @@
         });
     });
 
-  $("#addcategory select[name='category']").change(function(){
+    // Handle category change event
+    $("#addcategory select[name='category']").change(function(){
+        var categoryId = $(this).val();
         
-        // alert('Hi');
-               var params = {};
-               params.category = $(this).val();
-               var url = "<?=base_url('admin/Tours/getTourContinent')?>";
-       
-               if( $(this).val() == 0 )
-               {
-                 $("#addcategory select[name='continent']").empty();
-                 return false;
-               }
-       
-               $.ajax({
-                   type: "POST",
-                   url: url,
-                   data: params,
-                   dataType:'json', 
-                   success: function (data) {
-                       console.log(data);
-                       if( data.error == 1 )
-                       {
-                           $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>"+data.error_message+"</div>");
-                           $("#savetour").prop('disabled', false);
-                           $("#savetour").html("Submit");
-                       }
-                       else
-                       {
-                           var records = data.record;
-                           $("#addcategory select[name='continent']").empty();
-                           for(var i=0; i< records.length;i++)
-                           {
-                             $("#addcategory select[name='continent']").append("<option value='"+records[i].id+"'>"+records[i].continent+"</option>");
-                           }
-                       }
-                   },
-                   error: function (data) {
-                       $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occured. Try again later.</div>");
-                       $("#savetour").prop('disabled', false);
-                       $("#savetour").html("Submit");
-                   }
-               });
-       
-               setTimeout(function(){
-                   $("#error_div").html("");
-               }, 2000);
-       
-             });
-
-
-
-
+        // Show/hide continent field based on category
+        if(categoryId == '2') {
+            $('.continent-field').show();
+        } else {
+            $('.continent-field').hide();
+            $("#addcategory select[name='continent']").val('0'); // Reset continent selection
+        }
+        
+        // Only load continents for category 2
+        if(categoryId == '2') {
+            var params = {};
+            params.category = categoryId;
+            var url = "<?=base_url('admin/Tours/getTourContinent')?>";
+            
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: params,
+                dataType:'json', 
+                success: function (data) {
+                    console.log(data);
+                    if(data.error == 1) {
+                        $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>"+data.error_message+"</div>");
+                        $("#savetour").prop('disabled', false);
+                        $("#savetour").html("Submit");
+                    } else {
+                        var records = data.record;
+                        $("#addcategory select[name='continent']").empty();
+                        $("#addcategory select[name='continent']").append("<option value='0'>-Select-</option>");
+                        for(var i=0; i< records.length; i++) {
+                            $("#addcategory select[name='continent']").append("<option value='"+records[i].id+"'>"+records[i].continent+"</option>");
+                        }
+                    }
+                },
+                error: function (data) {
+                    $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occured. Try again later.</div>");
+                    $("#savetour").prop('disabled', false);
+                    $("#savetour").html("Submit");
+                }
+            });
+        }
+        
+        setTimeout(function(){
+            $("#error_div").html("");
+        }, 2000);
+    });
 
     // submit booking
     $("#submitcategory").click(function (event) {
@@ -219,12 +230,26 @@
         let mbody = $("#addcategory .modal-body");
         let url = form.attr('action');
         
-        var sub_category = $("#addcategory select[name='continent']").val().trim();
+        var category = $("#addcategory select[name='category']").val();
+        var continent = $("#addcategory select[name='continent']").val();
         var country = $("#addcategory input[name='country']").val().trim();
-        if( sub_category == "" )
-        {
-          $("#addcategory input[name='continent']").focus();
-          return false;
+        
+        // Validation
+        if(category == "0") {
+            mbody.prepend("<div class='alert alert-danger mt-1 mb-2'>Please select a category</div>");
+            return false;
+        }
+        
+        // Only validate continent if category is 2
+        if(category == "2" && continent == "0") {
+            mbody.prepend("<div class='alert alert-danger mt-1 mb-2'>Please select a continent</div>");
+            return false;
+        }
+        
+        if(country == "") {
+            mbody.prepend("<div class='alert alert-danger mt-1 mb-2'>Please enter country/state</div>");
+            $("#addcategory input[name='country']").focus();
+            return false;
         }
 
         $(this).prop('disabled', true);
@@ -303,4 +328,3 @@
   });
 
 </script>
-  
