@@ -76,6 +76,12 @@ class Tours extends CI_Controller
             $data['categoryid'] = $id;
             $data['category'] = $this->category_model->getAll();
             $data['tour_types'] = $this->tourtypes_model->getAll();
+            $data['continents'] = $this->category_model->getAllcontinent();
+            
+            // If category ID is set, pre-fetch tour categories
+            if($id > 0) {
+                $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($id);
+            }
 
             $this->load->view('layout_admin/header', $data);
             $this->load->view('backend/addtour', $data);
@@ -108,6 +114,7 @@ class Tours extends CI_Controller
             $data['record'] = $this->tours_model->getById($record_id);
             $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($data['record']['category_id']);
             $data['tour_types'] = $this->tourtypes_model->getAll();
+            $data['continents'] = $this->category_model->getAllcontinent();
 
             $this->load->view('layout_admin/header', $data);
             $this->load->view('backend/addtour', $data);
@@ -134,6 +141,26 @@ class Tours extends CI_Controller
             $response['error_message'] = "Invalid Request";
             die(json_encode($response));
         }
+    }
+
+    public function getTourCategoryByContinent()
+    {
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $continent_id = isset($_POST['continent_id']) ? intval($_POST['continent_id']) : 0;
+        
+        if($continent_id) {
+            // Get tour categories based on continent ID
+            $record = $this->tourcategory_model->getBySubCategory($continent_id);
+            $response['error'] = 0;
+            $response['error_message'] = "";
+            $response['success_message'] = "Success";
+            $response['record'] = $record;
+        } else {
+            $response['error'] = 1;
+            $response['error_message'] = "Invalid Request";
+        }
+        
+        die(json_encode($response));
     }
 
     public function getTourContinent()

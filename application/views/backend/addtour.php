@@ -1,4 +1,4 @@
-  <main id="main" class="main">
+<main id="main" class="main">
     <section class="section dashboard">
         <div class="col-lg-12 p-0">
           <div class="row">
@@ -29,16 +29,30 @@
                           
                           <div class="form-group w-45 mb-2">
                             <label>Category</label>
-                            <select name="category_id" class="form-select">
+                            <select name="category_id" id="category_id" class="form-select">
                                 <option value="0">-Select-</option>
                                 <?php foreach($category as $row){ ?>
-                                  <option <?=(isset($record) && $record['category_id'] == $row['id'] || $categoryid == $row['category'])?"selected":""?> value="<?=$row['id']?>"><?=$row['category']?></option>
+                                  <option <?=(isset($record) && $record['category_id'] == $row['id'] || (isset($categoryid) && $categoryid == $row['id']))?"selected":""?> value="<?=$row['id']?>"><?=$row['category']?></option>
                                 <?php } ?>
                             </select>
                           </div>
+                          
+                          <div class="form-group w-50 mb-2" id="continent_container" style="display: none;">
+                            <label>Continent</label>
+                            <select name="continent_id" id="continent_id" class="form-select">
+                                <option value="0">-Select-</option>
+                                <?php if(isset($continents)){ 
+                                  foreach($continents as $row){ ?>
+                                    <option value="<?=$row['id']?>"><?=$row['continent']?></option>
+                                  <?php }
+                                } ?>
+                            </select>
+                          </div>
+                          
                           <div class="form-group w-50 mb-2">
                             <label>State</label>
                             <select name="tourcategory_id" class="form-select">
+                              <option value="0">-Select-</option>
                               <?php if( isset($tourcategory)) { 
                                 foreach($tourcategory as $row) { ?>
                                   <option <?=(isset($record) && $record['tourcategory_id'] == $row['id'] )?"selected":""?>  value="<?=$row['id']?>"><?=$row['sub_category']?></option>
@@ -46,6 +60,7 @@
                               } ?>
                             </select>
                           </div>
+                          
                           <div class="form-group w-50 mb-2">
                             <label>Tour Type</label>
                             <select name="type_id" class="form-select">
@@ -57,6 +72,7 @@
                               } ?>
                             </select>
                           </div>
+                          
                           <div class="form-group w-100 mb-2">
                             <label>Title</label>
                             <input type="text" name="title" value="<?=(isset($record))?$record['title']:""?>" class="form-control" required maxlength="250">
@@ -222,26 +238,51 @@
     }
 
     $(document).ready(function(){
-
-      $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
-        if(e.keyCode == 13) {
-          e.preventDefault();
-          return false;
+      // Check category on page load and show/hide continent dropdown
+      var currentCategory = $("#category_id").val();
+      if(currentCategory == 2) {
+        $("#continent_container").show();
+      } else {
+        $("#continent_container").hide();
+      }
+      
+      // Handle category change
+      $("#category_id").change(function(){
+        var category_id = $(this).val();
+        
+        // Reset tour category dropdown
+        $("select[name='tourcategory_id']").empty().append("<option value='0'>-Select-</option>");
+        
+        // Show/hide continent dropdown based on category
+        if(category_id == 2) {
+          $("#continent_container").show();
+          // Reset continent selection
+          $("#continent_id").val(0);
+        } else if(category_id == 1) {
+          $("#continent_container").hide();
+          // Fetch tour categories directly for India
+          fetchTourCategories(category_id);
+        } else {
+          $("#continent_container").hide();
         }
       });
-
-      $("#addtour select[name='category_id']").change(function(){
-        
-        var params = {};
-        params.category_id = $(this).val();
-        var url = "<?=base_url('admin/Tours/getTourCategory')?>";
-
-        if( $(this).val() == 0 )
-        {
-          $("#addtour select[name='tourcategory_id']").empty();
-          return false;
+      
+      // Handle continent change
+      $("#continent_id").change(function(){
+        var continent_id = $(this).val();
+        if(continent_id > 0) {
+          // Fetch tour categories based on continent
+          fetchTourCategoriesByContinent(continent_id);
+        } else {
+          $("select[name='tourcategory_id']").empty().append("<option value='0'>-Select-</option>");
         }
-
+      });
+      
+      function fetchTourCategories(category_id) {
+        var params = {};
+        params.category_id = category_id;
+        var url = "<?=base_url('admin/Tours/getTourCategory')?>";
+        
         $.ajax({
             type: "POST",
             url: url,
@@ -249,33 +290,55 @@
             dataType:'json', 
             success: function (data) {
                 console.log(data);
-                if( data.error == 1 )
-                {
+                if(data.error == 1) {
                     $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>"+data.error_message+"</div>");
-                    $("#savetour").prop('disabled', false);
-                    $("#savetour").html("Submit");
-                }
-                else
-                {
+                } else {
                     var records = data.record;
-                    $("#addtour select[name='tourcategory_id']").empty();
-                    for(var i=0; i< records.length;i++)
-                    {
-                      $("#addtour select[name='tourcategory_id']").append("<option value='"+records[i].id+"'>"+records[i].sub_category+"</option>");
+                    $("select[name='tourcategory_id']").empty().append("<option value='0'>-Select-</option>");
+                    for(var i=0; i < records.length; i++) {
+                        $("select[name='tourcategory_id']").append("<option value='"+records[i].id+"'>"+records[i].sub_category+"</option>");
                     }
                 }
             },
             error: function (data) {
-                $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occured. Try again later.</div>");
-                $("#savetour").prop('disabled', false);
-                $("#savetour").html("Submit");
+                $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occurred. Try again later.</div>");
             }
         });
+      }
+      
+      function fetchTourCategoriesByContinent(continent_id) {
+        var params = {};
+        params.continent_id = continent_id;
+        var url = "<?=base_url('admin/Tours/getTourCategoryByContinent')?>";
+        
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            dataType:'json', 
+            success: function (data) {
+                console.log(data);
+                if(data.error == 1) {
+                    $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>"+data.error_message+"</div>");
+                } else {
+                    var records = data.record;
+                    $("select[name='tourcategory_id']").empty().append("<option value='0'>-Select-</option>");
+                    for(var i=0; i < records.length; i++) {
+                        $("select[name='tourcategory_id']").append("<option value='"+records[i].id+"'>"+records[i].sub_category+"</option>");
+                    }
+                }
+            },
+            error: function (data) {
+                $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occurred. Try again later.</div>");
+            }
+        });
+      }
 
-        setTimeout(function(){
-            $("#error_div").html("");
-        }, 2000);
-
+      $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
+        if(e.keyCode == 13) {
+          e.preventDefault();
+          return false;
+        }
       });
 
       $("#savetour").click(function(e){

@@ -66,6 +66,22 @@ class Tourcategory_model extends CI_Model
             return array();
         }
     }
+
+    public function getBySubCategory($continent_id)
+    {
+        $this->db->order_by('tbl_tourcategory.sub_category', 'ASC');
+        $this->db->select('*');
+        $this->db->from('tbl_tourcategory');
+        $this->db->where('sub_category', $continent_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     /**
      * This function used to check email exists or not
      * @param {string} $email : This is users email id
