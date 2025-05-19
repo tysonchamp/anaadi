@@ -192,6 +192,170 @@ class Tourcategory extends CI_Controller
         
         die(json_encode($response));
     }
+
+    /**
+     * Continents Page for this controller.
+     */
+    public function continents()
+    {
+        $isLoggedIn = $this->session->userdata('isLoggedIn');
+        if(!isset($isLoggedIn) || $isLoggedIn != TRUE)
+        {
+            redirect('admin');
+        }
+        else
+        {
+            $data['user'] = $this->session->userdata();
+            $data['page_title'] = "Continents";
+            $data['categories'] = $this->category_model->getAll();
+            $data['records'] = $this->category_model->getAllContinentsWithCategory();
+
+            $this->load->view('layout_admin/header', $data);
+            $this->load->view('backend/continent', $data);
+            $this->load->view('layout_admin/footer');
+        }
+    }
+
+    public function getContinent()
+    {
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        if( $id )
+        {
+            $record = $this->category_model->getContinentById($id);
+            $response['error'] = 0;
+            $response['error_message'] = "";
+            $response['success_message'] = "Success";
+            $response['record'] = $record;
+            die(json_encode($response));
+        }
+        else
+        {
+            $response['error'] = 1;
+            $response['error_message'] = "Invalid Request";
+            die(json_encode($response));
+        }
+    }
+
+    public function save_continent()
+    {
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $this->load->library('form_validation');       
+
+        $id = $this->security->xss_clean($this->input->post('record_id'));     
+        $this->form_validation->set_rules('category','Category','trim|required|max_length[128]');
+        $this->form_validation->set_rules('continent','Continent Name','trim|required|max_length[128]');
+                
+        if($this->form_validation->run() == FALSE)
+        {
+            $response["error"] = 1;
+            $response["error_message"] = $this->form_validation->error_string();
+            die(json_encode($response));
+        }
+
+        $category = $this->security->xss_clean($this->input->post('category'));
+        $continent = $this->security->xss_clean($this->input->post('continent'));
+
+        $recordInfo = array(
+                'category_id' => $category,
+                'continent' => $continent
+            );
+
+        // Check if it's a new record (empty id) or an update
+        if(empty($id))
+        {
+            // It's a new record
+            if($this->category_model->checkContinentExists($continent, $category))
+            {
+                $response["error"] = 1;
+                $response["error_message"] = "This continent already exists for the selected category.";
+            }
+            else
+            {
+                $result = $this->category_model->addNewContinent($recordInfo);
+                if($result > 0)
+                {
+                    $response["error"] = 0;
+                    $response["error_message"] = "";
+                    $response["success_message"] = "Continent added successfully";
+                } 
+                else 
+                {
+                    $response["error"] = 1;
+                    $response["error_message"] = "Continent add failed.";
+                }
+            }    
+        }
+        else
+        {
+            // It's an update
+            if($this->category_model->checkContinentExists1($continent, $category, $id))
+            {
+                $response["error"] = 1;
+                $response["error_message"] = "This continent already exists for the selected category.";
+            }
+            else
+            {
+                $result = $this->category_model->updateContinent($recordInfo, $id);
+                if($result > 0)
+                {
+                    $response["error"] = 0;
+                    $response["error_message"] = "";
+                    $response["success_message"] = "Continent updated successfully";
+                } 
+                else 
+                {
+                    $response["error"] = 1;
+                    $response["error_message"] = "Continent update failed.";
+                }
+            }                
+        }            
+        die(json_encode($response)); 
+    }
+
+    public function deleteContinent()
+    {
+        $record_id = intval($this->uri->segment(4));
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $user = $this->session->userdata();
+
+        if( $user['user_type'] !== "Admin" )
+        {
+            $response["error"] = 1;
+            $response["error_message"] = "You have no permission.";   
+            die(json_encode($response));
+        }
+        if( $record_id == 0 )
+        {   
+            $response["error"] = 1;
+            $response["error_message"] = "Invalid Request";
+            die(json_encode($response));
+        }
+        
+        // Check if continent is used in any tour category
+        if($this->tourcategory_model->isContinentUsed($record_id))
+        {
+            $response["error"] = 1;
+            $response["error_message"] = "This continent is being used by one or more tour categories and cannot be deleted.";
+            die(json_encode($response));
+        }
+        
+        $continent = $this->category_model->getContinentById($record_id);
+        if(empty($continent))
+        {   
+            $response["error"] = 1;
+            $response["error_message"] = "Record not found";
+        }
+        else
+        {
+            $this->category_model->deleteContinent($record_id);
+            $response["error"] = 0;
+            $response["error_message"] = "";
+            $response["success_message"] = "Continent deleted successfully";
+        }
+        
+        die(json_encode($response));
+    }
     
 }
 

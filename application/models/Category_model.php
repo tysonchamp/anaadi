@@ -33,10 +33,38 @@ class Category_model extends CI_Model
         }
     }
 
+    function getAllContinentsWithCategory()
+    {
+        $this->db->order_by('tbl_continent.id', 'ASC');
+        $this->db->select('tbl_continent.*, tbl_category.category');
+        $this->db->from('tbl_continent');
+        $this->db->join('tbl_category', 'tbl_category.id = tbl_continent.category_id', 'left');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0){
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
     function getById($id)
     {
         $this->db->select('*');
         $this->db->from('tbl_category');
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0)
+        {
+            return $query->row_array();
+        } else {
+            return array();
+        }
+    }
+
+    function getContinentById($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_continent');
         $this->db->where('id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0)
@@ -65,6 +93,20 @@ class Category_model extends CI_Model
         }
     }
 
+    function checkContinentExists($continent, $category_id)
+    {
+        $this->db->select('id');
+        $this->db->where('continent', $continent);
+        $this->db->where('category_id', $category_id);
+        $query = $this->db->get('tbl_continent');
+
+        if ($query->num_rows() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * This function used to check email exists or not
      * @param {string} $email : This is users email id
@@ -76,6 +118,21 @@ class Category_model extends CI_Model
         $this->db->where('category', $category);
         $this->db->where('id !=', $id);
         $query = $this->db->get('tbl_category');
+
+        if ($query->num_rows() > 0){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkContinentExists1($continent, $category_id, $id)
+    {
+        $this->db->select('id');
+        $this->db->where('continent', $continent);
+        $this->db->where('category_id', $category_id);
+        $this->db->where('id !=', $id);
+        $query = $this->db->get('tbl_continent');
 
         if ($query->num_rows() > 0){
             return true;
@@ -100,12 +157,46 @@ class Category_model extends CI_Model
         return $insert_id;
     }
 
+    function addNewContinent($info)
+    {
+        // Remove created_by if it exists in the info array
+        if(isset($info['created_by'])) {
+            unset($info['created_by']);
+        }
+        
+        $this->db->trans_start();
+        $this->db->insert('tbl_continent', $info);
+        
+        $insert_id = $this->db->insert_id();
+        
+        $this->db->trans_complete();
+        
+        return $insert_id;
+    }
+
     function updateRecord($info, $id)
     {
         $this->db->trans_start();
         
         $this->db->where('id', $id);
         $this->db->update('tbl_category', $info);
+        
+        $this->db->trans_complete();
+        
+        return true;
+    }
+
+    function updateContinent($info, $id)
+    {
+        // Remove created_by if it exists in the info array
+        if(isset($info['created_by'])) {
+            unset($info['created_by']);
+        }
+        
+        $this->db->trans_start();
+        
+        $this->db->where('id', $id);
+        $this->db->update('tbl_continent', $info);
         
         $this->db->trans_complete();
         
@@ -118,6 +209,18 @@ class Category_model extends CI_Model
         
         $this->db->where('id', $id);
         $this->db->delete('tbl_category');
+        
+        $this->db->trans_complete();
+        
+        return true;
+    }
+
+    function deleteContinent($id)
+    {
+        $this->db->trans_start();
+        
+        $this->db->where('id', $id);
+        $this->db->delete('tbl_continent');
         
         $this->db->trans_complete();
         

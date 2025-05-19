@@ -143,6 +143,19 @@ class Tourcategory_model extends CI_Model
         return true;
     }
 
+    /**
+     * Check if continent is used in any tour category
+     */
+    function isContinentUsed($continent_id)
+    {
+        $this->db->select('id');
+        $this->db->from('tbl_tourcategory');
+        $this->db->where('sub_category', $continent_id);
+        $query = $this->db->get();
+        
+        return ($query->num_rows() > 0);
+    }
+
 }
 
 ?>

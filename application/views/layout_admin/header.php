@@ -112,6 +112,11 @@
             </a>
           </li>
           <li>
+            <a href="<?=base_url('admin/Tourcategory/continents')?>">
+              <i class="bi bi-list"></i><span>Tour Continents</span>
+            </a>
+          </li>
+          <li>
             <a href="<?=base_url('admin/Tourcategory')?>">
               <i class="bi bi-list"></i><span>Tour Category</span>
             </a>
