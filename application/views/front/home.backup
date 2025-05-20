@@ -1,0 +1,32 @@
+<?php if(isset($destination_package) && count($destination_package) > 0 ) { ?>
+<div class="destination-area position-relative overflow-hidden space mt-0">
+    <div class="container">
+        <div class="title-area text-center">
+            <span class="sub-title">Popular </span> 
+            <h2 class="sec-title">Packages </h2>
+        </div>
+        <div class="swiper th-slider destination-slider slider-drag-wrap" id="aboutSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"3"}},"effect":"coverflow","coverflowEffect":{"rotate":"0","stretch":"95","depth":"212","modifier":"1"},"centeredSlides":"true"}'>
+            <div class="swiper-wrapper">
+                <?php foreach($destination_package as $tours){
+                	$images = explode(",", $tours['images']);
+                ?>
+                <div class="swiper-slide">
+                    <div class="destination-box gsap-cursor">
+                        <div class="destination-img">
+                            <img src="<?=base_url('assets/images/popular/'.$images[0])?>" alt="<?=$tours['album']?>">
+                            <div class="destination-content">
+                                <div class="media-left">
+                                    <h4 class="box-title"><a href="<?=base_url('Destination/'.$tours['album'])?>"><?=$tours['album']?></a></h4>
+                                   
+                                </div>
+                                <div class=""><a href="<?=base_url('Destination/'.$tours['album'])?>" class="th-btn style2 th-icon">View All</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            	<?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php } ?>

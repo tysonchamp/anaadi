@@ -369,28 +369,36 @@
             <span class="sub-title">Popular </span> 
             <h2 class="sec-title">Packages </h2>
         </div>
-        <div class="swiper th-slider destination-slider slider-drag-wrap" id="aboutSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"3"}},"effect":"coverflow","coverflowEffect":{"rotate":"0","stretch":"95","depth":"212","modifier":"1"},"centeredSlides":"true"}'>
-            <div class="swiper-wrapper">
-                <?php foreach($destination_package as $tours){
-                	$images = explode(",", $tours['images']);
-                ?>
-                <div class="swiper-slide">
-                    <div class="destination-box gsap-cursor">
-                        <div class="destination-img">
-                            <img src="<?=base_url('assets/images/popular/'.$images[0])?>" alt="<?=$tours['album']?>">
-                            <div class="destination-content">
-                                <div class="media-left">
-                                    <h4 class="box-title"><a href="<?=base_url('Destination/'.$tours['album'])?>"><?=$tours['album']?></a></h4>
-                                   
-                                </div>
-                                <div class=""><a href="<?=base_url('Destination/'.$tours['album'])?>" class="th-btn style2 th-icon">View All</a></div>
-                            </div>
-                        </div>
+        <!-- <div class="swiper th-slider destination-slider slider-drag-wrap" id="aboutSlider1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"3"}},"effect":"coverflow","coverflowEffect":{"rotate":"0","stretch":"95","depth":"212","modifier":"1"},"centeredSlides":"true"}'> -->
+            
+			<!-- Slider -->
+			 <div class="slider-area">
+                <div class="swiper th-slider destination-slider13 slider-drag-wrap" id="destiSlider13"
+                    data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"2"},"992":{"slidesPerView":"3"},"1200":{"slidesPerView":"4"}},"effect":"coverflow","coverflowEffect":{"rotate":"35","stretch":"0","depth":"100","modifier":"1","slideShadows":"false"},"centeredSlides":"true"}'>
+                    <div class="swiper-wrapper">
+
+						<?php foreach($destination_package as $tours){
+							$images = explode(",", $tours['images']);
+						?>
+							<div class="swiper-slide">
+								<div class="destination-box3">
+									<a href="<?=base_url('assets/images/popular/'.$images[0])?>" data-lightbox="image-1" data-title="My caption" class="overlay-lightbox">
+											<!-- <a href="destination-details.html" class="th-btn style2">24 Places</a> -->
+									</a>
+									<div class="destination-img"><img src="<?=base_url('assets/images/popular/'.$images[0])?>" alt="destination image"></div>
+								</div>
+							</div>
+						<?php } ?>
+						
                     </div>
                 </div>
-            	<?php } ?>
+                <!-- <div class="icon-box mt-60 text-center"><button data-slider-prev="#destiSlider1"
+                        class="slider-arrow style6 default"><img src="assets/img/icon/right-arrow2.svg" alt=""></button>
+                    <button data-slider-next="#destiSlider1" class="slider-arrow style6 default"><img
+                            src="assets/img/icon/left-arrow2.svg" alt=""></button></div> -->
             </div>
-        </div>
+
+        <!-- </div> -->
     </div>
 </div>
 <?php } ?>

@@ -33,9 +33,17 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/swiper-bundle.min.css">
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/style.css">
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/custom.css">
+		<link rel="stylesheet" href="<?=base_url()?>assets/lightbox/css/lightbox.css">
 		<script src="<?=base_url()?>assets/js/vendor/jquery-3.6.0.min.js"></script>
 		<script src="<?=base_url()?>assets/js/swiper-bundle.min.js"></script>
 		<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>
+		<script src="<?=base_url()?>assets/lightbox/js/lightbox.js"></script>
+		<script>
+			lightbox.option({
+			'resizeDuration': 200,
+			'wrapAround': true
+			})
+		</script>
 	</head>
 	<body>
 		<?php if( isset($homeslider) ){ ?>

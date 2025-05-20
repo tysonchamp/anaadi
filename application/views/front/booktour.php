@@ -174,10 +174,13 @@
                             <label class="p-1 mb-1 fs-16">No. of Children</label>
                             <input type="number" class="form-control" name="children" id="children" placeholder="0">
                         </div>
-                        <div class="col-6 form-group mb-2">
-                            <label class="text-danger p-2 font-bold">Amount</label>
-                            <span style="display:<?= (isset($tour) && count($tour) > 0) ? "inline;" : "none" ?>;font-size: 20px;font-weight:600;border: 1px solid lightgrey;" class="tour_amount mb-0 p-2 text-dark shadow-sm" id="amount" placeholder="0">
-                                <?= (isset($tour) && count($tour) > 0) ? "<i class='fa fa-indian-rupee'></i><input type='text' name= 'price' value=" . $tour['price'] . "> / Per Person" : "" ?>
+                        <div class="col-6 form-group mb-2 mt-3">
+                            <span class="d-flex align-items-center gap-2 p-2" style="border-radius: 8px; display:<?= (isset($tour) && count($tour) > 0) ? "block;" : "none" ?>;font-size: 16px;font-weight:600;border: 1px solid lightgrey;" class="tour_amount mb-0 p-2 text-dark shadow-sm" id="amount" placeholder="0">
+                                <label class="text-danger p-0 font-bold mb-0 px-2">Amount</label>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <?= (isset($tour) && count($tour) > 0) ? "<i class='fa fa-indian-rupee'></i>
+                                    <input type='text' name= 'price' value=" . $tour['price'] . "> <span style='font-size: 13px; line-height: 16px;'>/ Per Person</span> " : "" ?>
+                                </div>
                             </span>
                         </div>
 
