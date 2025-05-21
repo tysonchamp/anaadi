@@ -92,20 +92,22 @@
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select <?php if($message['typeof_tour']['value'] == "0") { echo $message['typeof_tour']['class']; } ?>" id="typeof_tour" name="typeof_tour">
                                         <option <?= ($message['typeof_tour']['value'] == '0') ? "selected" : ""  ?> value="0">Type of Tour</option>
-                                        <option <?= ($message['typeof_tour']['value'] == '1') ? "selected" : "" ?> value="1">Sightseeing Tours</option>
-                                        <option <?= ($message['typeof_tour']['value'] == '2') ? "selected" : "" ?> value="2">Adventure Tours</option>
-                                        <option <?= ($message['typeof_tour']['value'] == '3') ? "selected" : "" ?> value="3">Historical & Cultural Tours</option>
-                                        <option <?= ($message['typeof_tour']['value'] == '4') ? "selected" : "" ?> value="4">Specialty Tours</option>
+                                        <?php if(isset($tour_types) && !empty($tour_types)): ?>
+                                            <?php foreach($tour_types as $type): ?>
+                                                <option <?= ($message['typeof_tour']['value'] == $type['id']) ? "selected" : "" ?> value="<?= $type['id'] ?>"><?= $type['type'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="typeof_tour" name="typeof_tour">
                                         <option value="0">Type of Tour</option>
-                                        <option value="1">Sightseeing Tours</option>
-                                        <option value="2">Adventure Tours</option>
-                                        <option value="3">Historical & Cultural Tours</option>
-                                        <option value="4">Specialty Tours</option>
+                                        <?php if(isset($tour_types) && !empty($tour_types)): ?>
+                                            <?php foreach($tour_types as $type): ?>
+                                                <option value="<?= $type['id'] ?>"><?= $type['type'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } ?>
@@ -171,32 +173,16 @@
                                 $message = $this->session->flashdata('item');
                             ?>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select  <?php if($message['place']['value'] == "0") {   echo $message['place']['class']; } ?>" id="place" name="place">
-                                        <option <?= ($message['place']['value'] == "0")  ? "selected" : "" ?> value="0">Place</option>
-                                        <option <?= ($message['place']['value'] == "GOA")  ? "selected" : "" ?> value="GOA">GOA</option>
-                                        <option <?= ($message['place']['value'] == "SHIMLA")  ? "selected" : "" ?> value="SHIMLA">SHIMLA</option>
-                                        <option <?= ($message['place']['value'] == "COORG")  ? "selected" : "" ?> value="COORG">COORG</option>
-                                        <option <?= ($message['place']['value'] == "DARJEELING")  ? "selected" : "" ?> value="DARJEELING">DARJEELING</option>
-                                        <option <?= ($message['place']['value'] == "UDAIPUR")  ? "selected" : "" ?> value="UDAIPUR">UDAIPUR</option>
-                                        <option <?= ($message['place']['value'] == "MANALI")  ? "selected" : "" ?> value="MANALI">MANALI</option>
-                                        <option <?= ($message['place']['value'] == "Andaman and Nicobar")  ? "selected" : "" ?> value="Andaman and Nicobar">Andaman and Nicobar</option>
-                                        <option <?= ($message['place']['value'] == "DELHI")  ? "selected" : "" ?> value="DELHI">DELHI</option>
-                                    </select>
-                                    <?php if($message['place']['value'] == "0") {   ?><span class="text-danger"> <?php echo $message['place']['message']; ?></span> <?php } ?>
+                                    <input type="text" class="form-control <?php if($message['place']['value'] == "") {   echo $message['place']['class']; } ?>" 
+                                           id="place" name="place" placeholder="Place" 
+                                           value="<?php echo $message['place']['value'] != '0' ? $message['place']['value'] : ''; ?>">
+                                    <?php if($message['place']['value'] == "0" || $message['place']['value'] == "") { ?>
+                                        <span class="text-danger"><?php echo $message['place']['message']; ?></span>
+                                    <?php } ?>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select" id="place" name="place">
-                                        <option value="0">Place</option>
-                                        <option value="GOA">GOA</option>
-                                        <option value="SHIMLA">SHIMLA</option>
-                                        <option value="COORG">COORG</option>
-                                        <option value="DARJEELING">DARJEELING</option>
-                                        <option value="UDAIPUR">UDAIPUR</option>
-                                        <option value="MANALI">MANALI</option>
-                                        <option value="Andaman and Nicobar">Andaman and Nicobar</option>
-                                        <option value="DELHI">DELHI</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="place" name="place" placeholder="Place">
                                 </div>
                             <?php } ?>
                             

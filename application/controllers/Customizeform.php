@@ -8,6 +8,7 @@ class Customizeform extends CI_Controller {
         parent::__construct();
         $this->load->model('category_model');
         $this->load->model('tourcategory_model');
+        $this->load->model('Tourtypes_model'); // Added tour types model
         // Add CSRF token name to header for AJAX requests
         header('X-CSRF-Token: ' . $this->security->get_csrf_hash());
     }
@@ -19,6 +20,7 @@ class Customizeform extends CI_Controller {
         $this->load->model('tours_model');
         $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
         $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
+        $data['tour_types'] = $this->Tourtypes_model->getAll(); // Get all tour types
         
         $this->load->view('layout/header', $data);
         $this->load->view('front/cutomizeform', $data);
