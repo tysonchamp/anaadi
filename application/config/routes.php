@@ -59,7 +59,7 @@ $route['admin/Popular_Destinations'] = "admin/Tours";
 $route['Customizeform/enquiry'] = "Customizeform/enquiry";
 //$route['Customizeform/getTours'] = "Customizeform/getTours";
 // $route['Customizeform/(:any)'] = "Customizeform/index";
-$route['Customizeform'] = "Customizeform/index2";
+$route['Customizeform'] = "Customizeform/index";
 
 $route['Tour/getTourCategory'] = "Tour/getTourCategory";
 $route['Tour/getTours'] = "Tour/getTours";

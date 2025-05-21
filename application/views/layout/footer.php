@@ -1,4 +1,4 @@
-		<div id="whatsapp-widget" class="d-block dsm-none">
+<div id="whatsapp-widget" class="d-block dsm-none">
 	      <a title="Whatsapp Us" href="https://api.whatsapp.com/send?phone=919886774543&amp;text=Hi!%20Can%20I%20get%20more%20information%20on%20this?" target="_blank">
 	        <img width="54" height="54" style="border-radius:25px;" src="<?=base_url('assets/images/whatsapp.png')?>" alt="whatsapp--v1">
 	      </a>
@@ -142,6 +142,7 @@
 		<script src="<?=base_url()?>assets/js/nice-select.min.js"></script>
 		<script src="<?=base_url()?>assets/js/main.js"></script>
 		<script src="<?=base_url()?>assets/js/custom.js"></script>
+		<script src="<?= base_url() ?>assets/js/customize-form.js"></script>
 	</body>
 
 </html>

@@ -3,25 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Customizeform extends CI_Controller {
 
-	public function index2()
-	{
-		$data['page_title'] = 'Anaadi Tours and Travels | Customizeform';
-		$data['user'] = $this->session->userdata("Auth");
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('category_model');
+        $this->load->model('tourcategory_model');
+        // Add CSRF token name to header for AJAX requests
+        header('X-CSRF-Token: ' . $this->security->get_csrf_hash());
+    }
 
-		$this->load->model('tours_model');
-
-		$data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
-		$data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
+    public function index()
+    {
+        $data['page_title'] = 'Anaadi Tours and Travels | Customize Form';
+        $data['user'] = $this->session->userdata("Auth");
+        $this->load->model('tours_model');
+        $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
+        $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
         
         $this->load->view('layout/header', $data);
         $this->load->view('front/cutomizeform', $data);
         $this->load->view('layout/footer');
-	}
+    }
 
-	public function enquiry()
-	{
-		$response = array("error" => 0, "error_message" => "", "success_message" => "");
-		$this->load->model('Customizeform_model');
+    public function enquiry()
+    {
+        $response = array("error" => 0, "error_message" => "", "success_message" => "");
+        $this->load->model('Customizeform_model');
         $this->load->library('form_validation');       
         $name = $this->input->post('name');     
         $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
@@ -30,19 +37,14 @@ class Customizeform extends CI_Controller {
         $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('place', 'Place', 'trim|required|max_length[250]');
-         $this->form_validation->set_rules('adults', 'Adults', 'trim|required|max_length[250]');
+        $this->form_validation->set_rules('adults', 'Adults', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('children', 'Children', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('howmany_days', 'How many Days', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('howmany_night', 'How many Night', 'trim|required|max_length[250]');
 
-
-        // set session 
-        
-        
-
         if($this->form_validation->run() == FALSE)
         {
-        	$this->session->set_flashdata("error", $this->form_validation->error_string());
+            $this->session->set_flashdata("error", $this->form_validation->error_string());
             $messge['name'] = array('message' => 'Please Enter the name','class' => 'border border-danger','value' =>$this->input->post('name'));
             $messge['phone'] = array('message' => 'Please Enter the phone','class' => 'border border-danger','value' =>$this->input->post('phone'));
             $messge['email'] = array('message' => 'Please Enter the emailID','class' => 'border border-danger','value' =>$this->input->post('email'));
@@ -62,25 +64,24 @@ class Customizeform extends CI_Controller {
             $this->session->set_flashdata('item',$messge);
             redirect('Customizeform');
         }else{
-        //$this->session->keep_flashdata('item',$messge);
-        $name = $this->security->xss_clean($this->input->post('name'));
-        $phone = $this->security->xss_clean($this->input->post('phone'));
-        $email = $this->security->xss_clean($this->input->post('email'));
-        $typeof_tour = $this->security->xss_clean($this->input->post('typeof_tour'));
-        $country = $this->security->xss_clean($this->input->post('country'));
-        $place = $this->security->xss_clean($this->input->post('place'));
-        $adults = $this->security->xss_clean($this->input->post('adults'));
-        $children = $this->security->xss_clean($this->input->post('children'));
-        $howmany_days = $this->security->xss_clean($this->input->post('howmany_days'));
-        $howmany_night = $this->security->xss_clean($this->input->post('howmany_night'));
-        $visa = $this->security->xss_clean($this->input->post('visa'));
-        $Airfare = $this->security->xss_clean($this->input->post('Airfare'));
-        $meals = $this->security->xss_clean($this->input->post('meals'));
-        $Transfers = $this->security->xss_clean($this->input->post('Transfers'));
-        $Hotels = $this->security->xss_clean($this->input->post('Hotels'));
-        $budget = $this->security->xss_clean($this->input->post('budget'));
-          
-        $recordInfo = array(
+            $name = $this->security->xss_clean($this->input->post('name'));
+            $phone = $this->security->xss_clean($this->input->post('phone'));
+            $email = $this->security->xss_clean($this->input->post('email'));
+            $typeof_tour = $this->security->xss_clean($this->input->post('typeof_tour'));
+            $country = $this->security->xss_clean($this->input->post('country'));
+            $place = $this->security->xss_clean($this->input->post('place'));
+            $adults = $this->security->xss_clean($this->input->post('adults'));
+            $children = $this->security->xss_clean($this->input->post('children'));
+            $howmany_days = $this->security->xss_clean($this->input->post('howmany_days'));
+            $howmany_night = $this->security->xss_clean($this->input->post('howmany_night'));
+            $visa = $this->security->xss_clean($this->input->post('visa'));
+            $Airfare = $this->security->xss_clean($this->input->post('Airfare'));
+            $meals = $this->security->xss_clean($this->input->post('meals'));
+            $Transfers = $this->security->xss_clean($this->input->post('Transfers'));
+            $Hotels = $this->security->xss_clean($this->input->post('Hotels'));
+            $budget = $this->security->xss_clean($this->input->post('budget'));
+              
+            $recordInfo = array(
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
@@ -97,22 +98,76 @@ class Customizeform extends CI_Controller {
                 'Transfers' => $Transfers,
                 'Hotels' => $Hotels,
                 'budget' => $budget,
-                
             );
 
-        $result = $this->Customizeform_model->addNew($recordInfo);
-        if($result > 0)
-        {
-            $this->session->set_flashdata("success", "Thank you for Contacting us. Our team will get in touch with you soon.");
-        } 
-        else 
-        {
-            $this->session->set_flashdata("error", "OOps!! Message sending failed.");
+            $result = $this->Customizeform_model->addNew($recordInfo);
+            if($result > 0)
+            {
+                $this->session->set_flashdata("success", "Thank you for Contacting us. Our team will get in touch with you soon.");
+            } 
+            else 
+            {
+                $this->session->set_flashdata("error", "OOps!! Message sending failed.");
+            }
+            redirect('Customizeform','refresh');
         }
-        redirect('Customizeform','refresh');
-        }
+    }
 
-       
-	}
+    // AJAX endpoint to get continents based on category
+    public function getContinents()
+    {
+        $response = array('success' => false, 'data' => array());
+        
+        $category_id = $this->input->post('category_id');
+        
+        if ($category_id == 2) { // International
+            $continents = $this->category_model->getAllcontinent();
+            $response['success'] = true;
+            $response['data'] = $continents;
+        }
+        
+        // Add CSRF hash to response
+        $response['csrf_hash'] = $this->security->get_csrf_hash();
+        
+        echo json_encode($response);
+    }
     
+    // AJAX endpoint to get tour categories based on category/continent
+    public function getTourCategories()
+    {
+        $response = array('success' => false, 'data' => array());
+        
+        $category_id = $this->input->post('category_id');
+        
+        if ($category_id == 1) { // India
+            // Get all states/tour categories for India
+            $tourCategories = $this->tourcategory_model->getByCategoryId($category_id);
+            $response['success'] = true;
+            $response['data'] = $tourCategories;
+        }
+        
+        // Add CSRF hash to response
+        $response['csrf_hash'] = $this->security->get_csrf_hash();
+        
+        echo json_encode($response);
+    }
+    
+    // AJAX endpoint to get countries based on continent
+    public function getCountriesByContinent()
+    {
+        $response = array('success' => false, 'data' => array());
+        
+        $continent_id = $this->input->post('continent_id');
+        
+        if ($continent_id > 0) {
+            $countries = $this->tourcategory_model->getBySubCategory($continent_id);
+            $response['success'] = true;
+            $response['data'] = $countries;
+        }
+        
+        // Add CSRF hash to response
+        $response['csrf_hash'] = $this->security->get_csrf_hash();
+        
+        echo json_encode($response);
+    }
 }

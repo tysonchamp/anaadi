@@ -110,111 +110,57 @@
                                 </div>
                             <?php } ?>
                             
-                            <!-- Country field (Compulsory) -->
+                            <!-- Category field (Compulsory) -->
                             <?php
                             if ($this->session->flashdata('item')) {
                                 $message = $this->session->flashdata('item');
                             ?>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select  <?php if($message['country']['value'] == "0") {  echo $message['country']['class']; } ?>" id="country" name="country">
-                                        <option <?= ($message['country']['value'] == "0")  ? "selected" : "" ?> value="0">Country</option>
-                                        <option <?= ($message['country']['value'] == "Kenya")  ? "selected" : "" ?> value="Kenya">Kenya</option>
-                                        <option <?= ($message['country']['value'] == "Mauritius")  ? "selected" : "" ?> value="Mauritius">Mauritius</option>
-                                        <option <?= ($message['country']['value'] == "Morocco")  ? "selected" : "" ?> value="Morocco">Morocco</option>
-                                        <option <?= ($message['country']['value'] == "South Africa")  ? "selected" : "" ?> value="South Africa">South Africa</option>
-                                        <option <?= ($message['country']['value'] == "Tanzania")  ? "selected" : "" ?> value="Tanzania">Tanzania</option>
-                                        <option <?= ($message['country']['value'] == "USA")  ? "selected" : "" ?> value="USA">USA</option>
-                                        <option <?= ($message['country']['value'] == "Argentina")  ? "selected" : "" ?> value="Argentina">Argentina</option>
-                                        <option <?= ($message['country']['value'] == "Canada")  ? "selected" : "" ?> value="Canada">Canada</option>
-                                        <option <?= ($message['country']['value'] == "Brazil")  ? "selected" : "" ?> value="Brazil">Brazil</option>
-                                        <option <?= ($message['country']['value'] == "Colambia")  ? "selected" : "" ?> value="Colambia">Colambia</option>
-                                        <option <?= ($message['country']['value'] == "Peru")  ? "selected" : "" ?> value="Peru">Peru</option>
-                                        <option <?= ($message['country']['value'] == "Cambodia")  ? "selected" : "" ?> value="Cambodia">Cambodia</option>
-                                        <option <?= ($message['country']['value'] == "China")  ? "selected" : "" ?> value="China">China</option>
-                                        <option <?= ($message['country']['value'] == "Hong Kong")  ? "selected" : "" ?> value="Hong Kong">Hong Kong</option>
-                                        <option <?= ($message['country']['value'] == "Indonesia")  ? "selected" : "" ?> value="Indonesia">Indonesia</option>
-                                        <option <?= ($message['country']['value'] == "Japan")  ? "selected" : "" ?> value="Japan">Japan</option>
-                                        <option <?= ($message['country']['value'] == "Kazakhstan")  ? "selected" : "" ?> value="Kazakhstan">Kazakhstan</option>
-                                        <option <?= ($message['country']['value'] == "Laos")  ? "selected" : "" ?> value="Laos">Laos</option>
-                                        <option <?= ($message['country']['value'] == "Macau")  ? "selected" : "" ?> value="Macau">Macau</option>
-                                        <option <?= ($message['country']['value'] == "Malaysia")  ? "selected" : "" ?> value="Malaysia">Malaysia</option>
-                                        <option <?= ($message['country']['value'] == "Philippines")  ? "selected" : "" ?> value="Philippines">Philippines</option>
-                                        <option <?= ($message['country']['value'] == "Singapore")  ? "selected" : "" ?> value="Singapore">Singapore</option>
-                                        <option <?= ($message['country']['value'] == "Thailand")  ? "selected" : "" ?> value="Thailand">Thailand</option>
-                                        <option <?= ($message['country']['value'] == "Vietnam")  ? "selected" : "" ?> value="Vietnam">Vietnam</option>
-                                        <option <?= ($message['country']['value'] == "Austria")  ? "selected" : "" ?> value="Austria">Austria</option>
-                                        <option <?= ($message['country']['value'] == "Azerbaijan")  ? "selected" : "" ?> value="Azerbaijan">Azerbaijan</option>
-                                        <option <?= ($message['country']['value'] == "Belgium")  ? "selected" : "" ?> value="Belgium">Belgium</option>
-                                        <option <?= ($message['country']['value'] == "Croatia")  ? "selected" : "" ?> value="Croatia">Croatia</option>
-                                        <option <?= ($message['country']['value'] == "Czech Republic")  ? "selected" : "" ?> value="Czech Republic">Czech Republic</option>
-                                        <option <?= ($message['country']['value'] == "Denmark")  ? "selected" : "" ?> value="Denmark">Denmark</option>
-                                        <option <?= ($message['country']['value'] == "Estonia")  ? "selected" : "" ?> value="Estonia">Estonia</option>
-                                        <option <?= ($message['country']['value'] == "Finland")  ? "selected" : "" ?> value="Finland">Finland</option>
-                                        <option <?= ($message['country']['value'] == "France")  ? "selected" : "" ?> value="France">France</option>
-                                        <option <?= ($message['country']['value'] == "Georgia")  ? "selected" : "" ?> value="Georgia">Georgia</option>
-                                        <option <?= ($message['country']['value'] == "Germany")  ? "selected" : "" ?> value="Germany">Germany</option>
-                                        <option <?= ($message['country']['value'] == "Greece")  ? "selected" : "" ?> value="Greece">Greece</option>
-                                        <option <?= ($message['country']['value'] == "Hungary")  ? "selected" : "" ?> value="Hungary">Hungary</option>
-                                        <option <?= ($message['country']['value'] == "Ireland")  ? "selected" : "" ?> value="Ireland">Ireland</option>
-                                        <option <?= ($message['country']['value'] == "Italy")  ? "selected" : "" ?> value="Italy">Italy</option>
-                                        <option <?= ($message['country']['value'] == "Latvia")  ? "selected" : "" ?> value="Latvia">Latvia</option>
-                                        <option <?= ($message['country']['value'] == "Lithuania")  ? "selected" : "" ?> value="Lithuania">Lithuania</option>
-                                        <option <?= ($message['country']['value'] == "Netherlands")  ? "selected" : "" ?> value="Netherlands">Netherlands</option>
-                                        <option <?= ($message['country']['value'] == "Norway")  ? "selected" : "" ?> value="Norway">Norway</option>
-                                        <option <?= ($message['country']['value'] == "Poland")  ? "selected" : "" ?> value="Poland">Poland</option>
-                                        <option <?= ($message['country']['value'] == "Portugal")  ? "selected" : "" ?> value="Portugal">Portugal</option>
+                                    <select class="form-select <?php if(isset($message['category']) && $message['category']['value'] == "0") { echo $message['category']['class']; } ?>" id="tour_category" name="category">
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "0") ? "selected" : "" ?> value="0">Category</option>
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "1") ? "selected" : "" ?> value="1">India</option>
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "2") ? "selected" : "" ?> value="2">World</option>
                                     </select>
-                                   <?php if($message['country']['value'] == "0") {   ?> <span class="text-danger"> <?php echo $message['country']['message']; ?></span> <?php } ?>
+                                    <?php if(isset($message['category']) && $message['category']['value'] == "0") { ?>
+                                        <span class="text-danger"><?php echo $message['category']['message']; ?></span>
+                                    <?php } ?>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
+                                    <select class="form-select" id="tour_category" name="category">
+                                        <option value="0">Category</option>
+                                        <option value="1">India</option>
+                                        <option value="2">World</option>
+                                    </select>
+                                </div>
+                            <?php } ?>
+
+                            <!-- Continent field (shows only when International is selected) -->
+                            <div class="form-group col-6 mb-2" id="continent_container" style="display: none;">
+                                <select class="form-select" id="continent_id" name="continent">
+                                    <option value="0">Select Continent</option>
+                                    <!-- Continent options will be loaded via AJAX -->
+                                </select>
+                                <span class="text-danger continent-error" style="display: none;">Please select a continent</span>
+                            </div>
+                            
+                            <!-- Country field (Compulsory) - Will be populated based on category/continent -->
+                            <?php
+                            if ($this->session->flashdata('item')) {
+                                $message = $this->session->flashdata('item');
+                            ?>
+                                <div class="form-group col-6 mb-2" id="country_container">
+                                    <select class="form-select <?php if($message['country']['value'] == "0") { echo $message['country']['class']; } ?>" id="country" name="country">
+                                        <option <?= ($message['country']['value'] == "0") ? "selected" : "" ?> value="0">Country/State</option>
+                                        <!-- Options will be loaded dynamically -->
+                                    </select>
+                                   <?php if($message['country']['value'] == "0") { ?> <span class="text-danger"> <?php echo $message['country']['message']; ?></span> <?php } ?>
+                                </div>
+                            <?php } else { ?>
+                                <div class="form-group col-6 mb-2" id="country_container">
                                     <select class="form-select" id="country" name="country">
-                                        <option value="0">Country</option>
-                                        <option value="Kenya">Kenya</option>
-                                        <option value="Mauritius">Mauritius</option>
-                                        <option value="Morocco">Morocco</option>
-                                        <option value="South Africa">South Africa</option>
-                                        <option value="Tanzania">Tanzania</option>
-                                        <option value="USA">USA</option>
-                                        <option value="Argentina">Argentina</option>
-                                        <option value="Canada">Canada</option>
-                                        <option value="Brazil">Brazil</option>
-                                        <option value="Colambia">Colambia</option>
-                                        <option value="Peru">Peru</option>
-                                        <option value="Cambodia">Cambodia</option>
-                                        <option value="China">China</option>
-                                        <option value="Hong Kong">Hong Kong</option>
-                                        <option value="Indonesia">Indonesia</option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="Kazakhstan">Kazakhstan</option>
-                                        <option value="Laos">Laos</option>
-                                        <option value="Macau">Macau</option>
-                                        <option value="Malaysia">Malaysia</option>
-                                        <option value="Philippines">Philippines</option>
-                                        <option value="Singapore">Singapore</option>
-                                        <option value="Thailand">Thailand</option>
-                                        <option value="Vietnam">Vietnam</option>
-                                        <option value="Austria">Austria</option>
-                                        <option value="Azerbaijan">Azerbaijan</option>
-                                        <option value="Belgium">Belgium</option>
-                                        <option value="Croatia">Croatia</option>
-                                        <option value="Czech Republic">Czech Republic</option>
-                                        <option value="Denmark">Denmark</option>
-                                        <option value="Estonia">Estonia</option>
-                                        <option value="Finland">Finland</option>
-                                        <option value="France">France</option>
-                                        <option value="Georgia">Georgia</option>
-                                        <option value="Germany">Germany</option>
-                                        <option value="Greece">Greece</option>
-                                        <option value="Hungary">Hungary</option>
-                                        <option value="Ireland">Ireland</option>
-                                        <option value="Italy">Italy</option>
-                                        <option value="Latvia">Latvia</option>
-                                        <option value="Lithuania">Lithuania</option>
-                                        <option value="Netherlands">Netherlands</option>
-                                        <option value="Norway">Norway</option>
-                                        <option value="Poland">Poland</option>
-                                        <option value="Portugal">Portugal</option>
+                                        <option value="0">Country/State</option>
+                                        <!-- Options will be loaded dynamically -->
                                     </select>
                                 </div>
                             <?php } ?>

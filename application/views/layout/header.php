@@ -9,6 +9,7 @@
 		<meta name="keywords" content="best tour packages in Bengaluru, Best trip planners in Bengaluru, best tour planner in Bengaluru, tour planner Bengaluru, holiday packages planner in Bengaluru, trip planner Bengaluru">
 		<meta name="robots" content="INDEX,FOLLOW">
 		<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+		<meta name="base-url" content="<?= base_url() ?>">
 		<link rel="apple-touch-icon" sizes="180x180" href="<?=base_url()?>assets/img/favicons/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="<?=base_url()?>assets/img/favicons/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="<?=base_url()?>assets/img/favicons/favicon-16x16.png">
