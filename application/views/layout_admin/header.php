@@ -184,6 +184,13 @@
             </a>
           </li>
          
+          
+          <li>
+            <a href="<?=base_url('admin/Booking/customize')?>">
+              <i class="bi bi-person-lines-fill"></i><span>Customize Tour Requests</span>
+            </a>
+          </li>
+         
         </ul>
       </li>
       <li class="nav-item">
