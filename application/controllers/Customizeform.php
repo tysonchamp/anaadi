@@ -35,10 +35,11 @@ class Customizeform extends CI_Controller {
         $this->form_validation->set_rules('phone','Phone','trim|required|max_length[10]');
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[200]');
         $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
+        $this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('place', 'Place', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('adults', 'Adults', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('children', 'Children', 'trim|required|max_length[250]');
+        $this->form_validation->set_rules('travel_date', 'Travel Date', 'trim|required');
         $this->form_validation->set_rules('howmany_days', 'How many Days', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('howmany_night', 'How many Night', 'trim|required|max_length[250]');
 
@@ -49,29 +50,43 @@ class Customizeform extends CI_Controller {
             $messge['phone'] = array('message' => 'Please Enter the phone','class' => 'border border-danger','value' =>$this->input->post('phone'));
             $messge['email'] = array('message' => 'Please Enter the emailID','class' => 'border border-danger','value' =>$this->input->post('email'));
             $messge['typeof_tour'] = array('message' => 'Select the Type of Tour','class' => 'border border-danger','value' =>$this->input->post('typeof_tour'));
+            $messge['category'] = array('message' => 'Please Select Category','class' => 'border border-danger','value' =>$this->input->post('category'));
             $messge['country'] = array('message' => 'Please Select Country','class' => 'border border-danger','value' =>$this->input->post('country'));
             $messge['place'] = array('message' => 'Please Select the place','class' => 'border border-danger','value' =>$this->input->post('place'));
-            $messge['adults'] = array('message' => 'Please Eneter how many adults','class' => 'border border-danger','value' =>$this->input->post('adults'));
-            $messge['children'] = array('message' => 'Please Enter how many children','class' => 'border border-danger','value' =>$this->input->post('children'));
+            $messge['adults'] = array('message' => 'Please Enter how many adults','class' => 'border border-danger','value' =>$this->input->post('adults'));
+            $messge['travel_date'] = array('message' => 'Please Select Travel Date','class' => 'border border-danger','value' =>$this->input->post('travel_date'));
             $messge['howmany_days'] = array('message' => 'Please Enter the Total days','class' => 'border border-danger','value' =>$this->input->post('howmany_days'));
-            $messge['howmany_nights'] = array('message' => 'Please Enter the Tottal Nights','class' => 'border border-danger','value' =>$this->input->post('howmany_night'));
+            $messge['howmany_nights'] = array('message' => 'Please Enter the Total Nights','class' => 'border border-danger','value' =>$this->input->post('howmany_night'));
             $messge['visa'] = array('message' => 'Please Enter the Visa','class' => 'border border-danger','value' =>$this->input->post('visa'));
             $messge['Airfare'] = array('message' => 'Please Enter the Airfare','class' => 'border border-danger','value' =>$this->input->post('Airfare'));
             $messge['meals'] = array('message' => 'Please Enter the Meals','class' => 'border border-danger','value' =>$this->input->post('meals'));
             $messge['Transfers'] = array('message' => 'Please Select the Transfers','class' => 'border border-danger','value' =>$this->input->post('Transfers'));
             $messge['Hotels'] = array('message' => 'Please Select the Hotels','class' => 'border border-danger','value' =>$this->input->post('Hotels'));
-            $messge['budget'] = array('message' => 'Please Eneter Budget','class' => 'border border-danger','value' =>$this->input->post('budget'));
+            $messge['budget'] = array('message' => 'Please Enter Budget','class' => 'border border-danger','value' =>$this->input->post('budget'));
+            
+            // Add the new fields to the flash data
+            $messge['children_with_bed'] = array('value' =>$this->input->post('children_with_bed'));
+            $messge['children_without_bed'] = array('value' =>$this->input->post('children_without_bed'));
+            $messge['infants'] = array('value' =>$this->input->post('infants'));
+            $messge['continent'] = array('value' =>$this->input->post('continent'));
+            $messge['any_other'] = array('value' =>$this->input->post('any_other'));
+            
             $this->session->set_flashdata('item',$messge);
             redirect('Customizeform');
-        }else{
+        } else {
             $name = $this->security->xss_clean($this->input->post('name'));
             $phone = $this->security->xss_clean($this->input->post('phone'));
             $email = $this->security->xss_clean($this->input->post('email'));
+            $travel_date = $this->security->xss_clean($this->input->post('travel_date'));
             $typeof_tour = $this->security->xss_clean($this->input->post('typeof_tour'));
+            $category = $this->security->xss_clean($this->input->post('category'));
+            $continent = $this->security->xss_clean($this->input->post('continent'));
             $country = $this->security->xss_clean($this->input->post('country'));
             $place = $this->security->xss_clean($this->input->post('place'));
             $adults = $this->security->xss_clean($this->input->post('adults'));
-            $children = $this->security->xss_clean($this->input->post('children'));
+            $children_with_bed = $this->security->xss_clean($this->input->post('children_with_bed'));
+            $children_without_bed = $this->security->xss_clean($this->input->post('children_without_bed'));
+            $infants = $this->security->xss_clean($this->input->post('infants'));
             $howmany_days = $this->security->xss_clean($this->input->post('howmany_days'));
             $howmany_night = $this->security->xss_clean($this->input->post('howmany_night'));
             $visa = $this->security->xss_clean($this->input->post('visa'));
@@ -80,16 +95,22 @@ class Customizeform extends CI_Controller {
             $Transfers = $this->security->xss_clean($this->input->post('Transfers'));
             $Hotels = $this->security->xss_clean($this->input->post('Hotels'));
             $budget = $this->security->xss_clean($this->input->post('budget'));
+            $any_other = $this->security->xss_clean($this->input->post('any_other'));
               
             $recordInfo = array(
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
+                'travel_date' => $travel_date,
                 'typeof_tour' => $typeof_tour,
+                'category' => $category,
+                'continent' => $continent,
                 'country' => $country,
                 'place' => $place,
                 'adults' => $adults,
-                'children' => $children,
+                'children_with_bed' => $children_with_bed,
+                'children_without_bed' => $children_without_bed,
+                'infants' => $infants,
                 'howmany_days' => $howmany_days,
                 'howmany_night' => $howmany_night,
                 'visa' => $visa,
@@ -98,6 +119,7 @@ class Customizeform extends CI_Controller {
                 'Transfers' => $Transfers,
                 'Hotels' => $Hotels,
                 'budget' => $budget,
+                'any_other' => $any_other
             );
 
             $result = $this->Customizeform_model->addNew($recordInfo);
