@@ -229,8 +229,8 @@
                                 if ($this->session->flashdata('item')) {
                                     $message = $this->session->flashdata('item');
                                 ?>
-                                    <input type="number" class="form-control <?php if(isset($message['children_with_bed'])) { echo $message['children_with_bed']['class']; } ?>" 
-                                           value="<?php echo isset($message['children_with_bed']) ? $message['children_with_bed']['value'] : '0'; ?>" 
+                                    <input type="number" class="form-control <?php echo isset($message['children_with_bed']) && isset($message['children_with_bed']['class']) ? $message['children_with_bed']['class'] : ''; ?>" 
+                                           value="<?php echo isset($message['children_with_bed']) && isset($message['children_with_bed']['value']) ? $message['children_with_bed']['value'] : '0'; ?>" 
                                            name="children_with_bed" id="children_with_bed">
                                 <?php } else { ?>
                                     <input type="number" class="form-control" name="children_with_bed" id="children_with_bed" value="0">
@@ -244,8 +244,8 @@
                                 if ($this->session->flashdata('item')) {
                                     $message = $this->session->flashdata('item');
                                 ?>
-                                    <input type="number" class="form-control <?php if(isset($message['children_without_bed'])) { echo $message['children_without_bed']['class']; } ?>" 
-                                           value="<?php echo isset($message['children_without_bed']) ? $message['children_without_bed']['value'] : '0'; ?>" 
+                                    <input type="number" class="form-control <?php echo isset($message['children_without_bed']) && isset($message['children_without_bed']['class']) ? $message['children_without_bed']['class'] : ''; ?>" 
+                                           value="<?php echo isset($message['children_without_bed']) && isset($message['children_without_bed']['value']) ? $message['children_without_bed']['value'] : '0'; ?>" 
                                            name="children_without_bed" id="children_without_bed">
                                 <?php } else { ?>
                                     <input type="number" class="form-control" name="children_without_bed" id="children_without_bed" value="0">
@@ -259,8 +259,8 @@
                                 if ($this->session->flashdata('item')) {
                                     $message = $this->session->flashdata('item');
                                 ?>
-                                    <input type="number" class="form-control <?php if(isset($message['infants'])) { echo $message['infants']['class']; } ?>" 
-                                           value="<?php echo isset($message['infants']) ? $message['infants']['value'] : '0'; ?>" 
+                                    <input type="number" class="form-control <?php echo isset($message['infants']) && isset($message['infants']['class']) ? $message['infants']['class'] : ''; ?>" 
+                                           value="<?php echo isset($message['infants']) && isset($message['infants']['value']) ? $message['infants']['value'] : '0'; ?>" 
                                            name="infants" id="infants">
                                 <?php } else { ?>
                                     <input type="number" class="form-control" name="infants" id="infants" value="0">
@@ -434,7 +434,9 @@
                             if ($this->session->flashdata('item')) {
                                 $message = $this->session->flashdata('item'); ?>
                                 <div class="col-12 form-group mb-2">
-                                    <input type="text" class="form-control" value="<?php echo isset($message['budget']) ? $message['budget']['value'] : ''; ?>" name="budget" id="budget" placeholder="Budget (INR)">
+                                    <input type="text" class="form-control <?php echo isset($message['budget']) && isset($message['budget']['class']) ? $message['budget']['class'] : ''; ?>" 
+                                           value="<?php echo isset($message['budget']) && isset($message['budget']['value']) ? $message['budget']['value'] : ''; ?>" 
+                                           name="budget" id="budget" placeholder="Budget (INR)">
                                 </div>
                             <?php } else { ?>
                                 <div class="col-12 form-group mb-2">
@@ -447,7 +449,9 @@
                             if ($this->session->flashdata('item')) {
                                 $message = $this->session->flashdata('item'); ?>
                                 <div class="col-12 form-group">
-                                    <textarea class="form-control" name="any_other" id="any_other" rows="3" placeholder="Any Other"><?php echo isset($message['any_other']) ? $message['any_other']['value'] : ''; ?></textarea>
+                                    <textarea class="form-control <?php echo isset($message['any_other']) && isset($message['any_other']['class']) ? $message['any_other']['class'] : ''; ?>" 
+                                              name="any_other" id="any_other" rows="3" 
+                                              placeholder="Any Other"><?php echo isset($message['any_other']) && isset($message['any_other']['value']) ? $message['any_other']['value'] : ''; ?></textarea>
                                 </div>
                             <?php } else { ?>
                                 <div class="col-12 form-group">
@@ -466,3 +470,112 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    // Form validation
+    $("form.ajax-contact").submit(function(e) {
+        let isValid = true;
+        
+        // Validate required fields
+        if ($("#name3").val() === "") {
+            $("#name3").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#name3").removeClass("border border-danger");
+        }
+        
+        if ($("#email3").val() === "") {
+            $("#email3").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#email3").removeClass("border border-danger");
+        }
+        
+        if ($("#phone3").val() === "") {
+            $("#phone3").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#phone3").removeClass("border border-danger");
+        }
+
+        if ($("#travel_date").val() === "") {
+            $("#travel_date").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#travel_date").removeClass("border border-danger");
+        }
+        
+        if ($("#tour_category").val() === "0") {
+            $("#tour_category").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#tour_category").removeClass("border border-danger");
+        }
+        
+        if ($("#country").val() === "0") {
+            $("#country").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#country").removeClass("border border-danger");
+        }
+        
+        if ($("#place").val() === "0") {
+            $("#place").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#place").removeClass("border border-danger");
+        }
+        
+        if ($("#adults").val() === "" || $("#adults").val() === "0") {
+            $("#adults").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#adults").removeClass("border border-danger");
+        }
+        
+        if ($("#howmany_days").val() === "0") {
+            $("#howmany_days").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#howmany_days").removeClass("border border-danger");
+        }
+        
+        if ($("#howmany_night").val() === "0") {
+            $("#howmany_night").addClass("border border-danger");
+            isValid = false;
+        } else {
+            $("#howmany_night").removeClass("border border-danger");
+        }
+        
+        // Check if category is international and continent is required
+        if ($("#tour_category").val() === "2" && $("#continent_id").val() === "0") {
+            $("#continent_id").addClass("border border-danger");
+            $(".continent-error").show();
+            isValid = false;
+        } else {
+            $("#continent_id").removeClass("border border-danger");
+            $(".continent-error").hide();
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $(".alert-danger").offset().top - 100
+            }, 500);
+        }
+    });
+    
+    // Smooth scroll to success message if present
+    <?php if ($this->session->flashdata('success')) : ?>
+    $('html, body').animate({
+        scrollTop: $(".alert-success").offset().top - 100
+    }, 500);
+    
+    // Auto-hide success message after 5 seconds
+    setTimeout(function() {
+        $(".alert-success").fadeOut("slow");
+    }, 5000);
+    <?php endif; ?>
+});
+</script>

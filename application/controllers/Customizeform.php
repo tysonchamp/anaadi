@@ -29,12 +29,12 @@ class Customizeform extends CI_Controller {
     {
         $response = array("error" => 0, "error_message" => "", "success_message" => "");
         $this->load->model('Customizeform_model');
-        $this->load->library('form_validation');       
-        $name = $this->input->post('name');     
+        $this->load->library('form_validation');
+        // $name = $this->input->post('name');
         $this->form_validation->set_rules('name','Name','trim|required|max_length[128]');
-        $this->form_validation->set_rules('phone','Phone','trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone','Phone','trim|required');
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[200]');
-        $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
+        $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|max_length[250]');
         $this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('place', 'Place', 'trim|required|max_length[250]');
