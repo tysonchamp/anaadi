@@ -20,9 +20,6 @@ class Booktour extends CI_Controller
         if (count($data['tour']) > 0) {
             $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($data['tour']['category_id']);
         }
-       /* if (count($data['tour']) > 0) {
-            $data['continent'] = $this->tourcategory_model->getByContinentId($data['tour']['category_id']);
-        }*/
 
         $this->load->view('layout/header', $data);
         $this->load->view('front/booktour', $data);
@@ -41,6 +38,11 @@ class Booktour extends CI_Controller
         $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[250]');
+        
+        $category = $this->input->post('category', true);
+        if ($category == 2) { // If World is selected
+            $this->form_validation->set_rules('continent', 'Continent', 'trim|required|max_length[250]');
+        }
         
         $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('return_date', 'Return Date', 'trim|required|max_length[250]');
@@ -62,7 +64,6 @@ class Booktour extends CI_Controller
     
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata("error", $this->form_validation->error_string());
-          //  echo $error;
            redirect('Booktour');
         } else {
 
@@ -102,6 +103,7 @@ class Booktour extends CI_Controller
             $typeof_tour = $this->input->post('typeof_tour', true);
             $country = $this->input->post('country', true);
             $city = $this->input->post('city', true);
+            $continent = $this->input->post('continent', true);
 
             $recordInfo = array(
                 
@@ -113,7 +115,7 @@ class Booktour extends CI_Controller
                 'return_date' => $return_date,
                 'no_passenger' => $no_passenger,
                 'category' => $category,
-                
+                'continent' => $continent,
                 'tour_category' => $tourcategory,
                 'tour_package' => $tour_package,
                 'adults' => $adults,
@@ -157,6 +159,11 @@ class Booktour extends CI_Controller
         $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[250]');
         
+        $category = $this->input->post('category', true);
+        if ($category == 2) { // If World is selected
+            $this->form_validation->set_rules('continent', 'Continent', 'trim|required|max_length[250]');
+        }
+        
         $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('return_date', 'Return Date', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('howmany_days', 'How many Days', 'trim|required|max_length[250]');
@@ -177,7 +184,6 @@ class Booktour extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata("error", $this->form_validation->error_string());
-        //  echo $error;
         redirect('Booktour');
         } else {
 
@@ -205,6 +211,7 @@ class Booktour extends CI_Controller
             $typeof_tour = $this->input->post('typeof_tour', true);
             $country = $this->input->post('country', true);
             $city = $this->input->post('city', true);
+            $continent = $this->input->post('continent', true);
 
             $recordInfo = array(
                 
@@ -216,7 +223,7 @@ class Booktour extends CI_Controller
                 'return_date' => $return_date,
                 'no_passenger' => $no_passenger,
                 'category' => $category,
-                
+                'continent' => $continent,
                 'tour_category' => $tourcategory,
                 'tour_package' => $tour_package,
                 'adults' => $adults,
