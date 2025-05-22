@@ -60,7 +60,7 @@ class Booktour extends CI_Controller
         $this->form_validation->set_rules('meals', 'Meals', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('typeof_transfers', 'Type Of Transfers', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('adults', 'Adults', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('children', 'Children', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('children', 'Children', 'trim|max_length[250]');
         
     
         if ($this->form_validation->run() == FALSE) {
@@ -107,7 +107,6 @@ class Booktour extends CI_Controller
             $continent = $this->input->post('continent', true);
 
             $recordInfo = array(
-                
                 'departure_city' => $departure_city,
                 'arrival_city' => $return_date,
                 'howmany_days' => $howmany_days,
