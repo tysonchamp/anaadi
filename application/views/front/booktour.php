@@ -304,6 +304,7 @@
 
         $(".book-form select[name='tourcategory']").change(function() {
             $("#booktour").html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Please wait..");
+            console.log($(this).val());
             var params = {};
             params.category_id = $(".book-form select[name='category']").val();
             params.tourcategory_id = $(this).val();
@@ -424,7 +425,7 @@
                         let options = '<option value="0">-Select-</option>';
                         
                         $.each(response.data, function(index, category) {
-                            options += '<option value="' + category.country + '">' + category.country + '</option>';
+                            options += '<option value="' + category.id + '">' + category.country + '</option>';
                         });
                         
                         $('#tourcategory').html(options);
@@ -449,7 +450,7 @@
                         let options = '<option value="0">-Select-</option>';
                         
                         $.each(response.data, function(index, country) {
-                            options += '<option value="' + country.country + '">' + country.country + '</option>';
+                            options += '<option value="' + country.id + '">' + country.country + '</option>';
                         });
                         
                         $('#tourcategory').html(options);
