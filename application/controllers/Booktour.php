@@ -137,6 +137,9 @@ class Booktour extends CI_Controller
             $result = $this->Booknow_model->addNew($recordInfo);
             if ($result > 0) {
                 $this->session->set_flashdata("success", "Thank you for Booking. Our team will get in touch with you soon.");
+                // redirect to gateway page
+                redirect("Booktour/paymentgateway/".$result);
+
             } else {
                 $this->session->set_flashdata("error", "OOps!! Message sending failed.");
             }
@@ -252,5 +255,15 @@ class Booktour extends CI_Controller
 
         }
 
+    }
+
+    public function paymentgateway($id){
+        $this->load->model('Booknow_model');
+        $data['page_title'] = 'Anaadi Tours and Travels | Book Tour';
+        $record = $this->Booknow_model->getById($id);
+        
+        $this->load->view('layout/header', $data);
+        $this->load->view('front/gateway', $data);
+        $this->load->view('layout/footer');
     }
 }
