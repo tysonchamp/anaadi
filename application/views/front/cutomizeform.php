@@ -1,7 +1,7 @@
 <div class="breadcumb-wrapper" data-bg-src="<?= base_url() ?>assets/img/bg/subscribe_bg_1.png">
     <div class="container">
         <div class="breadcumb-content">
-            <h3 class="breadcumb-title">Customize Form</h3>
+            <h3 class="breadcumb-title">Customize Tour Request</h3>
         </div>
     </div>
 </div>
@@ -12,7 +12,7 @@
             <div class="col-lg-6">
                 <div>
                     <form action="<?= base_url('Customizeform/enquiry') ?>" method="POST" class="contact-form style2 ajax-contact">
-                        <h3 class="sec-title mb-30 text-capitalize">Customize Form</h3>
+                        <h3 class="sec-title mb-30 text-capitalize">Customize Tour Request</h3>
                        
                         <?php 
                             $success = $this->session->flashdata('success');
