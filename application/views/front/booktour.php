@@ -125,11 +125,11 @@
                             <label class="p-1 mb-1 fs-16">Country/State</label>
                             <select class="form-select" id="tourcategory" name="tourcategory">
                                 <option value="0">-Select-</option>
-                                <?php if (isset($tourcategory)) {
+                                <!-- <?php if (isset($tourcategory)) {
                                     foreach ($tourcategory as $item) { ?>
                                         <option <?= (isset($tour) && count($tour) > 0 && $tour['tourcategory_id'] == $item['id']) ? "selected" : "" ?> value="<?= $item['id'] ?>"><?= $item['sub_category'] ?></option>
                                 <?php }
-                                } ?>
+                                } ?> -->
                             </select>
                         </div>
                         <div class="form-group col-12 mb-2">
@@ -285,7 +285,7 @@
                         $(".book-form select[name='tourcategory']").empty();
                         $(".book-form select[name='tourcategory']").append("<option value='0'>-Select-</option>");
                         for (var i = 0; i < records.length; i++) {
-                            $(".book-form select[name='tourcategory']").append("<option value='" + records[i].id + "'>" + records[i].sub_category + "</option>");
+                            $(".book-form select[name='tourcategory']").append("<option value='" + records[i].id + "'>" + records[i].country + "</option>");
                         }
                     }
                 },
@@ -309,7 +309,7 @@
             params.tourcategory_id = $(this).val();
             var url = "<?= base_url('Tour/getTours') ?>";
             if ($(this).val() == 0) {
-                $(".book-form select[name='tourcategory']").empty();
+                $(".book-form select[name='tour']").empty();
                 return false;
             }
             $.ajax({

@@ -45,6 +45,7 @@
                                 $message = $this->session->flashdata('item');
                             ?>
                                 <div class="col-12 form-group">
+                                    <label for="travel_date">Date of Travel <span class="text-danger">*</span></label>
                                     <input type="date" class="form-control <?php if(isset($message['travel_date']) && $message['travel_date']['value'] == "") { echo $message['travel_date']['class']; } ?>" 
                                         name="travel_date" 
                                         value="<?php echo isset($message['travel_date']) ? $message['travel_date']['value'] : ''; ?>" 
@@ -56,6 +57,7 @@
                                 </div>
                             <?php } else { ?>
                                 <div class="col-12 form-group">
+                                    <label for="travel_date">Date of Travel <span class="text-danger">*</span></label>
                                     <input type="date" class="form-control" name="travel_date" id="travel_date" placeholder="Date of Travel">
                                 </div>
                             <?php } ?>
