@@ -530,3 +530,21 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Razorpay Configuration
+|--------------------------------------------------------------------------
+|
+| This is the configuration for Razorpay payment gateway
+| Get your API keys from https://dashboard.razorpay.com/app/keys
+|
+*/
+$config['razorpay_key_id'] = 'rzp_test_YOUR_KEY_ID';  // Replace with your key ID from Razorpay Dashboard
+$config['razorpay_key_secret'] = 'YOUR_KEY_SECRET';    // Replace with your key secret from Razorpay Dashboard
+
+/*
+| For production, use live keys. For testing, use test keys.
+| Test cards: https://razorpay.com/docs/payments/payments/test-card-upi-details/
+| Test card example: 4111 1111 1111 1111, Any future date, Any 3 digits for CVV
+*/

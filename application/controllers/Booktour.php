@@ -259,11 +259,133 @@ class Booktour extends CI_Controller
 
     public function paymentgateway($id){
         $this->load->model('Booknow_model');
-        $data['page_title'] = 'Anaadi Tours and Travels | Book Tour';
+        $this->load->model('Tours_model');
+        $this->load->model('Payment_model');
+        
+        $data['page_title'] = 'Anaadi Tours and Travels | Payment';
         $record = $this->Booknow_model->getById($id);
+        $tour_package = $record['tour_package'];
+        $data['bookingData'] = $record;
+        $data['tour'] = $this->Tours_model->getById($tour_package);
+        
+        // Set up Razorpay
+        $razorpay_key_id = $this->config->item('razorpay_key_id');
+        $razorpay_key_secret = $this->config->item('razorpay_key_secret');
+        $data['razorpay_key'] = $razorpay_key_id;
+        
+        // Calculate amount in paise (Razorpay uses smallest currency unit)
+        $price = $data['tour']['price'];
+        $amount = $price * 100; // Converting to paise
+        $data['amount'] = $amount;
+        
+        // Create order in Razorpay
+        require_once APPPATH . 'third_party/razorpay/Razorpay.php';
+        
+        $api = new Razorpay\Api\Api($razorpay_key_id, $razorpay_key_secret);
+        $receipt_id = 'rcpt_' . $id . '_' . time();
+        
+        try {
+            $order = $api->order->create([
+                'receipt' => $receipt_id,
+                'amount' => $amount,
+                'currency' => 'INR',
+                'notes' => [
+                    'booking_id' => $id
+                ]
+            ]);
+            
+            // Save order details in database
+            $this->Payment_model->createOrder($amount/100, $id, $receipt_id);
+            
+            // Pass order ID to view
+            $data['order_id'] = $order->id;
+            
+            $this->load->view('layout/header', $data);
+            $this->load->view('front/gateway', $data);
+            $this->load->view('layout/footer');
+        } catch (Exception $e) {
+            // Log the error and show error page
+            log_message('error', 'Razorpay Error: ' . $e->getMessage());
+            $this->session->set_flashdata("error", "Unable to create payment order. Please try again later.");
+            redirect('Booktour');
+        }
+    }
+    
+    public function payment_callback()
+    {
+        $this->load->model('Payment_model');
+        $this->load->model('Booknow_model');
+        
+        $razorpay_key_id = $this->config->item('razorpay_key_id');
+        $razorpay_key_secret = $this->config->item('razorpay_key_secret');
+        
+        // Get payment details from POST
+        $razorpay_payment_id = $this->input->post('razorpay_payment_id');
+        $razorpay_order_id = $this->input->post('razorpay_order_id');
+        $razorpay_signature = $this->input->post('razorpay_signature');
+        $booking_id = $this->input->post('booking_id');
+        
+        // Verify signature
+        require_once APPPATH . 'third_party/razorpay/Razorpay.php';
+        $api = new Razorpay\Api\Api($razorpay_key_id, $razorpay_key_secret);
+        
+        try {
+            $attributes = array(
+                'razorpay_payment_id' => $razorpay_payment_id,
+                'razorpay_order_id' => $razorpay_order_id,
+                'razorpay_signature' => $razorpay_signature
+            );
+            
+            $api->utility->verifyPaymentSignature($attributes);
+            
+            // Payment successful, update database
+            $this->Payment_model->updatePayment($razorpay_payment_id, $razorpay_order_id, $razorpay_signature, 'paid', $booking_id);
+            $this->Payment_model->updateBookingPaymentStatus($booking_id, 'paid');
+            
+            // Redirect to success page
+            redirect('Booktour/payment_success/' . $booking_id);
+        } catch (Exception $e) {
+            // Log the error
+            log_message('error', 'Razorpay Error: ' . $e->getMessage());
+            
+            // Update payment status
+            $this->Payment_model->updatePayment($razorpay_payment_id, $razorpay_order_id, $razorpay_signature, 'failed', $booking_id);
+            $this->Payment_model->updateBookingPaymentStatus($booking_id, 'failed');
+            
+            // Redirect to failure page
+            redirect('Booktour/payment_failed/' . $booking_id);
+        }
+    }
+    
+    public function payment_success($booking_id)
+    {
+        $this->load->model('Booknow_model');
+        $this->load->model('Tours_model');
+        
+        $data['page_title'] = 'Payment Success';
+        $record = $this->Booknow_model->getById($booking_id);
+        $tour_package = $record['tour_package'];
+        $data['bookingData'] = $record;
+        $data['tour'] = $this->Tours_model->getById($tour_package);
         
         $this->load->view('layout/header', $data);
-        $this->load->view('front/gateway', $data);
+        $this->load->view('front/payment_success', $data);
+        $this->load->view('layout/footer');
+    }
+    
+    public function payment_failed($booking_id)
+    {
+        $this->load->model('Booknow_model');
+        $this->load->model('Tours_model');
+        
+        $data['page_title'] = 'Payment Failed';
+        $record = $this->Booknow_model->getById($booking_id);
+        $tour_package = $record['tour_package'];
+        $data['bookingData'] = $record;
+        $data['tour'] = $this->Tours_model->getById($tour_package);
+        
+        $this->load->view('layout/header', $data);
+        $this->load->view('front/payment_failed', $data);
         $this->load->view('layout/footer');
     }
 }
