@@ -1,0 +1,80 @@
+https://www.anaadi.co/
+
+Home:
+	Popular Packages: Just Image Gallery with Light box (https://html.themeholy.com/tourm/demo/home-city-tour.html Wornderful Place For You
+Top Place in city)
+
+Customize Tour
+	(Ref: excel file : Enquery Form)
+
+Book Tour
+	1st Main Category (Tour Type) (India or World)
+	if india then show state else show based on world
+	3rd tour packages based on category
+
+	Payment gateway
+
+Admin
+	Tour Add:
+		if india it will show state by default no category same for world if selected show continent and country fields
+
+	Booking Information
+		Customize tour booking information will be shown separately
+
+
+payment gateway
+
+------------------------------------------------
+Book now & customize tour (number fields)
+
+Adults
+> 2 < 12 Years (With Bed)
+> 2 < 12 Years (Without Bed)
+< 2 Years
+
+if days is selected  night will be -1
+
+minimum adults : 2
+
+Book now:
+
+remove arrival & departure city
+
+days and night remove
+
+hotels remove
+
+City input type text
+
+Type of Tour remove
+
+basic information all are required
+
+
+
+Website:
+Update contact information
+
+whatsapp number update
+
+menu update
+
+address icon hyperlink
+
+contact us page:
+
+message optional
+
+admin panel:
+
+serial number correction
+
+admin panel testing and finalize
+
+book tour gateway info update
+
+add tour:
+
+first days and then night autocalculate
+
+for 2 to 12 yr person cost (with bed and without bed)
