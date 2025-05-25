@@ -23,6 +23,62 @@
                             </div>
                         <?php } ?>
                         <div class="row">
+                            
+                            <!-- Category field (Compulsory) -->
+                            <?php
+                            if ($this->session->flashdata('item')) {
+                                $message = $this->session->flashdata('item');
+                            ?>
+                                <div class="form-group col-6 mb-2">
+                                    <select class="form-select <?php if(isset($message['category']) && $message['category']['value'] == "0") { echo $message['category']['class']; } ?>" id="tour_category" name="category">
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "0") ? "selected" : "" ?> value="0">Category</option>
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "1") ? "selected" : "" ?> value="1">India</option>
+                                        <option <?= (isset($message['category']) && $message['category']['value'] == "2") ? "selected" : "" ?> value="2">World</option>
+                                    </select>
+                                    <?php if(isset($message['category']) && $message['category']['value'] == "0") { ?>
+                                        <span class="text-danger"><?php echo $message['category']['message']; ?></span>
+                                    <?php } ?>
+                                </div>
+                            <?php } else { ?>
+                                <div class="form-group col-6 mb-2">
+                                    <select class="form-select" id="tour_category" name="category">
+                                        <option value="0">Category</option>
+                                        <option value="1">India</option>
+                                        <option value="2">World</option>
+                                    </select>
+                                </div>
+                            <?php } ?>
+
+                            <!-- Continent field (shows only when International is selected) -->
+                            <div class="form-group col-6 mb-2" id="continent_container" style="display: none;">
+                                <select class="form-select" id="continent_id" name="continent">
+                                    <option value="0">Select Continent</option>
+                                    <!-- Continent options will be loaded via AJAX -->
+                                </select>
+                                <span class="text-danger continent-error" style="display: none;">Please select a continent</span>
+                            </div>
+                            
+                            <!-- Country field (Compulsory) - Will be populated based on category/continent -->
+                            <?php
+                            if ($this->session->flashdata('item')) {
+                                $message = $this->session->flashdata('item');
+                            ?>
+                                <div class="form-group col-6 mb-2" id="country_container">
+                                    <select class="form-select <?php if($message['country']['value'] == "0") { echo $message['country']['class']; } ?>" id="country" name="country">
+                                        <option <?= ($message['country']['value'] == "0") ? "selected" : "" ?> value="0">Country/State</option>
+                                        <!-- Options will be loaded dynamically -->
+                                    </select>
+                                   <?php if($message['country']['value'] == "0") { ?> <span class="text-danger"> <?php echo $message['country']['message']; ?></span> <?php } ?>
+                                </div>
+                            <?php } else { ?>
+                                <div class="form-group col-6 mb-2" id="country_container">
+                                    <select class="form-select" id="country" name="country">
+                                        <option value="0">Country/State</option>
+                                        <!-- Options will be loaded dynamically -->
+                                    </select>
+                                </div>
+                            <?php } ?>
+                            
                             <?php
                             if ($this->session->flashdata('item')) {
                                 $message = $this->session->flashdata('item');
@@ -110,61 +166,6 @@
                                                 <option value="<?= $type['id'] ?>"><?= $type['type'] ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
-                                    </select>
-                                </div>
-                            <?php } ?>
-                            
-                            <!-- Category field (Compulsory) -->
-                            <?php
-                            if ($this->session->flashdata('item')) {
-                                $message = $this->session->flashdata('item');
-                            ?>
-                                <div class="form-group col-6 mb-2">
-                                    <select class="form-select <?php if(isset($message['category']) && $message['category']['value'] == "0") { echo $message['category']['class']; } ?>" id="tour_category" name="category">
-                                        <option <?= (isset($message['category']) && $message['category']['value'] == "0") ? "selected" : "" ?> value="0">Category</option>
-                                        <option <?= (isset($message['category']) && $message['category']['value'] == "1") ? "selected" : "" ?> value="1">India</option>
-                                        <option <?= (isset($message['category']) && $message['category']['value'] == "2") ? "selected" : "" ?> value="2">World</option>
-                                    </select>
-                                    <?php if(isset($message['category']) && $message['category']['value'] == "0") { ?>
-                                        <span class="text-danger"><?php echo $message['category']['message']; ?></span>
-                                    <?php } ?>
-                                </div>
-                            <?php } else { ?>
-                                <div class="form-group col-6 mb-2">
-                                    <select class="form-select" id="tour_category" name="category">
-                                        <option value="0">Category</option>
-                                        <option value="1">India</option>
-                                        <option value="2">World</option>
-                                    </select>
-                                </div>
-                            <?php } ?>
-
-                            <!-- Continent field (shows only when International is selected) -->
-                            <div class="form-group col-6 mb-2" id="continent_container" style="display: none;">
-                                <select class="form-select" id="continent_id" name="continent">
-                                    <option value="0">Select Continent</option>
-                                    <!-- Continent options will be loaded via AJAX -->
-                                </select>
-                                <span class="text-danger continent-error" style="display: none;">Please select a continent</span>
-                            </div>
-                            
-                            <!-- Country field (Compulsory) - Will be populated based on category/continent -->
-                            <?php
-                            if ($this->session->flashdata('item')) {
-                                $message = $this->session->flashdata('item');
-                            ?>
-                                <div class="form-group col-6 mb-2" id="country_container">
-                                    <select class="form-select <?php if($message['country']['value'] == "0") { echo $message['country']['class']; } ?>" id="country" name="country">
-                                        <option <?= ($message['country']['value'] == "0") ? "selected" : "" ?> value="0">Country/State</option>
-                                        <!-- Options will be loaded dynamically -->
-                                    </select>
-                                   <?php if($message['country']['value'] == "0") { ?> <span class="text-danger"> <?php echo $message['country']['message']; ?></span> <?php } ?>
-                                </div>
-                            <?php } else { ?>
-                                <div class="form-group col-6 mb-2" id="country_container">
-                                    <select class="form-select" id="country" name="country">
-                                        <option value="0">Country/State</option>
-                                        <!-- Options will be loaded dynamically -->
                                     </select>
                                 </div>
                             <?php } ?>
@@ -264,42 +265,24 @@
                                 $message = $this->session->flashdata('item');
                             ?>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select <?php if($message['howmany_days']['value'] == "") {  echo $message['howmany_days']['class']; } ?>" id="howmany_days" name="howmany_days">
-                                        <option <?= ($message['howmany_days']['value'] == "0")  ? "selected" : "" ?> value="0">Days</option>
-                                        <option <?= ($message['howmany_days']['value'] == "3")  ? "selected" : "" ?> value="3">3</option>
-                                        <option <?= ($message['howmany_days']['value'] == "4")  ? "selected" : "" ?> value="4">4</option>
-                                        <option <?= ($message['howmany_days']['value'] == "5")  ? "selected" : "" ?> value="5">5</option>
-                                        <option <?= ($message['howmany_days']['value'] == "7")  ? "selected" : "" ?> value="7">7</option>
-                                    </select>
+                                    <input type="number" min="0" class="form-control <?php if($message['howmany_days']['value'] == "") { echo $message['howmany_days']['class']; } ?>" 
+                                           id="howmany_days" name="howmany_days" placeholder="Days" 
+                                           value="<?php echo isset($message['howmany_days']['value']) ? $message['howmany_days']['value'] : '0'; ?>">
                                 </div>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select <?php  if($message['howmany_days']['value'] == "") {   echo $message['howmany_nights']['class']; } ?>" id="howmany_night" name="howmany_night">
-                                        <option <?= ($message['howmany_nights']['value'] == "0")  ? "selected" : "" ?> value="0">Night</option>
-                                        <option <?= ($message['howmany_nights']['value'] == "2")  ? "selected" : "" ?> value="2">2</option>
-                                        <option <?= ($message['howmany_nights']['value'] == "3")  ? "selected" : "" ?> value="3">3</option>
-                                        <option <?= ($message['howmany_nights']['value'] == "4")  ? "selected" : "" ?> value="4">4</option>
-                                        <option <?= ($message['howmany_nights']['value'] == "5")  ? "selected" : "" ?> value="5">5</option>
-                                    </select>
+                                    <input type="number" min="0" class="form-control <?php if($message['howmany_days']['value'] == "") { echo $message['howmany_nights']['class']; } ?>" 
+                                           id="howmany_night" name="howmany_night" placeholder="Nights" 
+                                           value="<?php echo isset($message['howmany_nights']['value']) ? $message['howmany_nights']['value'] : '0'; ?>">
                                 </div>
-                                <?php  if($message['howmany_days']['value'] == "") {   ?><span class="text-danger"> <?php echo $message['howmany_days']['message']; ?></span> <?php } ?>
+                                <?php if($message['howmany_days']['value'] == "") { ?>
+                                    <span class="text-danger"><?php echo $message['howmany_days']['message']; ?></span>
+                                <?php } ?>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select" id="howmany_days" name="howmany_days">
-                                        <option value="0">Days</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="7">7</option>
-                                    </select>
+                                    <input type="number" min="0" class="form-control" id="howmany_days" name="howmany_days" placeholder="Days" value="0">
                                 </div>
                                 <div class="form-group col-6 mb-2">
-                                    <select class="form-select" id="howmany_night" name="howmany_night">
-                                        <option value="0">Night</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
+                                    <input type="number" min="0" class="form-control" id="howmany_night" name="howmany_night" placeholder="Nights" value="0">
                                 </div>
                             <?php } ?>
                             
