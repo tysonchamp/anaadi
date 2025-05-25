@@ -20,7 +20,7 @@ class Booktour extends CI_Controller
         if (count($data['tour']) > 0) {
             $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($data['tour']['category_id']);
         }
-        $data['tourcategory'] = $this->tourcategory_model->getByCategoryId(1);
+        $data['india_states'] = $this->tourcategory_model->getByCategoryId(1);
 
         $this->load->view('layout/header', $data);
         $this->load->view('front/booktour', $data);

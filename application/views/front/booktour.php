@@ -43,69 +43,6 @@
                         <h4 class="sec-title pe-xl-5 me-xl-5 heading"> Tour Booking </h4>
                         <hr>
 
-
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Departure City:</label>
-                            <select class="form-select" id="departure_city" name="departure_city">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'GOA') ? "selected" : "" ?>>GOA</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'SHIMLA') ? "selected" : "" ?>>SHIMLA</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'Bangaluru') ? "selected" : "" ?>>Bangaluru</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'DARJEELING') ? "selected" : "" ?>>DARJEELING</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'UDAIPUR') ? "selected" : "" ?>>UDAIPUR</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'MANALI') ? "selected" : "" ?>>MANALI</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'Andaman and Nicobar') ? "selected" : "" ?>>Andaman and Nicobar</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['start_location'] == 'DELHI') ? "selected" : "" ?>>DELHI</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Arrival City:</label>
-                            <select class="form-select" id="arrival_city" name="arrival_city">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Hampi') ? "selected" : "" ?>>Hampi</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Bangaluru') ? "selected" : "" ?>>Bangaluru</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'COORG') ? "selected" : "" ?>>COORG</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Kuala Lumpur') ? "selected" : "" ?>>Kuala Lumpur</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Mauritius') ? "selected" : "" ?>>Mauritius</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Kerala') ? "selected" : "" ?>>Kerala</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Tamil Nadu') ? "selected" : "" ?>>Tamil Nadu</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['destination_location'] == 'Rajasthan') ? "selected" : "" ?>>Rajasthan</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Days</label>
-                            <select class="form-select" id="howmany_days" name="howmany_days">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_days'] == '3') ? "selected" : "" ?> value="3">3</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_days'] == '4') ? "selected" : "" ?> value="4">4</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_days'] == '5') ? "selected" : "" ?> value="5">5</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_days'] == '7') ? "selected" : "" ?> value="7">7</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Night</label>
-                            <select class="form-select" id="howmany_night" name="howmany_night">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_nights'] == '2') ? "selected" : "" ?> value="2">2</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_nights'] == '3') ? "selected" : "" ?> value="3">3</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_nights'] == '4') ? "selected" : "" ?> value="4">4</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['duration_nights'] == '5') ? "selected" : "" ?> value="5">5</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16" for="departure_date">Departure Date:</label>
-                            <input type="datetime-local" id="departure_date" name="departure_date">
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16" for="return_date">Return Date (Optional):</label>
-                            <input type="datetime-local" id="return_date" name="return_date">
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16" for="passengers">Number of Passengers:</label>
-                            <input type="number" id="passengers" name="passengers" value="1" min="1">
-
-                        </div>
-
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Category</label>
                             <select class="form-select" id="tour_category" name="category">
@@ -140,19 +77,21 @@
                                 <?php } ?>
                             </select>
                         </div>
+
                         <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Hotel</label>
-                            <select class="form-select" id="hotel" name="hotel">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 1) ? "selected" : "" ?> value="Standard">Standard</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="Deluxe">Deluxe</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="Super Deluxe">Super Deluxe</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="Luxury">Luxury</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="3 Star">3 Star</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="4 Star">4 Star</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="5 Star">5 Star</option>
-                            </select>
+                            <label class="p-1 mb-1 fs-16" for="departure_date">Departure Date:</label>
+                            <input type="datetime-local" id="departure_date" name="departure_date">
                         </div>
+                        <div class="form-group col-6 mb-2">
+                            <label class="p-1 mb-1 fs-16" for="return_date">Return Date (Optional):</label>
+                            <input type="datetime-local" id="return_date" name="return_date">
+                        </div>
+                        <div class="form-group col-6 mb-2">
+                            <label class="p-1 mb-1 fs-16" for="passengers">Number of Passengers:</label>
+                            <input type="number" id="passengers" name="passengers" value="1" min="1">
+
+                        </div>
+
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Meals</label>
                             <select class="form-select" id="meals" name="meals">
@@ -160,16 +99,6 @@
                                 <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 1) ? "selected" : "" ?> value="CP">CP</option>
                                 <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="MAP">MAP</option>
                                 <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="AP">AP</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Types of Transfers</label>
-                            <select class="form-select" id="typeof_transfers" name="typeof_transfers">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['type_id'] == 1) ? "selected" : "" ?> value="1">Shared Transfers</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['type_id'] == 2) ? "selected" : "" ?> value="2">Private Transfers</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['type_id'] == 3) ? "selected" : "" ?> value="3">Airport Chauffeur Services</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['type_id'] == 4) ? "selected" : "" ?> value="4">Touristic Transfers</option>
                             </select>
                         </div>
 
@@ -223,25 +152,20 @@
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Country</label>
 
-                            <select class="form-select" id="country" name="country">
+                            <select class="form-select" name="country">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
+                                <?php if(!empty($india_states)): ?>
+                                    <?php foreach($india_states as $state): ?>
+                                        <option value="<?= $state['id'] ?>"><?= $state['country'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
                             </select>
 
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16"> City:</label>
-
-                            <select class="form-select" id="city" name="city">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'GOA') ? "selected" : "" ?>>GOA</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'SHIMLA') ? "selected" : "" ?>>SHIMLA</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'COORG') ? "selected" : "" ?>>COORG</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'DARJEELING') ? "selected" : "" ?>>DARJEELING</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'UDAIPUR') ? "selected" : "" ?>>UDAIPUR</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'MANALI') ? "selected" : "" ?>>MANALI</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'Andaman and Nicobar') ? "selected" : "" ?>>Andaman and Nicobar</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 'DELHI') ? "selected" : "" ?>>DELHI</option>
-                            </select>
+                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
                         </div>
                         <div class="form-btn col-12 mt-24"><button id="booktour" type="submit" class="th-btn">Book Now</button></div>
                     </div>
