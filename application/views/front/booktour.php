@@ -143,10 +143,11 @@
                             <label class="p-1 mb-1 fs-16">Type of Tour</label>
                             <select class="form-select" id="typeof_tour" name="typeof_tour">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 1) ? "selected" : "" ?> value="1">Sightseeing Tours</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="2">Adventure Tours</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="3">Historical & Cultural Tours</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="4">Specialty Tours</option>
+                                <?php if(!empty($tour_types)): ?>
+                                    <?php foreach($tour_types as $type): ?>
+                                        <option value="<?= $type['id'] ?>"><?= $type['type'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </select>
                         </div>
                         <div class="form-group col-6 mb-2">
