@@ -202,12 +202,12 @@
                                     $message = $this->session->flashdata('item');
                                 ?>
                                     <input type="number" class="form-control <?php if($message['adults']['value'] == "") { echo $message['adults']['class']; } ?>" 
-                                           value="<?php echo $message['adults']['value'] ?>" name="adults" id="adults">
+                                           value="<?php echo $message['adults']['value'] ?>" name="adults" id="adults" min="2" placeholder="Min 2 Person">
                                     <?php if($message['adults']['value'] == "") { ?>
                                         <span class="text-danger"><?php echo $message['adults']['message']; ?></span>
                                     <?php } ?>
                                 <?php } else { ?>
-                                    <input type="number" class="form-control" name="adults" id="adults" value="1">
+                                    <input type="number" class="form-control" name="adults" id="adults" min="2" placeholder="Min 2 Person">
                                 <?php } ?>
                             </div>
                             

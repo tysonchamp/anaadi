@@ -76,6 +76,8 @@
 											<p><a href="tel:916364328383" class="info-box_link">+91 6364328383</a></p>
 											<p><a href="tel:919886774543" class="info-box_link">+91 9886774543</a></p>
 											<p><a href="tel:919341666060" class="info-box_link">+91 9341666060</a></p>
+											<p><a href="tel:919886774543" class="info-box_link">+91 9886774543</a></p>
+											<p><a href="tel:919739974193" class="info-box_link">+91 9739974193</a></p>
 										</div>
 									</div>
 									<div class="info-box_text">

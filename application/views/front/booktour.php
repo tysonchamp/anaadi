@@ -104,7 +104,7 @@
 
                         <div class="col-6 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">No. of Adults</label>
-                            <input type="number" class="form-control" name="adults" id="adults" placeholder="0">
+                            <input type="number" class="form-control" name="adults" id="adults" placeholder="Min: 2 Person" min="2">
                         </div>
                         <div class="col-6 form-group mb-4">
                             <label class="p-1 mb-1 fs-16">No. of Children</label>

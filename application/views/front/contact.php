@@ -29,6 +29,8 @@
                             <h6 class="box-title">Phone Number</h6>
                             <p class="about-contact-details-text"><a href="tel:+91 6364328383">+91 6364328383</a></p>
                             <p class="about-contact-details-text"><a href="tel:+91 9341666060">+91 9341666060</a></p>
+                            <p class="about-contact-details-text"><a href="tel:919886774543">+91 9886774543</a></p>
+                            <p class="about-contact-details-text"><a href="tel:919739974193">+91 9739974193</a></p>
                         </div>
                     </div>
                 </div>
