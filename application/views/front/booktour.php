@@ -62,11 +62,11 @@
                             <label class="p-1 mb-1 fs-16">Country/State</label>
                             <select class="form-select" id="tourcategory" name="tourcategory">
                                 <option value="0">-Select-</option>
-                                <!-- <?php if (isset($tourcategory)) {
+                                <?php if (isset($tourcategory)) {
                                     foreach ($tourcategory as $item) { ?>
-                                        <option <?= (isset($tour) && count($tour) > 0 && $tour['tourcategory_id'] == $item['id']) ? "selected" : "" ?> value="<?= $item['id'] ?>"><?= $item['sub_category'] ?></option>
+                                        <option <?= (isset($tour) && count($tour) > 0 && $tour['tourcategory_id'] == $item['id']) ? "selected" : "" ?> value="<?= $item['id'] ?>"><?= $item['country'] ?></option>
                                 <?php }
-                                } ?> -->
+                                } ?>
                             </select>
                         </div>
                         <div class="form-group col-12 mb-2">
@@ -301,6 +301,34 @@
             calculateAmount();
         });
 
+        // Initialize price fields on page load if a tour is pre-selected
+        if ($(".book-form select[name='tour'] option:selected").val() > 0) {
+            var selectedOption = $(".book-form select[name='tour'] option:selected");
+            var price = selectedOption.attr('data-price');
+            var childPrice = selectedOption.attr('data-childprice');
+            var childPriceWithBed = selectedOption.attr('data-childpricebed');
+            
+            // Update hidden fields
+            $("#tour_price").val(price);
+            $("#price_child_with_bed").val(childPriceWithBed);
+            $("#price_child_without_bed").val(childPrice);
+            
+            // Show the tour price
+            $(".book-form .tour_amount").css('display', 'block');
+            
+            function toCurrencyString(price) {
+                price = parseInt(price);
+                return price.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g, '$1,');
+            }
+            
+            $("#amount").html("<label class='text-danger p-0 font-bold mb-0 px-2'>Amount</label><div>" +
+                "<i class='fa fa-indian-rupee'></i>" + toCurrencyString(price) + " / Per Person</div>");
+                
+            // Calculate amount if any quantities are already entered
+            calculateAmount();
+        }
+
+        // Initialize the amount display
         // Add event listeners for quantity inputs
         $("#adults, #children, #children_withbed").on('change keyup', function() {
             calculateAmount();
@@ -473,7 +501,7 @@
             $('#continent_container').show();
             loadContinents();
         } else if ($('#tour_category').val() == 1) {
-            loadIndiaStates(1);
+            // loadIndiaStates(1);
         }
     });
 </script>
