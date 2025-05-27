@@ -119,7 +119,7 @@
                             <label class="p-1 mb-1 fs-16">2 &lt; 12 Years (With Bed)</label>
                             <input type="number" class="form-control" name="children_withbed" id="children_withbed" placeholder="0">
                         </div>
-                        <div class="col-6 form-group mb-2 mt-3">
+                        <div class="col-12 form-group mb-2 mt-3">
                             <span class="d-flex align-items-center gap-2 p-2" style="border-radius: 8px; display:<?= (isset($tour) && count($tour) > 0) ? "block;" : "none" ?>;font-size: 16px;font-weight:600;border: 1px solid lightgrey;" class="tour_amount mb-0 p-2 text-dark shadow-sm" id="amount" placeholder="0">
                                 <label class="text-danger p-0 font-bold mb-0 px-2">Amount</label>
                                 <div class="d-flex gap-2 align-items-center">
