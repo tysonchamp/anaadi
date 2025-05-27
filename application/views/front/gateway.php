@@ -26,10 +26,11 @@
                                     <p><strong>Return Date:</strong> <?= $bookingData['return_date'] ?></p>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><strong>Duration:</strong> <?= $bookingData['howmany_days'] ?> Days, <?= $bookingData['howmany_night'] ?> Nights</p>
+                                    <!-- <p><strong>Duration:</strong> <?= $bookingData['howmany_days'] ?> Days, <?= $bookingData['howmany_night'] ?> Nights</p> -->
                                     <p><strong>Adults:</strong> <?= $bookingData['adults'] ?></p>
-                                    <p><strong>Children:</strong> <?= $bookingData['children'] ?></p>
-                                    <p><strong>Hotel:</strong> <?= $bookingData['hotel'] ?></p>
+                                    <p><strong>Children (With Bed):</strong> <?= $bookingData['children_withbed'] ?></p>
+                                    <p><strong>Children (Without Bed):</strong> <?= $bookingData['children'] ?></p>
+                                    <!-- <p><strong>Hotel:</strong> <?= $bookingData['hotel'] ?></p> -->
                                     <p><strong>Meals:</strong> <?= $bookingData['meals'] ?></p>
                                 </div>
                             </div>
@@ -40,11 +41,11 @@
                                 <h5>Payment Details</h5>
                                 <div class="d-flex justify-content-between">
                                     <p>Tour Price:</p>
-                                    <p>₹<?= $tour['price'] ?></p>
+                                    <p>₹<?= $bookingData['price'] ?></p>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <p><strong>Total Amount:</strong></p>
-                                    <p><strong>₹<?= $tour['price'] ?></strong></p>
+                                    <p><strong>₹<?= $bookingData['price'] ?></strong></p>
                                 </div>
                             </div>
                             

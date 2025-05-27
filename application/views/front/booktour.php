@@ -73,9 +73,19 @@
                             <label class="p-1 mb-1 fs-16">Tour Package</label>
                             <select class="form-select" id="tour" name="tour">
                                 <?php if (isset($tour) && count($tour) > 0) { ?>
-                                    <option data-price="<?= $tour['price'] ?>" value="<?= $tour['id'] ?>"><?= $tour['title'] ?></option>
+                                    <option 
+                                        data-price="<?= $tour['price'] ?>" 
+                                        data-childprice="<?= $tour['price_child_without_bed'] ?>" 
+                                        data-childpricebed="<?= $tour['price_child_with_bed'] ?>" 
+                                        value="<?= $tour['id'] ?>"
+                                    >
+                                        <?= $tour['title'] ?>
+                                    </option>
                                 <?php } ?>
                             </select>
+                            <input type="hidden" id="tour_price" value="0" >
+                            <input type="hidden" id="price_child_with_bed" value="0" >
+                            <input type="hidden" id="price_child_without_bed" value="0" >
                         </div>
 
                         <div class="form-group col-6 mb-2">
@@ -85,11 +95,6 @@
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16" for="return_date">Return Date (Optional):</label>
                             <input type="datetime-local" id="return_date" name="return_date">
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16" for="passengers">Number of Passengers:</label>
-                            <input type="number" id="passengers" name="passengers" value="1" min="1">
-
                         </div>
 
                         <div class="form-group col-6 mb-2">
@@ -107,8 +112,12 @@
                             <input type="number" class="form-control" name="adults" id="adults" placeholder="Min: 2 Person" min="2">
                         </div>
                         <div class="col-6 form-group mb-4">
-                            <label class="p-1 mb-1 fs-16">No. of Children</label>
+                            <label class="p-1 mb-1 fs-16">2 &lt; 12 Years (Without Bed)</label>
                             <input type="number" class="form-control" name="children" id="children" placeholder="0">
+                        </div>
+                        <div class="col-6 form-group mb-4">
+                            <label class="p-1 mb-1 fs-16">2 &lt; 12 Years (With Bed)</label>
+                            <input type="number" class="form-control" name="children_withbed" id="children_withbed" placeholder="0">
                         </div>
                         <div class="col-6 form-group mb-2 mt-3">
                             <span class="d-flex align-items-center gap-2 p-2" style="border-radius: 8px; display:<?= (isset($tour) && count($tour) > 0) ? "block;" : "none" ?>;font-size: 16px;font-weight:600;border: 1px solid lightgrey;" class="tour_amount mb-0 p-2 text-dark shadow-sm" id="amount" placeholder="0">
@@ -255,7 +264,7 @@
                         $(".book-form select[name='tour']").empty();
                         $(".book-form select[name='tour']").append("<option value='0'>-Select-</option>");
                         for (var i = 0; i < records.length; i++) {
-                            $(".book-form select[name='tour']").append("<option data-price='" + records[i].price + "' value='" + records[i].id + "'>" + records[i].title + "</option>");
+                            $(".book-form select[name='tour']").append("<option data-price='" + records[i].price + "' data-childprice='" + records[i].price_child_without_bed + "' data-childpricebed='" + records[i].price_child_with_bed + "' value='" + records[i].id + "'>" + records[i].title + "</option>");
                         }
                     }
                 },
@@ -281,8 +290,81 @@
             }
 
             var price = $(this).find('option:selected').attr('data-price');
+            var childPrice = $(this).find('option:selected').attr('data-childprice');
+            var childPriceWithBed = $(this).find('option:selected').attr('data-childpricebed');
+            $("#tour_price").val(price);
+            $("#price_child_with_bed").val(childPriceWithBed);
+            $("#price_child_without_bed").val(childPrice);
             $("#amount").html("<i class='fa fa-indian-rupee'></i>" + toCurrencyString(price) + " / Per Person");
+            
+            // Calculate initial amount based on current values
+            calculateAmount();
         });
+
+        // Add event listeners for quantity inputs
+        $("#adults, #children, #children_withbed").on('change keyup', function() {
+            calculateAmount();
+        });
+
+        function calculateAmount() {
+            // Get prices from hidden fields
+            var adultPrice = parseFloat($("#tour_price").val()) || 0;
+            var childPriceWithoutBed = parseFloat($("#price_child_without_bed").val()) || 0;
+            var childPriceWithBed = parseFloat($("#price_child_with_bed").val()) || 0;
+            
+            // Get quantities
+            var adultsQty = parseInt($("#adults").val()) || 0;
+            var childrenQty = parseInt($("#children").val()) || 0;
+            var childrenWithBedQty = parseInt($("#children_withbed").val()) || 0;
+            
+            // Calculate totals
+            var adultTotal = adultPrice * adultsQty;
+            var childWithoutBedTotal = childPriceWithoutBed * childrenQty;
+            var childWithBedTotal = childPriceWithBed * childrenWithBedQty;
+            
+            // Calculate grand total
+            var grandTotal = adultTotal + childWithoutBedTotal + childWithBedTotal;
+            
+            // Update the display
+            function toCurrencyString(price) {
+                return price.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g, '$1,');
+            }
+            
+            // Create breakdown of the price
+            var breakdown = "";
+            if (adultsQty > 0) {
+                breakdown += "<div>Adults: " + adultsQty + " × ₹" + toCurrencyString(adultPrice) + " = ₹" + toCurrencyString(adultTotal) + "</div>";
+            }
+            if (childrenQty > 0) {
+                breakdown += "<div>Children (Without Bed): " + childrenQty + " × ₹" + toCurrencyString(childPriceWithoutBed) + " = ₹" + toCurrencyString(childWithoutBedTotal) + "</div>";
+            }
+            if (childrenWithBedQty > 0) {
+                breakdown += "<div>Children (With Bed): " + childrenWithBedQty + " × ₹" + toCurrencyString(childPriceWithBed) + " = ₹" + toCurrencyString(childWithBedTotal) + "</div>";
+            }
+            if (breakdown !== "") {
+                breakdown += "<div class='fw-bold mt-2'>Total: ₹" + toCurrencyString(grandTotal) + "</div>";
+            }
+            
+            // Display the breakdown or just the adult price if no quantities yet
+            if (adultsQty > 0 || childrenQty > 0 || childrenWithBedQty > 0) {
+                $("#amount").html("<label class='text-danger p-0 font-bold mb-0 px-2'>Amount</label><div class='price-breakdown'>" + breakdown + "</div>");
+            } else {
+                // If no quantities entered yet, just show per person price
+                $("#amount").html("<i class='fa fa-indian-rupee'></i>" + toCurrencyString(adultPrice) + " / Per Person");
+            }
+            
+            // Add hidden input with the total price for form submission
+            if ($("#total_amount").length === 0) {
+                $("<input>").attr({
+                    type: "hidden",
+                    id: "total_amount",
+                    name: "price",
+                    value: grandTotal
+                }).appendTo(".book-form");
+            } else {
+                $("#total_amount").val(grandTotal);
+            }
+        }
 
         $('#tour_category').on('change', function() {
             const categoryId = $(this).val();

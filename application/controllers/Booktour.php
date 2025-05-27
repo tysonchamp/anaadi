@@ -4,6 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Booktour extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        // load model : tours_model
+        $this->load->model('tours_model');
+    }
+
     public function index()
     {
         $data['page_title'] = 'Anaadi Tours and Travels | Book Tour';
@@ -35,7 +42,7 @@ class Booktour extends CI_Controller
         $this->load->model('Booknow_model');
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[128]');
-        $this->form_validation->set_rules('phone', 'Phone', 'trim|required|max_length[10]');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[200]');
         $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[200]');
         $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
@@ -48,19 +55,19 @@ class Booktour extends CI_Controller
         }
         
         $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('return_date', 'Return Date', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('howmany_days', 'How many Days', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('howmany_night', 'How many Night', 'trim|required|max_length[250]');
+        $this->form_validation->set_rules('return_date', 'Return Date', 'trim|max_length[250]');
+        // $this->form_validation->set_rules('howmany_days', 'How many Days', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('howmany_night', 'How many Night', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('return_date', 'Return Date', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('passengers', 'No Passenger', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('return_date', 'Return Date', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('passengers', 'No Passenger', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('category', 'Category', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('tourcategory', 'Tour Category', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('tour', 'Tour Package', 'trim|required|max_length[250]');
  
-        $this->form_validation->set_rules('hotel', 'Hotel', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('meals', 'Meals', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('typeof_transfers', 'Type Of Transfers', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('hotel', 'Hotel', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('meals', 'Meals', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('typeof_transfers', 'Type Of Transfers', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('adults', 'Adults', 'trim|required|max_length[250]');
         // $this->form_validation->set_rules('children', 'Children', 'trim|max_length[250]');
         
@@ -107,6 +114,7 @@ class Booktour extends CI_Controller
             $country = $this->input->post('country', true);
             $city = $this->input->post('city', true);
             $continent = $this->input->post('continent', true);
+            $children_withbed = $this->input->post('children_withbed', true);
 
             $recordInfo = array(
                 'departure_city' => $departure_city,
@@ -121,12 +129,13 @@ class Booktour extends CI_Controller
                 'tour_category' => $tourcategory,
                 'tour_package' => $tour_package,
                 'adults' => $adults,
+                'children_withbed' => $children_withbed,
                 
                 'children' => $children,
                 'hotel' => $hotel,
                 'meals' => $meals,
                 'typeof_tranfers' => $typeof_tranfers,
-                'price' => '22344',
+                'price' => $price,
                 'name' => $name,
                 'phone' => $phone,
                 'email' => $email,
@@ -136,6 +145,9 @@ class Booktour extends CI_Controller
                 'city' => $city,
 
             );
+            // echo "<pre>";
+            // print_r($recordInfo);
+            // echo "</pre>";
             $result = $this->Booknow_model->addNew($recordInfo);
             if ($result > 0) {
                 $this->session->set_flashdata("success", "Thank you for Booking. Our team will get in touch with you soon.");
@@ -278,7 +290,7 @@ class Booktour extends CI_Controller
         $data['razorpay_key'] = $razorpay_key_id;
         
         // Calculate amount in paise (Razorpay uses smallest currency unit)
-        $price = $data['tour']['price'];
+        $price = $record['price'];
         $amount = $price * 100; // Converting to paise
         $data['amount'] = $amount;
         
