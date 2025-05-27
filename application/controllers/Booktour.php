@@ -265,6 +265,8 @@ class Booktour extends CI_Controller
         $this->load->model('Payment_model');
         
         $data['page_title'] = 'Anaadi Tours and Travels | Payment';
+        $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
+        $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
         $record = $this->Booknow_model->getById($id);
         $tour_package = $record['tour_package'];
         $data['bookingData'] = $record;
@@ -365,6 +367,8 @@ class Booktour extends CI_Controller
         $this->load->model('Tours_model');
         
         $data['page_title'] = 'Payment Success';
+        $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
+        $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
         $record = $this->Booknow_model->getById($booking_id);
         $tour_package = $record['tour_package'];
         $data['bookingData'] = $record;
@@ -381,6 +385,8 @@ class Booktour extends CI_Controller
         $this->load->model('Tours_model');
         
         $data['page_title'] = 'Payment Failed';
+        $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
+        $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
         $record = $this->Booknow_model->getById($booking_id);
         $tour_package = $record['tour_package'];
         $data['bookingData'] = $record;

@@ -121,7 +121,12 @@
 							<ul class="sub-menu">
 								<?php foreach ($domestic_tours as $tourcategory => $tours) { ?>
 								<li class="menu-item-has-children">
-									<a href="<?=base_url('/Domestictours/'.$tourcategory)?>"><?=$tourcategory?></a>
+									<a href="<?=base_url('/Domestictours/'.$tourcategory)?>">
+										<?php
+											$catData = $this->Tourcategory_model->getById($tourcategory);
+										?>
+										<?=$catData['country']?>
+									</a>
 									<ul class="sub-menu">
 										<?php foreach ($tours as $key => $tour) { ?>
 										<li><a href="<?=base_url('/Tour/'.$tour['url_title'])?>"><?=$tour['title']?></a></li>
@@ -137,7 +142,12 @@
 							<ul class="sub-menu">
 								<?php foreach ($international_tours as $tourcategory => $tours) { ?>
 								<li class="menu-item-has-children">
-									<a href="<?=base_url('/Internationaltours/'.$tourcategory)?>"><?=$tourcategory?></a>
+									<a href="<?=base_url('/Internationaltours/'.$tourcategory)?>">
+										<?php
+											$catData = $this->Tourcategory_model->getById($tourcategory);
+										?>
+										<?=$catData['country']?>
+									</a>
 									<ul class="sub-menu">
 										<?php foreach ($tours as $key => $tour) { ?>
 										<li><a href="<?=base_url('/Tour/'.$tour['url_title'])?>"><?=$tour['title']?></a></li>
@@ -209,7 +219,12 @@
 											<ul class="sub-menu">
 												<?php foreach ($domestic_tours as $tourcategory => $tours) { ?>
 												<li class="menu-item-has-children">
-													<a href="<?=base_url('/Domestictours/'.$tourcategory)?>"><?=$tourcategory?></a>
+													<a href="<?=base_url('/Domestictours/'.$tourcategory)?>">
+														<?php
+															$catData = $this->Tourcategory_model->getById($tourcategory);
+														?>
+														<?=$catData['country']?>
+													</a>
 													<ul class="sub-menu">
 														<?php foreach ($tours as $key => $tour) { ?>
 														<li><a href="<?=base_url('/Tour/'.$tour['url_title'])?>"><?=$tour['title']?></a></li>
@@ -225,7 +240,12 @@
 											<ul class="sub-menu">
 												<?php foreach ($international_tours as $tourcategory => $tours) { ?>
 												<li class="menu-item-has-children">
-													<a href="<?=base_url('/Internationaltours/'.$tourcategory)?>"><?=$tourcategory?></a>
+													<a href="<?=base_url('/Internationaltours/'.$tourcategory)?>">
+														<?php
+															$catData = $this->Tourcategory_model->getById($tourcategory);
+														?>
+														<?=$catData['country']?>
+													</a>
 													<ul class="sub-menu">
 														<?php foreach ($tours as $key => $tour) { ?>
 														<li><a href="<?=base_url('/Tour/'.$tour['url_title'])?>"><?=$tour['title']?></a></li>

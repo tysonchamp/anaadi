@@ -74,7 +74,14 @@
 					<div class="swiper-slide">
 						<div class="category-card single2">
 							<div class="box-img global-img shadow"><img class="shadow" src="<?=base_url('assets/images/tours/'.$images[0])?>" alt="<?=$tour_category?> Tours"></div>
-							<h3 class="box-title"><a href="<?=base_url('Domestictours/'.$tour_category)?>"><?=$tour_category?></a></h3>
+							<h3 class="box-title">
+								<a href="<?=base_url('Domestictours/'.$tour_category)?>">
+									<?php
+										$catData = $this->Tourcategory_model->getById($tour_category);
+									?>
+									<?=$catData['country']?>
+								</a>
+							</h3>
 							<a class="line-btn" href="<?=base_url('Domestictours/'.$tour_category)?>">See more</a>
 						</div>
 					</div>
@@ -102,7 +109,12 @@
 					<div class="swiper-slide">
 						<div class="category-card single2">
 							<div class="box-img global-img"><img src="<?=base_url('assets/images/tours/'.$images[0])?>" alt="<?=$tour_category?> Tours"></div>
-							<h3 class="box-title"><a href="<?=base_url('Internationaltours/'.$tour_category)?>"><?=$tour_category?></a></h3>
+							<h3 class="box-title"><a href="<?=base_url('Internationaltours/'.$tour_category)?>">
+								<?php
+										$catData = $this->Tourcategory_model->getById($tour_category);
+									?>
+									<?=$catData['country']?>
+							</a></h3>
 							<a class="line-btn" href="<?=base_url('Internationaltours/'.$tour_category)?>">See more</a>
 						</div>
 					</div>

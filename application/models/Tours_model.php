@@ -177,13 +177,16 @@ class Tours_model extends CI_Model
         $this->load->model('tourcategory_model');
         $menu = array();
         $subcategorys = $this->tourcategory_model->getByCategoryId($category_id);
+        // print_r($subcategorys);
         foreach($subcategorys as $row)
         {
             $result = $this->getByCategorySubId($category_id, $row['id']);
             if( count($result) > 0 ){
-                $menu[ $row['sub_category'] ] = $result;
+                $menu[ $row['id'] ] = $result;
             }
         }
+        // echo "<pre>";
+        // print_r($menu);
         return $menu;
     }
 
@@ -245,7 +248,7 @@ class Tours_model extends CI_Model
         $this->db->select('*');
         $this->db->from('tbl_tours');
         $this->db->join('tbl_tourcategory', 'tbl_tours.tourcategory_id = tbl_tourcategory.id',  'left');
-        $this->db->where('tbl_tourcategory.sub_category', $category);
+        $this->db->where('tbl_tourcategory.id', $category);
         $query = $this->db->get();
         if ($query->num_rows() > 0)
         {
@@ -266,7 +269,7 @@ class Tours_model extends CI_Model
         $this->db->from('tbl_tours');
         $this->db->join('tbl_tourcategory', 'tbl_tours.tourcategory_id = tbl_tourcategory.id',  'left');
         $this->db->join('tbl_tour_types', 'tbl_tours.type_id = tbl_tour_types.id',  'left');
-        $this->db->where('tbl_tourcategory.sub_category', $category);
+        $this->db->where('tbl_tourcategory.id', $category);
         $this->db->where('tbl_tour_types.type', $type);
         $query = $this->db->get();
         if ($query->num_rows() > 0)
