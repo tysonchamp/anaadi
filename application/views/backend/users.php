@@ -42,7 +42,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['userId']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['username']?></td>
                       <td><?=$row['name']?></td>
                       <td><?=$row['email']?></td>

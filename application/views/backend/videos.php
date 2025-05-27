@@ -44,7 +44,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['title']?></td>
                       <td><?=$row['description']?></td>
                       <td><a target="_blank" href="<?=$row['url']?>"><?=$row['url']?></a></td>

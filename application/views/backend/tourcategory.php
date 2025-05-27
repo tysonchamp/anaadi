@@ -44,7 +44,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['category']?></td>
                       <td><?=$row['continent']?></td>
                       <td><?=$row['country']?></td>

@@ -54,7 +54,7 @@
               <tbody>
                 <?php foreach($records as $index => $row) {?>
                 <tr>
-                  <th scope="row"><?=$row['id']?></th>
+                  <th scope="row"><?= ($index+1) ?></th>
                   <td><?=$row['name']?></td>
                   <td><?=$row['email']?></td>
                   <td><?=$row['phone']?></td>

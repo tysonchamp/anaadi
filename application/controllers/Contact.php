@@ -28,7 +28,7 @@ class Contact extends CI_Controller {
         $this->form_validation->set_rules('phone','Phone','trim|required|max_length[10]');
         $this->form_validation->set_rules('email','Email','trim|required|valid_email|max_length[200]');
         $this->form_validation->set_rules('subject','Subject','trim|required|max_length[200]');
-        $this->form_validation->set_rules('message','Message','trim|required|max_length[250]');
+        $this->form_validation->set_rules('message','Message','trim|max_length[250]');
 
         if($this->form_validation->run() == FALSE)
         {

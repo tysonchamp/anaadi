@@ -44,7 +44,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['service_name']?></td>
                       <td><img style="max-width: 50px;" class="img-fluid" src="<?=base_url('assets/images/services/'.$row['image'])?>"></td>
                       <td><?=$row['description']?></td>

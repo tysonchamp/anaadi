@@ -51,7 +51,7 @@
                   $img = explode(",", $row['images']);
                 ?>
                 <tr>
-                  <th scope="row"><?=$row['id']?></th>
+                  <th scope="row"><?= ($index+1) ?></th>
                   <td><?=$row['category']?></td>
                   <td><?=$row['tourcategory']?></td>
                   <td><?=$row['title']?></td>

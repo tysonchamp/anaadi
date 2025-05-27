@@ -45,7 +45,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['name']?></td>
                       <td><?=$row['sub_title']?></td>
                       <td><?=substr($row['testimonial'], 0, 100)?>..</td>

@@ -44,7 +44,7 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['title']?></td>
                       <td><?=$row['sub_title']?></td>
                       <td><img style="max-width: 150px;" class="img-fluid mx-auto p-1 border rounded" src="<?=base_url('assets/images/homeslider/'.$row['image'])?>"></td>

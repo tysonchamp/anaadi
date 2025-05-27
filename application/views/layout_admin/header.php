@@ -198,11 +198,11 @@
           <i class="bi bi-layout-text-window-reverse"></i><span>Admin</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
+          <!-- <li>
             <a href="<?=base_url('admin/Settings')?>">
               <i class="bi bi-gear-fill"></i><span>Settings</span>
             </a>
-          </li>
+          </li> -->
           <?php if( isset($user['user_type']) && $user['user_type'] == 'Admin' ){?>
           <li>
             <a href="<?=base_url('admin/Users')?>">
@@ -216,11 +216,11 @@
               <i class="bi bi-person-lines-fill"></i><span>Contact</span>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a href="<?=base_url('admin/Subscribers')?>">
               <i class="bi bi-person-lines-fill"></i><span>Subscribers</span>
             </a>
-          </li>
+          </li> -->
         </ul>
       </li><!-- End Tables Nav -->
     </ul>

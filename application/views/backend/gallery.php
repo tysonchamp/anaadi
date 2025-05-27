@@ -46,7 +46,7 @@
                       $images = explode(",", $row['images']);
                     ?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['album']?></td>
                       <td><img style="max-width: 150px;" class="img-fluid mx-auto p-1 border rounded" src="<?=base_url('assets/images/gallery/'.$images[0])?>"></td>
                       <td><?=$row['created_by']?></td>

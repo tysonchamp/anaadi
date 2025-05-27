@@ -42,16 +42,16 @@
                   <tbody>
                     <?php foreach($records as $index => $row) {?>
                     <tr>
-                      <th scope="row"><?=$row['id']?></th>
+                      <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['type']?></td>
                       <td><?=$row['created_by']?></td>
                       <td><?=date("d-m-Y h:m A", strtotime($row['created_date']))?></td>
                       <td><div class="d-flex justify-content-center">
                         <?php if( isset($user['user_type']) && $user['user_type'] == 'Admin' ){?>
-                        <a title="Edit Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="edit-record fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
-                        <a title="Delete Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="delete-record fs-6 text-danger float-right mx-2"><i class="bi bi-trash-fill"></i></a>
+                        <a title="Edit Record" href="javascript:void(0)" record-data="<?= ($index+1) ?>" class="edit-record fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
+                        <a title="Delete Record" href="javascript:void(0)" record-data="<?= ($index+1) ?>" class="delete-record fs-6 text-danger float-right mx-2"><i class="bi bi-trash-fill"></i></a>
                         <?php } else { ?>
-                          <a title="Edit Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="edit-record fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
+                          <a title="Edit Record" href="javascript:void(0)" record-data="<?= ($index+1) ?>" class="edit-record fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
                         <?php } ?>
                       </div></td>
                     </tr>
