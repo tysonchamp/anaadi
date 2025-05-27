@@ -37,17 +37,20 @@
                   <th scope="col">Email</th>
                   <th scope="col">Phone</th>
                   <th scope="col">Address</th>
+                  <th scope="col">City</th>
                   <th scope="col">Country</th>
-                  <th scope="col">Departure city</th>
-                  <th scope="col">Arrival city</th>
-                  <th scope="col">How Many days/Night</th>
+                  <th scope="col">Tour Type</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Tour Category</th>
+                  <th scope="col">Tour Package</th>
                   <th scope="col">Departure Date</th>
                   <th scope="col">Return Date</th>
-                  <th scope="col">No Of Passengers</th>
-                  <th scope="col">Hotel</th>
-                  <th scope="col">Transfers</th>
+                  <th scope="col">Adults</th>
+                  <th scope="col">Children (Without Bed)</th>
+                  <th scope="col">Children (With Bed)</th>
                   <th scope="col">Meals</th>
                   <th scope="col">Price</th>
+                  <th scope="col">Payment Status</th>
                   <?php if( isset($user['user_type']) && $user['user_type'] == 'Admin' ){?>
                   <th scope="col">Action</th>  
                   <?php } ?>  
@@ -61,19 +64,43 @@
                   <td><?=$row['email']?></td>
                   <td><?=$row['phone']?></td>
                   <td><?=$row['address']?></td>
-                  <td><?=$row['country']?></td>
-                  <td><?=$row['category']?></td>
-                  <td><?=$row['tour_category']?></td>
-                  <td><?=$row['howmany_days']?></td>
+                  <td><?=$row['city']?></td>
+                  <td>
+                    <?php
+                      $catData = $this->Tourcategory_model->getById($row['country']);
+                    ?>
+                    <?= $catData['country'] ?? '' ?>
+                  </td>
+                  <td><?=$row['tour_type_name'] ?? $row['typeof_tour']?></td>
+                  <td><?=$row['category_name'] ?? $row['category']?></td>
+                  <td><?=$row['tour_category_name'] ?? $row['tour_category']?></td>
+                  <td><?=$row['tour_package_name'] ?? $row['tour_package']?></td>
                   <td><?=$row['departure_date']?></td>
                   <td><?=$row['return_date']?></td>
-                  <td><?=$row['no_passenger']?></td>
-                  <td><?=$row['country']?></td>
-                  <td><?=$row['tour_package']?></td>
-                  <td><?=$row['hotel']?></td>
-                  <td><?=$row['typeof_tranfers']?></td>
+                  <td><?=$row['adults']?></td>
+                  <td><?=$row['children']?></td>
+                  <td><?=$row['children_withbed'] ?? ''?></td>
                   <td><?=$row['meals']?></td>
                   <td><?=$row['price']?></td>
+                  <td>
+                    <?php 
+                      $status_class = '';
+                      switch($row['payment_status']) {
+                        case 'paid':
+                          $status_class = 'badge bg-success';
+                          break;
+                        case 'pending':
+                          $status_class = 'badge bg-warning text-dark';
+                          break;
+                        case 'failed':
+                          $status_class = 'badge bg-danger';
+                          break;
+                        default:
+                          $status_class = 'badge bg-secondary';
+                      }
+                    ?>
+                    <span class="<?=$status_class?>"><?=ucfirst($row['payment_status'] ?? 'pending')?></span>
+                  </td>
                
                   <?php if( isset($user['user_type']) && $user['user_type'] == 'Admin' ){?>
                   <td><div class="d-flex justify-content-center">

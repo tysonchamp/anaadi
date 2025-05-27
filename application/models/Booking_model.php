@@ -9,8 +9,16 @@ class Booking_model extends CI_Model
     function getAll()
     {
         $this->db->order_by('tbl_booknow.id', 'ASC');
-        $this->db->select('*');
+        $this->db->select('tbl_booknow.*, 
+            tbl_category.category as category_name,
+            tbl_tourcategory.country as tour_category_name,
+            tbl_tours.title as tour_package_name,
+            tbl_tour_types.type as tour_type_name');
         $this->db->from('tbl_booknow');
+        $this->db->join('tbl_category', 'tbl_category.id = tbl_booknow.category', 'left');
+        $this->db->join('tbl_tourcategory', 'tbl_tourcategory.id = tbl_booknow.tour_category', 'left');
+        $this->db->join('tbl_tours', 'tbl_tours.id = tbl_booknow.tour_package', 'left');
+        $this->db->join('tbl_tour_types', 'tbl_tour_types.id = tbl_booknow.typeof_tour', 'left');
         $query = $this->db->get();
         if ($query->num_rows() > 0){
             return $query->result_array();
