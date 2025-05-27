@@ -213,7 +213,7 @@
                             
                             <!-- Children with bed -->
                             <div class="col-6 form-group mb-2">
-                                <label class="mb-1">> 2 &lt; 12 Years (With Bed)</label>
+                                <label class="mb-1">2 &lt; 12 Years (With Bed)</label>
                                 <?php
                                 if ($this->session->flashdata('item')) {
                                     $message = $this->session->flashdata('item');
@@ -228,7 +228,7 @@
                             
                             <!-- Children without bed -->
                             <div class="col-6 form-group mb-2">
-                                <label class="mb-1">> 2 &lt; 12 Years (Without Bed)</label>
+                                <label class="mb-1">2 &lt; 12 Years (Without Bed)</label>
                                 <?php
                                 if ($this->session->flashdata('item')) {
                                     $message = $this->session->flashdata('item');
