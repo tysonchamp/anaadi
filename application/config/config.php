@@ -543,8 +543,8 @@ $config['proxy_ips'] = '';
 | Get your API keys from https://dashboard.razorpay.com/app/keys
 |
 */
-$config['razorpay_key_id'] = 'rzp_test_55tGNBZFb1xPif';  // Replace with your key ID from Razorpay Dashboard
-$config['razorpay_key_secret'] = 'S0hRN3FrWLluEsR8KHSbIQM2';    // Replace with your key secret from Razorpay Dashboard
+$config['razorpay_key_id'] = 'rzp_live_vb3Lr3fbCIccj0';  // Replace with your key ID from Razorpay Dashboard
+$config['razorpay_key_secret'] = 'PqTH3sVyEcvHkkJEcZ4QqhuO';    // Replace with your key secret from Razorpay Dashboard
 
 /*
 | For production, use live keys. For testing, use test keys.
