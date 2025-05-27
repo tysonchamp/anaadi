@@ -260,6 +260,8 @@ class Tours extends CI_Controller
         $this->form_validation->set_rules('nights','Nights','trim|required|integer');
         $this->form_validation->set_rules('days','Days','trim|required|integer');
         $this->form_validation->set_rules('price','Price','trim|required|max_length[50]');
+        $this->form_validation->set_rules('price_child_with_bed','Child Price With Bed','trim|required|max_length[50]');
+        $this->form_validation->set_rules('price_child_without_bed','Child Price Without Bed','trim|required|max_length[50]');
         $this->form_validation->set_rules('start_location','Start Location','trim|required|max_length[250]');
         $this->form_validation->set_rules('destination_location','Destination Location','trim|required|max_length[250]');
         $this->form_validation->set_rules('covered_locations','Covered Locations','trim|required|max_length[500]');
@@ -332,6 +334,8 @@ class Tours extends CI_Controller
         $nights = $this->security->xss_clean($this->input->post('nights'));
         $days = $this->security->xss_clean($this->input->post('days'));
         $price = $this->security->xss_clean($this->input->post('price'));
+        $price_child_with_bed = $this->security->xss_clean($this->input->post('price_child_with_bed'));
+        $price_child_without_bed = $this->security->xss_clean($this->input->post('price_child_without_bed'));
         $start_location = $this->security->xss_clean($this->input->post('start_location'));
 
         $destination_location = $this->security->xss_clean($this->input->post('destination_location'));
@@ -351,6 +355,8 @@ class Tours extends CI_Controller
                 'duration_nights' => $nights,
                 'duration_days' => $days,
                 'price' => $price,
+                'price_child_with_bed' => $price_child_with_bed,
+                'price_child_without_bed' => $price_child_without_bed,
                 'start_location' => $start_location,
                 'destination_location' => $destination_location,
                 'covered_locations' => $covered_locations,

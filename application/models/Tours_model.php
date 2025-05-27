@@ -40,7 +40,7 @@ class Tours_model extends CI_Model
     function getIndia()
     {
         $this->db->order_by('tbl_tours.id', 'DESC');
-        $this->db->select('tbl_tours.*, tbl_category.category, tbl_tour_types.type, tbl_tourcategory.sub_category as tourcategory,tbl_users.name as created_by');
+        $this->db->select('tbl_tours.*, tbl_category.category, tbl_tour_types.type, tbl_tourcategory.country as tourcategory,tbl_users.name as created_by');
         $this->db->from('tbl_tours');
         $this->db->where('tbl_category.id', '1');
         $this->db->join('tbl_users', 'tbl_users.userId = tbl_tours.created_by',  'left');

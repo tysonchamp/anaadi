@@ -81,6 +81,18 @@
                             <label>Starting Price / Per Person</label>
                             <input type="text" name="price" class="form-control" value="<?=(isset($record))?$record['price']:""?>" required maxlength="10">
                           </div>
+                          
+                          <!-- <div class="row"> -->
+                            <div class="form-group w-50 mb-2">
+                              <label>Child Price (2-12 yrs with bed)</label>
+                              <input type="text" name="price_child_with_bed" class="form-control" value="<?=(isset($record))?$record['price_child_with_bed']:""?>" required maxlength="10">
+                            </div>
+
+                            <div class="form-group w-50 mb-2">
+                              <label>Child Price (2-12 yrs without bed)</label>
+                              <input type="text" name="price_child_without_bed" class="form-control" value="<?=(isset($record))?$record['price_child_without_bed']:""?>" required maxlength="10">
+                            </div>
+                          <!-- </div> -->
 
                           <div class="form-group w-50 mb-2">
                             <label>Start Location</label>
