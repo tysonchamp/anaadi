@@ -90,7 +90,11 @@
 							</div>
 						</div>
 						<div class="info-box_text">
-							<div class="icon"><img src="<?=base_url()?>assets/img/icon/location-dot.svg" alt="img"></div>
+							<div class="icon">
+								<a href="https://maps.app.goo.gl/hf9oYWgaokgSWmyq8" target="_blank">
+									<img src="<?=base_url()?>assets/img/icon/location-dot.svg" alt="img">
+								</a>
+							</div>
 							<div class="details">
 								<p>#4, Virupakshapura, Vidyaranyapura Post, Bengaluru - 560097</p>
 							</div>
@@ -180,7 +184,12 @@
 						<div class="col-auto d-none d-md-block">
 							<div class="header-links">
 								<ul>
-									<li class="d-none d-xl-inline-block"><i class="fa-sharp text-danger fa-regular fa-location-dot"></i> <span class="fw-semibold">#4, Virupakshapura, Vidyaranyapura Post, Bengaluru - 560097</span></li>
+									<li class="d-none d-xl-inline-block">
+										<a href="https://maps.app.goo.gl/hf9oYWgaokgSWmyq8" target="_blank">
+											<i class="fa-sharp text-danger fa-regular fa-location-dot"></i> 
+											<span class="fw-semibold">#4, Virupakshapura, Vidyaranyapura Post, Bengaluru - 560097</span>
+										</a>
+									</li>
 									<li class="d-none d-xl-inline-block"><i class="fa-regular text-danger fa-clock"></i> <span class="fw-semibold">Monday to Friday: 10.00 AM - 7.00 PM</span></li>
 								</ul>
 							</div>

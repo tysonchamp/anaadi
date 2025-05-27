@@ -279,10 +279,10 @@
                                 <?php } ?>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
-                                    <input type="number" min="0" class="form-control" id="howmany_days" name="howmany_days" placeholder="Days" value="0">
+                                    <input type="number" min="0" class="form-control" id="howmany_days" name="howmany_days" placeholder="Days">
                                 </div>
                                 <div class="form-group col-6 mb-2">
-                                    <input type="number" min="0" class="form-control" id="howmany_night" name="howmany_night" placeholder="Nights" value="0">
+                                    <input type="number" min="0" class="form-control" id="howmany_night" name="howmany_night" placeholder="Nights">
                                 </div>
                             <?php } ?>
                             
@@ -444,6 +444,13 @@
 
 <script>
 $(document).ready(function() {
+    // Auto calculate nights when days change
+    $("#howmany_days").on('change input', function() {
+        let days = parseInt($(this).val()) || 0;
+        let nights = days > 0 ? days - 1 : 0;
+        $("#howmany_night").val(nights);
+    });
+    
     // Form validation
     $("form.ajax-contact").submit(function(e) {
         let isValid = true;

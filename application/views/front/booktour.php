@@ -125,23 +125,23 @@
                     <hr>
                         <div class="col-12 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Name</label>
-                            <input type="text" class="form-control" name="name" id="name4" placeholder="">
+                            <input type="text" class="form-control" name="name" id="name4" placeholder="" required>
                         </div>
                         <div class="col-6 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Email</label>
-                            <input type="email" class="form-control" name="email" id="email4" placeholder="">
+                            <input type="email" class="form-control" name="email" id="email4" placeholder="" required>
                         </div>
                         <div class="col-6 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Phone</label>
-                            <input type="number" class="form-control" name="phone" id="phone4" placeholder="">
+                            <input type="number" class="form-control" name="phone" id="phone4" placeholder="" required>
                         </div>
                         <div class="col-12 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Address</label>
-                            <input type="text" class="form-control" name="address" id="address4" placeholder="">
+                            <input type="text" class="form-control" name="address" id="address4" placeholder="" required>
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Type of Tour</label>
-                            <select class="form-select" id="typeof_tour" name="typeof_tour">
+                            <select class="form-select" id="typeof_tour" name="typeof_tour" required>
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
                                 <?php if(!empty($tour_types)): ?>
                                     <?php foreach($tour_types as $type): ?>
@@ -153,7 +153,7 @@
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Country</label>
 
-                            <select class="form-select" name="country">
+                            <select class="form-select" name="country" required>
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
                                 <?php if(!empty($india_states)): ?>
                                     <?php foreach($india_states as $state): ?>
@@ -166,7 +166,7 @@
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16"> City:</label>
-                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
+                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3" required>
                         </div>
                         <div class="form-btn col-12 mt-24"><button id="booktour" type="submit" class="th-btn">Book Now</button></div>
                     </div>
