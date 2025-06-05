@@ -129,7 +129,7 @@
           </li>
           <li>
             <a href="<?=base_url('admin/Places')?>">
-              <i class="bi bi-list"></i><span>Places</span>
+              <i class="bi bi-list"></i><span>Arrival & Deperture Place</span>
             </a>
           </li>
           <li>
