@@ -101,16 +101,43 @@
           <i class="bi bi-menu-button-wide"></i><span>Tours</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          
           <li>
-            <a href="<?=base_url('admin/Tours/getIndia')?>">
-              <i class="bi bi-list"></i><span>India</span>
+            <a href="<?=base_url('admin/Gst')?>">
+              <i class="bi bi-list"></i><span>Gst</span>
             </a>
           </li>
           <li>
-            <a href="<?=base_url('admin/Tours')?>">
-              <i class="bi bi-list"></i><span>World</span>
+            <a href="<?=base_url('admin/Accomodation')?>">
+              <i class="bi bi-list"></i><span>Accomodation</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/Articles')?>">
+              <i class="bi bi-list"></i><span>Articles</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Exclusion')?>">
+              <i class="bi bi-list"></i><span>Exclusion</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Meals')?>">
+              <i class="bi bi-list"></i><span>Meals</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Places')?>">
+              <i class="bi bi-list"></i><span>Places</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tcs')?>">
+              <i class="bi bi-list"></i><span>Tcs</span>
+            </a>
+          </li>
+
           <li>
             <a href="<?=base_url('admin/Tourcategory/continents')?>">
               <i class="bi bi-list"></i><span>Tour Continents</span>
@@ -124,6 +151,16 @@
           <li>
             <a href="<?=base_url('admin/Tourtypes')?>">
               <i class="bi bi-list"></i><span>Tour Types</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tours/getIndia')?>">
+              <i class="bi bi-list"></i><span>India</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tours')?>">
+              <i class="bi bi-list"></i><span>World</span>
             </a>
           </li>
           <li>
