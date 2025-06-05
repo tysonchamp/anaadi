@@ -21,189 +21,208 @@
                   </div>
                   <?php } ?>
               </div>
-              <div class="row gap-1">
-                  <form id="addtour" class="col-lg-12" method="POST" encypt="multipart/data" action="<?=base_url('admin/Tours/save_record')?>">
-                      <input type="hidden" name="record_id" value="<?=(isset($record))?$record['id']:""?>">
-                      <div class="row justify-content-left">
-                        <div class="col-lg-6 px-4 py-2">
-                          
-                          <!-- Hidden category_id field -->
-                          <input type="hidden" name="category_id" id="category_id" value="<?=(isset($record))?$record['category_id']:(isset($categoryid)?$categoryid:"")?>">
-
-                          <div class="form-group w-50 mb-2" id="continent_container">
-                            <label>Continent</label>
-                            <select name="continent_id" id="continent_id" class="form-select">
-                                <option value="0">-Select-</option>
-                                <?php if(isset($continents)){ 
-                                  foreach($continents as $row){ ?>
-                                    <option value="<?=$row['id']?>"><?=$row['continent']?></option>
-                                  <?php }
-                                } ?>
-                            </select>
-                          </div>
-                          
-                          <div class="form-group w-50 mb-2" id="state_container">
-                            <label id="location_label">State</label>
-                            <select name="tourcategory_id" class="form-select">
-                              <option value="0">-Select-</option>
-                              <?php if( isset($tourcategory)) { 
-                                foreach($tourcategory as $row) { ?>
-                                  <option <?=(isset($record) && $record['tourcategory_id'] == $row['id'] )?"selected":""?>  value="<?=$row['id']?>"><?=$row['country']?></option>
-                                <?php }
-                              } ?>
-                            </select>
-                          </div>
-                          
-                          <div class="form-group w-50 mb-2">
-                            <label>Tour Type</label>
-                            <select name="type_id" class="form-select">
-                              <option value="0">-Select-</option>
-                              <?php if( isset($tour_types)) { 
-                                foreach($tour_types as $row) { ?>
-                                  <option <?=(isset($record) && $record['type_id'] == $row['id'])?"selected":""?>  value="<?=$row['id']?>"><?=$row['type']?></option>
-                                <?php }
-                              } ?>
-                            </select>
-                          </div>
-                          
-                          <div class="form-group w-100 mb-2">
-                            <label>Title</label>
-                            <input type="text" name="title" value="<?=(isset($record))?$record['title']:""?>" class="form-control" required maxlength="250">
-                          </div>
-
-                          <div class="form-group w-50 mb-2">
-                            <label class="w-100">Duration</label>
-                            <input type="text" name="nights" value="<?=(isset($record))?$record['duration_nights']:""?>" class="w-30 d-inline form-control" required maxlength="10"> <label class="d-inline">Nights &nbsp;</label>
-                            <input type="text" name="days" class="w-30 d-inline form-control" value="<?=(isset($record))?$record['duration_days']:""?>" required maxlength="10"> <label class="d-inline">Days</label>
-                          </div>
-
-                          <div class="form-group w-45 mb-2">
-                            <label>Starting Price / Per Person</label>
-                            <input type="text" name="price" class="form-control" value="<?=(isset($record))?$record['price']:""?>" required maxlength="10">
-                          </div>
-                          
-                          <!-- <div class="row"> -->
-                            <div class="form-group w-50 mb-2">
-                              <label>Child Price (2-12 yrs with bed)</label>
-                              <input type="text" name="price_child_with_bed" class="form-control" value="<?=(isset($record))?$record['price_child_with_bed']:""?>" required maxlength="10">
-                            </div>
-
-                            <div class="form-group w-50 mb-2">
-                              <label>Child Price (2-12 yrs without bed)</label>
-                              <input type="text" name="price_child_without_bed" class="form-control" value="<?=(isset($record))?$record['price_child_without_bed']:""?>" required maxlength="10">
-                            </div>
-                          <!-- </div> -->
-
-                          <div class="form-group w-50 mb-2">
-                            <label>Start Location</label>
-                            <input type="text" name="start_location" class="form-control" value="<?=(isset($record))?$record['start_location']:""?>" required maxlength="250">
-                          </div>
-
-                          <div class="form-group w-45 mb-2">
-                            <label>Destination Location</label>
-                            <input type="text" name="destination_location" class="form-control" value="<?=(isset($record))?$record['destination_location']:""?>" required maxlength="250">
-                          </div> 
-
-                          <div class="form-group w-100 mb-2">
-                            <label>Covered Locations</label>
-                            <input type="text" name="covered_locations" class="form-control" value="<?=(isset($record))?$record['covered_locations']:""?>" required maxlength="250">
-                          </div>
-
-                          <div class="form-group w-100 mb-2">
-                            <label>Accomodations</label>
-                            <input type="text" name="accomodations" class="form-control" value="<?=(isset($record))?$record['accomodations']:""?>" required maxlength="250">
-                          </div>
-
-                          <div class="form-group w-100 mb-2">
-                            <label>Activities</label>
-                            <input type="text" name="activities" class="form-control" value="<?=(isset($record))?$record['activities']:""?>" required maxlength="250">
-                          </div>
-
-                        </div>
-
-                        <div class="col-lg-6 px-4 py-2">
-                          <div class="form-group w-100 mt-2 mb-4 px-2">
-                            <label>Tour Images</label>
-                            <input type="file" onchange="loadFile(event)" multiple class="form-control" name="tour_images[]" value="" />
-                          </div>
-                          <div id="imagepreview" class="imagepreview w-100 px-4 mb-4 float-left">
-                            <?php if(isset($record)){
-                              $images = explode(",", $record['images']);
-                              foreach($images as $img){
-                              ?>
-                              <img src="<?=base_url('assets/images/tours/'.$img)?>" />
-                            <?php } } ?>
-                          </div>
-                        </div>
-
+              
+                  <form id="addtour" method="POST" enctype="multipart/form-data" action="<?=base_url('admin/Tours/save_record')?>">
+                    <input type="hidden" name="record_id" value="<?=(isset($record))?$record['id']:''?>">
+                    <input type="hidden" name="category_id" id="category_id" value="<?=(isset($record))?$record['category_id']:(isset($categoryid)?$categoryid:'')?>">
+                    <div class="row g-3">
+                      <div class="col-md-4">
+                        <label class="form-label">Continent</label>
+                        <select name="continent_id" id="continent_id" class="form-select">
+                          <option value="0">-Select-</option>
+                          <?php if(isset($continents)){ foreach($continents as $row){ ?>
+                            <option value="<?=$row['id']?>" <?=isset($record)&&isset($record['continent_id'])&&$record['continent_id']==$row['id']?'selected':''?>><?=$row['continent']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
-                      
-                      <div class="row justify-content-left">
-                        <div class="col-lg-10 px-4 py-2">
-                          <div class="w-100 form-group mb-2">
-                            <div class="card">
-                              <div class="card-body">
-                                <h5 class="card-title text-dark">Tour Description / Itinerary</h5>
-                                <div class="quill-editor-default" style="height:200px;overflow: auto;">
-                                  <?=(isset($record))?$record['itinerary']:""?>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                      <div class="col-md-4">
+                        <label class="form-label">State/Country</label>
+                        <select name="tourcategory_id" class="form-select">
+                          <option value="0">-Select-</option>
+                          <?php if(isset($tourcategory)) { foreach($tourcategory as $row) { ?>
+                            <option value="<?=$row['id']?>" <?=(isset($record) && $record['tourcategory_id'] == $row['id'])?'selected':''?>><?=$row['country']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
-
-                      <div class="row justify-content-left">
-                        <div class="col-lg-6 px-4 py-2">
-                          <div class="w-100 form-group mb-2">
-                              <label>Inclusions</label>
-                              <input type="text" class="w-90 form-control" name="inclusions" id="inclusions" maxlength="250" value="">                            
-                              <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
-                          </div>
-                          <div class="w-100 form-group mb-2">
-                              <ul class="inclusions_block d-block">
-                                <?php if(isset($record)) {
-                                $ins = json_decode($record['inclusions']);
-                                foreach($ins as $i => $txt){ ?>
-                                <li id='lirow_<?=$i?>'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'><?=$txt?></span><a onclick='deleteli("lirow_<?=$i?>")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>  
-                                <?php } 
-                                } else { ?>
-                                <p>No Items</p>
-                                <?php } ?>
-                              </ul>
-                          </div>
-                        </div>
-
-                        <div class="col-lg-6 px-4 py-2">
-                          <div class="w-100 form-group mb-2">
-                              <label>Exclusions</label>
-                              <input type="text" class="w-90 form-control" name="exclusions" id="exclusions" maxlength="250" value="">                            
-                              <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
-                          </div>
-                          <div class="w-100 form-group mb-2">
-                              <ul class="exclusions_block d-block">
-                                <?php if(isset($record)) {
-                                $ins = json_decode($record['exclusions']);
-                                foreach($ins as $i => $txt){ ?>
-                                <li id='lirow1_<?=$i?>'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'><?=$txt?></span><a onclick='deleteli1("lirow1_<?=$i?>")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>  
-                                <?php } 
-                                } else { ?>
-                                <p>No Items</p>
-                                <?php } ?>
-                              </ul>
-                          </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Tour Type</label>
+                        <select name="type_id" class="form-select">
+                          <option value="0">-Select-</option>
+                          <?php if(isset($tour_types)) { foreach($tour_types as $row) { ?>
+                            <option value="<?=$row['id']?>" <?=(isset($record) && $record['type_id'] == $row['id'])?'selected':''?>><?=$row['type']?></option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Title</label>
+                        <input type="text" name="title" value="<?=(isset($record))?$record['title']:''?>" class="form-control" required maxlength="255">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Nights</label>
+                        <input type="number" name="duration_nights" value="<?=(isset($record))?$record['duration_nights']:''?>" class="form-control" min="1" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Days</label>
+                        <input type="number" name="duration_days" value="<?=(isset($record))?$record['duration_days']:''?>" class="form-control" min="1" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Min. Adults</label>
+                        <input type="number" name="min_adults" value="<?=(isset($record))?$record['min_adults']:1?>" class="form-control" min="1">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Price Per Adult</label>
+                        <input type="number" step="0.01" name="price" class="form-control" value="<?=(isset($record))?$record['price']:''?>" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Child Price (with bed)</label>
+                        <input type="number" step="0.01" name="price_child_with_bed" class="form-control" value="<?=(isset($record))?$record['price_child_with_bed']:''?>">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Child Price (without bed)</label>
+                        <input type="number" step="0.01" name="price_child_without_bed" class="form-control" value="<?=(isset($record))?$record['price_child_without_bed']:''?>">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Infant Price (without bed)</label>
+                        <input type="number" step="0.01" name="price_infant_without_bed" class="form-control" value="<?=(isset($record))?$record['price_infant_without_bed']:''?>">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Start Location</label>
+                        <input type="text" name="start_location" class="form-control" value="<?=(isset($record))?$record['start_location']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Arrival Location</label>
+                        <input type="text" name="arrival_location" class="form-control" value="<?=(isset($record))?$record['arrival_location']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Destination Location</label>
+                        <input type="text" name="destination_location" class="form-control" value="<?=(isset($record))?$record['destination_location']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Tour Starts (Place)</label>
+                        <input type="text" name="tour_start_place" class="form-control" value="<?=(isset($record))?$record['tour_start_place']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Tour Ends (Place)</label>
+                        <input type="text" name="tour_end_place" class="form-control" value="<?=(isset($record))?$record['tour_end_place']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Covered Locations</label>
+                        <input type="text" name="covered_locations" class="form-control" value="<?=(isset($record))?$record['covered_locations']:''?>" maxlength="500">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Accommodations</label>
+                        <input type="text" name="accomodations" class="form-control" value="<?=(isset($record))?$record['accomodations']:''?>" maxlength="500">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Meals</label>
+                        <input type="text" name="meals" class="form-control" value="<?=(isset($record))?$record['meals']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Transfers</label>
+                        <input type="text" name="transfers" class="form-control" value="<?=(isset($record))?$record['transfers']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">VISA</label>
+                        <input type="text" name="visa" class="form-control" value="<?=(isset($record))?$record['visa']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Air Ticket</label>
+                        <input type="text" name="air_ticket" class="form-control" value="<?=(isset($record))?$record['air_ticket']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Travel Insurance</label>
+                        <input type="text" name="travel_insurance" class="form-control" value="<?=(isset($record))?$record['travel_insurance']:''?>" maxlength="255">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">GST</label>
+                        <select name="gst_id" class="form-select">
+                          <option value="">-Select-</option>
+                          <?php if(isset($gst)) { foreach($gst as $row) { ?>
+                            <option value="<?=$row['id']?>" <?=(isset($record) && $record['gst_id'] == $row['id'])?'selected':''?>><?=$row['title']?> (<?=$row['tax_percentage']?>%)</option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">TCS</label>
+                        <select name="tcs_id" class="form-select">
+                          <option value="">-Select-</option>
+                          <?php if(isset($tcs)) { foreach($tcs as $row) { ?>
+                            <option value="<?=$row['id']?>" <?=(isset($record) && $record['tcs_id'] == $row['id'])?'selected':''?>><?=$row['title']?> (<?=$row['tcs_percentage']?>%)</option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Activities</label>
+                        <input type="text" name="activities" class="form-control" value="<?=(isset($record))?$record['activities']:''?>" maxlength="500">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Booking Validity From</label>
+                        <input type="date" name="booking_validity_from" class="form-control" value="<?=(isset($record))?$record['booking_validity_from']:''?>">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Booking Validity To</label>
+                        <input type="date" name="booking_validity_to" class="form-control" value="<?=(isset($record))?$record['booking_validity_to']:''?>">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Package Validity From</label>
+                        <input type="date" name="package_validity_from" class="form-control" value="<?=(isset($record))?$record['package_validity_from']:''?>">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Package Validity To</label>
+                        <input type="date" name="package_validity_to" class="form-control" value="<?=(isset($record))?$record['package_validity_to']:''?>">
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Fixed Date Tours (comma separated)</label>
+                        <input type="text" name="fixed_dates" class="form-control" value="<?=(isset($record))?$record['fixed_dates']:''?>" maxlength="500">
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Tour Images</label>
+                        <input type="file" onchange="loadFile(event)" multiple class="form-control" name="tour_images[]" />
+                        <div id="imagepreview" class="d-flex flex-wrap gap-2 mt-2">
+                          <?php if(isset($record)){
+                            $images = explode(",", $record['images']);
+                            foreach($images as $img){ ?>
+                              <img src="<?=base_url('assets/images/tours/'.$img)?>" class="img-thumbnail" style="max-width:100px;max-height:100px;" />
+                          <?php } } ?>
                         </div>
                       </div>
-
-                      <div class="row justify-content-left">
-                        <div class="col-lg-4 px-4 py-2">
-                          <button id="savetour" class="btn btn-primary"><?=(isset($record))?"Update":"Submit"?></button>
-                        </div>
-                        <div id="error_div" class="col-lg-6 px-4 py-2 text-left">
-                          
-                        </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Tour Description</label>
+                        <textarea name="tour_description" class="form-control" rows="4"><?=(isset($record))?$record['tour_description']:''?></textarea>
                       </div>
-
+                      <div class="col-md-12">
+                        <label class="form-label">Itinerary</label>
+                        <textarea name="itinerary" class="form-control" rows="4"><?=(isset($record))?$record['itinerary']:''?></textarea>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Inclusions</label>
+                        <input type="text" class="form-control mb-2" name="inclusions" id="inclusions" maxlength="250" value="">
+                        <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
+                        <ul class="inclusions_block list-group mt-2">
+                          <?php if(isset($record)) {
+                            $ins = json_decode($record['inclusions']);
+                            if($ins) foreach($ins as $i => $txt){ ?>
+                              <li class="list-group-item d-flex justify-content-between align-items-center"><span><?=$txt?></span><a onclick="deleteli('lirow_<?=$i?>')" class="text-danger"><i class="ri-close-circle-line"></i></a></li>
+                          <?php }} ?>
+                        </ul>
+                      </div>
+                      <div class="col-md-12">
+                        <label class="form-label">Exclusions</label>
+                        <input type="text" class="form-control mb-2" name="exclusions" id="exclusions" maxlength="250" value="">
+                        <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
+                        <ul class="exclusions_block list-group mt-2">
+                          <?php if(isset($record)) {
+                            $exs = json_decode($record['exclusions']);
+                            if($exs) foreach($exs as $i => $txt){ ?>
+                              <li class="list-group-item d-flex justify-content-between align-items-center"><span><?=$txt?></span><a onclick="deleteli1('lirow1_<?=$i?>')" class="text-danger"><i class="ri-close-circle-line"></i></a></li>
+                          <?php }} ?>
+                        </ul>
+                      </div>
+                      <div class="col-12 text-end mt-4">
+                        <button type="submit" id="savetour" class="btn btn-primary px-5 py-2">Save Tour</button>
+                      </div>
+                      <div id="error_div" class="col-12 mt-2"></div>
+                    </div>
                   </form>
               </div>
             </div>
