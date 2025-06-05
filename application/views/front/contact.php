@@ -17,7 +17,8 @@
                         <div class="about-contact-icon"><img src="<?=base_url()?>assets/img/icon/location-dot2.svg" alt=""></div>
                         <div class="about-contact-details">
                             <h6 class="box-title">Our Address</h6>
-                            <p class="about-contact-details-text">#4, 2nd Floor, Maruthi Complex, Thindlu-Kodigehalli Main Road, </p>
+                            <p class="about-contact-details-text">Anaadi Tours & Travels</p>
+                            <p class="about-contact-details-text">#4, 2nd Floor, Maruthi Complex, Kodigehalli-Thindlu Main Road, </p>
                             <p class="about-contact-details-text">Virupakshapura, Vidyaranyapura Post, Bengaluru - 560097, Karnataka, INDIA.</p>
                         </div>
                     </div>
@@ -27,10 +28,12 @@
                         <div class="about-contact-icon"><img src="<?=base_url()?>assets/img/icon/call.svg" alt=""></div>
                         <div class="about-contact-details">
                             <h6 class="box-title">Phone Number</h6>
-                            <p class="about-contact-details-text"><a href="tel:+91 6364328383">+91 6364328383</a></p>
-                            <p class="about-contact-details-text"><a href="tel:+91 9341666060">+91 9341666060</a></p>
-                            <p class="about-contact-details-text"><a href="tel:919886774543">+91 9886774543</a></p>
-                            <p class="about-contact-details-text"><a href="tel:919739974193">+91 9739974193</a></p>
+                            <!-- <p class="about-contact-details-text"><a href="tel:+91 6364328383">+91 6364328383</a></p> -->
+                            <p class="about-contact-details-text"><a href="tel:916364328383" class="info-box_link">+91 6364328383</a></p>
+                            <p class="about-contact-details-text"><a href="tel:918048660847" class="info-box_link">+91 8048660847</a></p>
+                            <p class="about-contact-details-text"><a href="tel:919886774543" class="info-box_link">+91 9886774543</a></p>
+                            <p class="about-contact-details-text"><a href="tel:919341666060" class="info-box_link">+91 9341666060</a></p>
+                            <p class="about-contact-details-text"><a href="tel:919739974193" class="info-box_link">+91 9739974193</a></p>
                         </div>
                     </div>
                 </div>
@@ -40,6 +43,7 @@
                         <div class="about-contact-details">
                             <h6 class="box-title">Email Address</h6>
                             <p class="about-contact-details-text"><a href="mailto:toursandtravels@anaadi.co">toursandtravels@anaadi.co</a></p>
+                            <p class="about-contact-details-text"><a href="mailto:nandish@anaadi.co">nandish@anaadi.co</a></p>
                         </div>
                     </div>
                 </div>

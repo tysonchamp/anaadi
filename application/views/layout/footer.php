@@ -12,6 +12,7 @@
 		      <a href="<?=TWITTER?>"><img src="<?=base_url('assets/img/social/twitter.svg')?>"></a>
 		      <a href="<?=YOUTUBE?>"><img src="<?=base_url('assets/img/social/youtube.svg')?>"></a>
 		      <a href="<?=INSTAGRAM?>"><img src="<?=base_url('assets/img/social/instagram.svg')?>"></a>
+			  <a href="<?=INSTAGRAM?>"><img src="<?=base_url('assets/img/social/facebook.svg')?>"></a>
 		    </div>
 		</div>
 	    
@@ -74,21 +75,23 @@
 										<div class="icon"><img src="<?=base_url()?>assets/img/icon/phone.svg" alt="img"></div>
 										<div class="details">
 											<p><a href="tel:916364328383" class="info-box_link">+91 6364328383</a></p>
+											<p><a href="tel:918048660847" class="info-box_link">+91 8048660847</a></p>
 											<p><a href="tel:919886774543" class="info-box_link">+91 9886774543</a></p>
 											<p><a href="tel:919341666060" class="info-box_link">+91 9341666060</a></p>
-											<p><a href="tel:919886774543" class="info-box_link">+91 9886774543</a></p>
 											<p><a href="tel:919739974193" class="info-box_link">+91 9739974193</a></p>
 										</div>
 									</div>
 									<div class="info-box_text">
 										<div class="icon"><img src="<?=base_url()?>assets/img/icon/envelope.svg" alt="img"></div>
 										<div class="details">
-											<p><a href="toursandtravels@anaadi.co" class="info-box_link">toursandtravels@anaadi.co</a></p>
+											<p><a href="mailto:toursandtravels@anaadi.co" class="info-box_link">toursandtravels@anaadi.co</a></p>
+											<p><a href="mailto:nandish@anaadi.co" class="info-box_link">nandish@anaadi.co</a></p>
 										</div>
 									</div>
 									<div class="info-box_text">
 										<div class="icon"><img src="<?=base_url()?>assets/img/icon/location-dot.svg" alt="img"></div>
 										<div class="details">
+											<p>Anaadi Tours & Travels</p>
 											<p>#4, 2nd Floor, Maruthi Complex, Kodigehalli-Thindlu Main Road, Virupakshapura, Vidyaranyapura Post, Bengaluru - 560097, Karnataka, INDIA.</p>
 										</div>
 									</div>
@@ -115,7 +118,7 @@
             <div class="shape-mockup movingX d-none d-xxl-block" data-top="20%" data-right="5%"><img src="<?=base_url()?>assets/img/shape/shape_2_2.png" alt="shape"></div>
 		</footer>
 		<div class="d-none dsm-block" id="whatsapp-widget-mobile">
-	      <a title="Whatsapp Us" class="btn btn-warning" href="https://api.whatsapp.com/send?phone=916364328383&amp;text=Hi!%20Can%20I%20get%20more%20information%20on%20this?" target="_blank">
+	      <a title="Whatsapp Us" class="btn btn-warning" href="https://api.whatsapp.com/send?phone=919886774543&amp;text=Hi!%20Can%20I%20get%20more%20information%20on%20this?" target="_blank">
 	        <i class="fab fa-whatsapp"></i>
 	        &nbsp; Whatsapp Us
 	      </a>
