@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 05, 2025 at 06:54 PM
+-- Generation Time: Jun 05, 2025 at 08:05 PM
 -- Server version: 10.11.13-MariaDB-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -52,10 +52,9 @@ CREATE TABLE `tbl_accomodation` (
 --
 
 CREATE TABLE `tbl_age_range` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `comparison` enum('greater','less') NOT NULL,
-  `age` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `age` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -206,7 +205,7 @@ CREATE TABLE `tbl_customize` (
 --
 
 CREATE TABLE `tbl_exclusion` (
-  `id` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -250,6 +249,17 @@ CREATE TABLE `tbl_homeslider` (
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_inclusion`
+--
+
+CREATE TABLE `tbl_inclusion` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -393,20 +403,38 @@ CREATE TABLE `tbl_tours` (
   `type_id` int(11) NOT NULL DEFAULT 0,
   `duration_nights` int(11) NOT NULL,
   `duration_days` int(11) NOT NULL,
+  `min_adults` int(11) DEFAULT 1,
   `price` float NOT NULL,
   `price_child_with_bed` float NOT NULL DEFAULT 0,
   `price_child_without_bed` float NOT NULL DEFAULT 0,
-  `start_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price_infant_without_bed` float DEFAULT 0,
+  `start_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'deperture location',
+  `arrival_location` varchar(255) NOT NULL,
   `destination_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tour_start_place` varchar(255) DEFAULT NULL,
+  `tour_end_place` varchar(255) DEFAULT NULL,
   `covered_locations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `accomodations` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `meals` varchar(255) DEFAULT NULL,
+  `transfers` varchar(255) DEFAULT NULL,
+  `visa` varchar(255) DEFAULT NULL,
+  `air_ticket` varchar(255) DEFAULT NULL,
+  `travel_insurance` varchar(255) DEFAULT NULL,
+  `gst_id` int(11) DEFAULT NULL,
+  `tcs_id` int(11) DEFAULT NULL,
   `activities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `itinerary` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tour_description` text DEFAULT NULL,
   `inclusions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `exclusions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `images` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_by` int(11) NOT NULL,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp()
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `booking_validity_from` date DEFAULT NULL,
+  `booking_validity_to` date DEFAULT NULL,
+  `package_validity_from` date DEFAULT NULL,
+  `package_validity_to` date DEFAULT NULL,
+  `fixed_dates` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -454,18 +482,6 @@ CREATE TABLE `tbl_videos` (
   `created_by` int(11) NOT NULL,
   `created_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_inclusion`
---
-
-CREATE TABLE `tbl_inclusion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -532,6 +548,12 @@ ALTER TABLE `tbl_customize`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_exclusion`
+--
+ALTER TABLE `tbl_exclusion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_gallery`
 --
 ALTER TABLE `tbl_gallery`
@@ -547,6 +569,12 @@ ALTER TABLE `tbl_gst`
 -- Indexes for table `tbl_homeslider`
 --
 ALTER TABLE `tbl_homeslider`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_inclusion`
+--
+ALTER TABLE `tbl_inclusion`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -687,6 +715,12 @@ ALTER TABLE `tbl_customize`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tbl_exclusion`
+--
+ALTER TABLE `tbl_exclusion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_gallery`
 --
 ALTER TABLE `tbl_gallery`
@@ -702,6 +736,12 @@ ALTER TABLE `tbl_gst`
 -- AUTO_INCREMENT for table `tbl_homeslider`
 --
 ALTER TABLE `tbl_homeslider`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_inclusion`
+--
+ALTER TABLE `tbl_inclusion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
