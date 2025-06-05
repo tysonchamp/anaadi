@@ -113,8 +113,8 @@
             </a>
           </li>
           <li>
-            <a href="<?=base_url('admin/Articles')?>">
-              <i class="bi bi-list"></i><span>Articles</span>
+            <a href="<?=base_url('admin/Activities')?>">
+              <i class="bi bi-list"></i><span>Activities</span>
             </a>
           </li>
           <li>
