@@ -48,6 +48,19 @@ CREATE TABLE `tbl_accomodation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_age_range`
+--
+
+CREATE TABLE `tbl_age_range` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comparison` enum('greater','less') NOT NULL,
+  `age` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_articles`
 --
 
@@ -459,6 +472,12 @@ ALTER TABLE `tbl_accomodation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_age_range`
+--
+ALTER TABLE `tbl_age_range`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_articles`
 --
 ALTER TABLE `tbl_articles`
@@ -606,6 +625,12 @@ ALTER TABLE `tbl_videos`
 --
 ALTER TABLE `tbl_accomodation`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_age_range`
+--
+ALTER TABLE `tbl_age_range`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_articles`

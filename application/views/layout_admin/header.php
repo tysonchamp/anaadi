@@ -137,6 +137,11 @@
               <i class="bi bi-list"></i><span>Tcs</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/Age_range')?>">
+              <i class="bi bi-list"></i><span>Age Range</span>
+            </a>
+          </li>
 
           <li>
             <a href="<?=base_url('admin/Tourcategory/continents')?>">
