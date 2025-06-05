@@ -16,6 +16,15 @@ class Tours extends CI_Controller
         $this->load->model('category_model');
         $this->load->model('tourcategory_model');
         $this->load->model('tourtypes_model');
+        $this->load->model('meals_model');
+        $this->load->model('accomodation_model');
+        $this->load->model('activities_model');
+        $this->load->model('places_model');
+        $this->load->model('gst_model');
+        $this->load->model('tcs_model');
+        $this->load->model('inclusion_model');
+        $this->load->model('exclusion_model');
+        $this->load->model('age_range_model');
     }
 
     /**
@@ -83,20 +92,25 @@ class Tours extends CI_Controller
                 $categoryId = intval($id);
             }
             
-            $data['categoryid'] = $categoryId;
+            $data['categoryid'] = isset($categoryId) ? $categoryId : null;
             $data['category'] = $this->category_model->getAll();
             $data['tour_types'] = $this->tourtypes_model->getAll();
             $data['continents'] = $this->category_model->getAllcontinent();
-            
-            // If category ID is set, pre-fetch tour categories
-            if($categoryId == 1) {
-                // For India, fetch states directly
+            if(isset($categoryId) && $categoryId == 1) {
                 $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($categoryId);
-            } else if($categoryId == 2) {
-                // For World, we'll load countries via JavaScript after continent selection
-                $data['tourcategory'] = array();
+            } else if(isset($categoryId) && $categoryId == 2) {
+                $data['tourcategory'] = $this->tourcategory_model->getByCategoryId($categoryId);
             }
-
+            // Add DB-driven select options
+            $data['meals_list'] = $this->meals_model->getAll();
+            $data['accomodation_list'] = $this->accomodation_model->getAll();
+            $data['activities_list'] = $this->activities_model->getAll();
+            $data['places_list'] = $this->places_model->getAll();
+            $data['gst'] = $this->gst_model->getAll();
+            $data['tcs'] = $this->tcs_model->getAll();
+            $data['inclusion_list'] = $this->inclusion_model->getAll();
+            $data['exclusion_list'] = $this->exclusion_model->getAll();
+            $data['age_range_list'] = $this->age_range_model->getAll();
             $this->load->view('layout_admin/header', $data);
             $this->load->view('backend/addtour', $data);
             $this->load->view('layout_admin/footer');

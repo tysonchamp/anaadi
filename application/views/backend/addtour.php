@@ -87,11 +87,21 @@
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Start Location</label>
-                        <input type="text" name="start_location" class="form-control" value="<?=(isset($record))?$record['start_location']:''?>" maxlength="255">
+                        <select name="start_location" class="form-select select2">
+                          <option value="">-Select-</option>
+                          <?php if(isset($places_list)) { foreach($places_list as $row) { ?>
+                            <option value="<?=$row['name']?>" <?=(isset($record) && $record['start_location'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Arrival Location</label>
-                        <input type="text" name="arrival_location" class="form-control" value="<?=(isset($record))?$record['arrival_location']:''?>" maxlength="255">
+                        <select name="arrival_location" class="form-select select2">
+                          <option value="">-Select-</option>
+                          <?php if(isset($places_list)) { foreach($places_list as $row) { ?>
+                            <option value="<?=$row['name']?>" <?=(isset($record) && $record['arrival_location'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Destination Location</label>
@@ -111,11 +121,21 @@
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Accommodations</label>
-                        <input type="text" name="accomodations" class="form-control" value="<?=(isset($record))?$record['accomodations']:''?>" maxlength="500">
+                        <select name="accomodations" class="form-select select2">
+                          <option value="">-Select-</option>
+                          <?php if(isset($accomodation_list)) { foreach($accomodation_list as $row) { ?>
+                            <option value="<?=$row['name']?>" <?=(isset($record) && $record['accomodations'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Meals</label>
-                        <input type="text" name="meals" class="form-control" value="<?=(isset($record))?$record['meals']:''?>" maxlength="255">
+                        <select name="meals" class="form-select select2">
+                          <option value="">-Select-</option>
+                          <?php if(isset($meals_list)) { foreach($meals_list as $row) { ?>
+                            <option value="<?=$row['name']?>" <?=(isset($record) && $record['meals'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Transfers</label>
