@@ -151,9 +151,21 @@
                           <?php }} ?>
                         </select>
                       </div>
-                      <div class="col-md-12">
-                        <label class="form-label">Activities</label>
-                        <input type="text" name="activities" class="form-control" value="<?=(isset($record))?$record['activities']:''?>" maxlength="500">
+                      <div class="col-md-6">
+                        <label class="form-label">Inclusions</label>
+                        <select name="inclusions[]" id="inclusions" class="form-select select2" multiple="multiple">
+                          <?php if(isset($inclusion_list)) { foreach($inclusion_list as $row) { ?>
+                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['inclusions']) && in_array($row['id'], is_array($record['inclusions']) ? $record['inclusions'] : json_decode($record['inclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Exclusions</label>
+                        <select name="exclusions[]" id="exclusions" class="form-select select2" multiple="multiple">
+                          <?php if(isset($exclusion_list)) { foreach($exclusion_list as $row) { ?>
+                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['exclusions']) && in_array($row['id'], is_array($record['exclusions']) ? $record['exclusions'] : json_decode($record['exclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
+                          <?php }} ?>
+                        </select>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label">Booking Validity From</label>
@@ -193,26 +205,6 @@
                             <?=(isset($record))?$record['itinerary']:""?>
                           </div>
                       </div>
-                      <!-- <div class="col-md-12">
-                        <label class="form-label">Itinerary</label>
-                        <textarea name="itinerary" class="form-control" rows="4"><?=(isset($record))?$record['itinerary']:''?></textarea>
-                      </div> -->
-                      <div class="col-md-6">
-                        <label class="form-label">Inclusions</label>
-                        <select name="inclusions[]" id="inclusions" class="form-select select2" multiple="multiple">
-                          <?php if(isset($inclusion_list)) { foreach($inclusion_list as $row) { ?>
-                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['inclusions']) && in_array($row['id'], is_array($record['inclusions']) ? $record['inclusions'] : json_decode($record['inclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
-                          <?php }} ?>
-                        </select>
-                      </div>
-                      <div class="col-md-6">
-                        <label class="form-label">Exclusions</label>
-                        <select name="exclusions[]" id="exclusions" class="form-select select2" multiple="multiple">
-                          <?php if(isset($exclusion_list)) { foreach($exclusion_list as $row) { ?>
-                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['exclusions']) && in_array($row['id'], is_array($record['exclusions']) ? $record['exclusions'] : json_decode($record['exclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
-                          <?php }} ?>
-                        </select>
-                      </div>
                       <div class="col-12 text-end mt-4">
                         <button type="submit" id="savetour" class="btn btn-primary px-5 py-2">Save Tour</button>
                       </div>
@@ -229,32 +221,18 @@
 
   </main><!-- End #main -->
   <script type="text/javascript">
-
-    var loadFile = function(event) 
-    {
+    var loadFile = function(event) {
       document.getElementById("imagepreview").innerHTML = "";
       var files = event.target.files;
-      for(var i=0; i< files.length;i++)
-      {
+      for(var i=0; i< files.length;i++) {
         var output = document.createElement('img');
         output.src = URL.createObjectURL(files[i]);
         output.onload = function() {
           URL.revokeObjectURL(output.src) // free memory
-        }  
+        }
         document.getElementById("imagepreview").appendChild(output);
       }
-      
     };
-
-    function deleteli(id) 
-    {
-      $("#"+id).remove();
-    }
-
-    function deleteli1(id) 
-    {
-      $("#"+id).remove();
-    }
 
     $(document).ready(function(){
       // Initialize form based on category_id
@@ -301,8 +279,7 @@
       });
       
       function fetchTourCategories(category_id) {
-        var params = {};
-        params.category_id = category_id;
+        var params = {category_id: category_id};
         var url = "<?=base_url('admin/Tours/getTourCategory')?>";
         
         $.ajax({
@@ -328,8 +305,7 @@
       }
       
       function fetchTourCategoriesByContinent(continent_id) {
-        var params = {};
-        params.continent_id = continent_id;
+        var params = {continent_id: continent_id};
         var url = "<?=base_url('admin/Tours/getTourCategoryByContinent')?>";
         
         $.ajax({
@@ -355,8 +331,7 @@
       }
       
       function fetchContinentFromTourCategory(tourCategoryId) {
-        var params = {};
-        params.tourcategory_id = tourCategoryId;
+        var params = {tourcategory_id: tourCategoryId};
         var url = "<?=base_url('admin/Tours/getContinentFromTourCategory')?>";
         
         $.ajax({
@@ -373,143 +348,10 @@
         });
       }
 
-      $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
-        if(e.keyCode == 13) {
-          e.preventDefault();
-          return false;
-        }
-      });
-
-      $("#savetour").click(function(e){
-        e.preventDefault();
-
-        $("#error_div").html("");
-        var btn_txt = "Submit";
-        var record_id = $("#addtour input[name='record_id']").val();
-        if( record_id !== "" ){
-          btn_txt = "Update";
-        }
-
-
-        let form = $("#addtour")[0];
-        var formData = new FormData(form);
-        let url = $("#addtour").attr('action');
-        console.log(formData);
-
-        var inclusions = new Array();
-        $(".inclusions_block").find('li').each(function(){
-          var span_txt = $(this).find('span').eq(0);
-          inclusions.push(span_txt.html().trim());
-        });
-
-        var exclusions = new Array();
-        $(".exclusions_block").find('li').each(function(){
-          var span_txt = $(this).find('span').eq(0);
-          exclusions.push(span_txt.html().trim());
-        });
-
-        console.log(inclusions);
-        console.log(exclusions);
-
-        var itinerary = $("#addtour .ql-editor").html();
-
-        formData.append('inclusions', JSON.stringify(inclusions));
-        formData.append('exclusions', JSON.stringify(exclusions));
-        formData.append('itinerary', itinerary);
-
-        $(this).prop('disabled', true);
-        $(this).html("<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> Please wait..");
-
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: formData, 
-            contentType: false,       
-            cache: false,             
-            processData:false, 
-            success: function (data) {
-                var d = JSON.parse(data);
-                console.log(d);
-                if( d.error == 1 )
-                {
-                    $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>"+d.error_message+"</div>");
-                    $("#savetour").prop('disabled', false);
-                    $("#savetour").html(btn_txt);
-                }
-                else
-                {
-                    $("#error_div").append("<div class='alert alert-success mt-1 mb-0'>"+d.success_message+"</div>");
-                    $("#savetour").html("Success");
-                    setTimeout(function(){
-                        $("#savetour").html(btn_txt);
-                        window.location.href = "<?=base_url('admin/Tours')?>";
-                    }, 2000);
-                }
-            },
-            error: function (data) {
-                $("#error_div").append("<div class='alert alert-danger mt-1 mb-0'>Error Occured. Try again later.</div>");
-                $("#savetour").prop('disabled', false);
-                $("#savetour").html(btn_txt);
-            }
-        });
-
-        setTimeout(function(){
-            $("#error_div").html("");
-        }, 2000);
-
-      });
-
-
-      $("#inclusions").keydown(function(event)
-      { 
-        if( event.which == 13 && $(this).val().trim() != "" )
-        {
-          var len = $(".inclusions_block").find('li').length;
-          var txt = $(this).val().trim();
-          txt = txt.replace(/\s+/g," ");
-          if( txt == "" )
-          {
-            return false;
-          }
-          if( len == 0 ){
-            $(".inclusions_block").html("<li id='lirow_"+len+"'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'>"+txt+"</span><a onclick='deleteli(\"lirow_"+len+"\")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>");
-          }else{
-            $(".inclusions_block").append("<li id='lirow_"+len+"'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'>"+txt+"</span><a onclick='deleteli(\"lirow_"+len+"\")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>");
-          }
-          $(this).val("");
-        }
-        return true;
-
-      });
-
-      $("#exclusions").keydown(function(event)
-      { 
-        if( event.which == 13 && $(this).val().trim() != "" )
-        {
-          var len = $(".exclusions_block").find('li').length;
-          var txt = $(this).val().trim();
-          txt = txt.replace(/\s+/g," ");
-          if( txt == "" )
-          {
-            return false;
-          }
-          if( len == 0 ){
-            $(".exclusions_block").html("<li id='lirow1_"+len+"'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'>"+txt+"</span><a onclick='deleteli1(\"lirow1_"+len+"\")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>");
-          }else{
-            $(".exclusions_block").append("<li id='lirow1_"+len+"'><span class='d-inline small h-100 w-90 p-0 m-0 mb-0 overflow-hidden'>"+txt+"</span><a onclick='deleteli1(\"lirow1_"+len+"\")' class='closeli d-block float-right text-danger'><i class='ri-close-circle-line'></i></a></li>");
-          }
-          $(this).val("");
-        }
-        return true;
-
-      });
-
       $('.select2').select2({
         width: '100%',
         placeholder: 'Select options',
         allowClear: true
       });
-
     });
-
   </script>
