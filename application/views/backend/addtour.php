@@ -26,7 +26,7 @@
                     <input type="hidden" name="record_id" value="<?=(isset($record))?$record['id']:''?>">
                     <input type="hidden" name="category_id" id="category_id" value="<?=(isset($record))?$record['category_id']:(isset($categoryid)?$categoryid:'')?>">
                     <div class="row g-3">
-                      <div class="col-md-4">
+                      <div class="col-md-4" id="continent_container" style="display:<?=(isset($categoryid) && $categoryid == 1) ? 'none' : 'block'?>;">
                         <label class="form-label">Continent</label>
                         <select name="continent_id" id="continent_id" class="form-select">
                           <option value="0">-Select-</option>
@@ -35,8 +35,8 @@
                           <?php }} ?>
                         </select>
                       </div>
-                      <div class="col-md-4">
-                        <label class="form-label">State/Country</label>
+                      <div class="col-md-4" id="state_container">
+                        <label class="form-label" id="location_label"><?=(isset($categoryid) && $categoryid == 1) ? 'State' : 'Country'?></label>
                         <select name="tourcategory_id" class="form-select">
                           <option value="0">-Select-</option>
                           <?php if(isset($tourcategory)) { foreach($tourcategory as $row) { ?>
@@ -260,27 +260,21 @@
       
       function initFormByCategory() {
         var currentCategory = $("#category_id").val();
-        
         if(currentCategory == 2) {
-          // International/World Tours - show continent dropdown
           $("#continent_container").show();
+          $("#state_container").show();
           $("#location_label").text("Country");
-          
           <?php if(isset($record) && $record['category_id'] == 2): ?>
-          // For edit mode, pre-select the continent based on tour category
           fetchContinentFromTourCategory(<?php echo $record['tourcategory_id']; ?>);
           <?php endif; ?>
         } else if(currentCategory == 1) {
-          // India Tours - hide continent dropdown
           $("#continent_container").hide();
+          $("#state_container").show();
           $("#location_label").text("State");
-          
-          // Make sure we have tour categories loaded
           if ($("select[name='tourcategory_id'] option").length <= 1) {
             fetchTourCategories(currentCategory);
           }
         } else {
-          // Default case or no category selected yet
           $("#continent_container").hide();
           $("#state_container").show();
           $("#location_label").text("State/Country");
