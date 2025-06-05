@@ -142,6 +142,11 @@
               <i class="bi bi-list"></i><span>Age Range</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/Inclusion')?>">
+              <i class="bi bi-list"></i><span>Inclusion</span>
+            </a>
+          </li>
 
           <li>
             <a href="<?=base_url('admin/Tourcategory/continents')?>">

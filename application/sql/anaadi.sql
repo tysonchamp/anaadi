@@ -455,6 +455,18 @@ CREATE TABLE `tbl_videos` (
   `created_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_inclusion`
+--
+
+CREATE TABLE `tbl_inclusion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
