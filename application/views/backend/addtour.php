@@ -187,36 +187,31 @@
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <label class="form-label">Tour Description</label>
-                        <textarea name="tour_description" class="form-control" rows="4"><?=(isset($record))?$record['tour_description']:''?></textarea>
+                        <label class="form-label">Tour Description / Itinerary</label>
+                        <!-- <textarea name="tour_description" class="form-control" rows="4"><?=(isset($record))?$record['tour_description']:''?></textarea> -->
+                         <div class="quill-editor-default" style="height:200px;overflow: auto;">
+                            <?=(isset($record))?$record['itinerary']:""?>
+                          </div>
                       </div>
-                      <div class="col-md-12">
+                      <!-- <div class="col-md-12">
                         <label class="form-label">Itinerary</label>
                         <textarea name="itinerary" class="form-control" rows="4"><?=(isset($record))?$record['itinerary']:''?></textarea>
-                      </div>
-                      <div class="col-md-12">
+                      </div> -->
+                      <div class="col-md-6">
                         <label class="form-label">Inclusions</label>
-                        <input type="text" class="form-control mb-2" name="inclusions" id="inclusions" maxlength="250" value="">
-                        <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
-                        <ul class="inclusions_block list-group mt-2">
-                          <?php if(isset($record)) {
-                            $ins = json_decode($record['inclusions']);
-                            if($ins) foreach($ins as $i => $txt){ ?>
-                              <li class="list-group-item d-flex justify-content-between align-items-center"><span><?=$txt?></span><a onclick="deleteli('lirow_<?=$i?>')" class="text-danger"><i class="ri-close-circle-line"></i></a></li>
+                        <select name="inclusions[]" id="inclusions" class="form-select select2" multiple="multiple">
+                          <?php if(isset($inclusion_list)) { foreach($inclusion_list as $row) { ?>
+                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['inclusions']) && in_array($row['id'], is_array($record['inclusions']) ? $record['inclusions'] : json_decode($record['inclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
                           <?php }} ?>
-                        </ul>
+                        </select>
                       </div>
-                      <div class="col-md-12">
+                      <div class="col-md-6">
                         <label class="form-label">Exclusions</label>
-                        <input type="text" class="form-control mb-2" name="exclusions" id="exclusions" maxlength="250" value="">
-                        <span class="text-sm text-warning">Add multiple items. Type and press enter.</span>
-                        <ul class="exclusions_block list-group mt-2">
-                          <?php if(isset($record)) {
-                            $exs = json_decode($record['exclusions']);
-                            if($exs) foreach($exs as $i => $txt){ ?>
-                              <li class="list-group-item d-flex justify-content-between align-items-center"><span><?=$txt?></span><a onclick="deleteli1('lirow1_<?=$i?>')" class="text-danger"><i class="ri-close-circle-line"></i></a></li>
+                        <select name="exclusions[]" id="exclusions" class="form-select select2" multiple="multiple">
+                          <?php if(isset($exclusion_list)) { foreach($exclusion_list as $row) { ?>
+                            <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['exclusions']) && in_array($row['id'], is_array($record['exclusions']) ? $record['exclusions'] : json_decode($record['exclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
                           <?php }} ?>
-                        </ul>
+                        </select>
                       </div>
                       <div class="col-12 text-end mt-4">
                         <button type="submit" id="savetour" class="btn btn-primary px-5 py-2">Save Tour</button>
@@ -507,6 +502,12 @@
         }
         return true;
 
+      });
+
+      $('.select2').select2({
+        width: '100%',
+        placeholder: 'Select options',
+        allowClear: true
       });
 
     });
