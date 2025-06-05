@@ -58,12 +58,12 @@
                         <input type="text" name="title" value="<?=(isset($record))?$record['title']:''?>" class="form-control" required maxlength="255">
                       </div>
                       <div class="col-md-3">
-                        <label class="form-label">Nights</label>
-                        <input type="number" name="duration_nights" value="<?=(isset($record))?$record['duration_nights']:''?>" class="form-control" min="1" required>
-                      </div>
-                      <div class="col-md-3">
                         <label class="form-label">Days</label>
                         <input type="number" name="duration_days" value="<?=(isset($record))?$record['duration_days']:''?>" class="form-control" min="1" required>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="form-label">Nights</label>
+                        <input type="number" name="duration_nights" value="<?=(isset($record))?$record['duration_nights']:''?>" class="form-control" min="1" required>
                       </div>
                       <div class="col-md-3">
                         <label class="form-label">Min. Adults</label>
@@ -367,6 +367,14 @@
             }
         });
       }
+
+      // Auto set nights when days is changed
+      $("input[name='duration_days']").on('input', function() {
+        var days = parseInt($(this).val());
+        if (!isNaN(days) && days > 0) {
+          $("input[name='duration_nights']").val(days - 1);
+        }
+      });
 
       $('.select2').select2({
         width: '100%',
