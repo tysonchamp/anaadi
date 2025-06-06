@@ -231,7 +231,7 @@
                           <select name="gst_id" class="form-select">
                             <option value="">-Select-</option>
                             <?php if(isset($gst)) { foreach($gst as $row) { ?>
-                              <option value="<?=$row['id']?>" <?=(isset($record) && $record['gst_id'] == $row['id'])?'selected':''?>><?=$row['title']?> (<?=$row['tax_percentage']?>%)</option>
+                              <option value="<?=$row['tax_percentage']?>" <?=(isset($record) && $record['gst_id'] == $row['tax_percentage'])?'selected':''?>><?=$row['title']?> (<?=$row['tax_percentage']?>%)</option>
                             <?php }} ?>
                           </select>
                         </div>
@@ -240,7 +240,7 @@
                           <select name="tcs_id" class="form-select">
                             <option value="">-Select-</option>
                             <?php if(isset($tcs)) { foreach($tcs as $row) { ?>
-                              <option value="<?=$row['id']?>" <?=(isset($record) && $record['tcs_id'] == $row['id'])?'selected':''?>><?=$row['title']?> (<?=$row['tcs_percentage']?>%)</option>
+                              <option value="<?=$row['tcs_percentage']?>" <?=(isset($record) && $record['tcs_id'] == $row['tcs_percentage'])?'selected':''?>><?=$row['title']?> (<?=$row['tcs_percentage']?>%)</option>
                             <?php }} ?>
                           </select>
                         </div>

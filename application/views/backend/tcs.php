@@ -78,7 +78,7 @@
               </div>
               <div class="col-md-10 mx-auto">
                 <label for="tcs_percentage" class="form-label">TCS Percentage</label>
-                <input type="text" maxlength="255" autocomplete="off" class="form-control" name="tcs_percentage" id="tcs_percentage" value="" required>
+                <input type="number" step="1" min="0" autocomplete="off" class="form-control" name="tcs_percentage" id="tcs_percentage" value="" required>
               </div>
           </div>
           <div class="modal-footer">

@@ -77,6 +77,8 @@
                                         data-price="<?= $tour['price'] ?>" 
                                         data-childprice="<?= $tour['price_child_without_bed'] ?>" 
                                         data-childpricebed="<?= $tour['price_child_with_bed'] ?>" 
+                                        data-gst_rate_per="<?= $tour['gst_id'] ?>" 
+                                        data-tcs_rate_per="<?= $tour['tcs_id'] ?>" 
                                         value="<?= $tour['id'] ?>"
                                     >
                                         <?= $tour['title'] ?>
@@ -86,6 +88,8 @@
                             <input type="hidden" id="tour_price" value="0" >
                             <input type="hidden" id="price_child_with_bed" value="0" >
                             <input type="hidden" id="price_child_without_bed" value="0" >
+                            <input type="hidden" id="gst_rate_per" value="0" >
+                            <input type="hidden" id="tcs_rate_per" value="0" >
                         </div>
 
                         <div class="form-group col-6 mb-2">
@@ -264,7 +268,17 @@
                         $(".book-form select[name='tour']").empty();
                         $(".book-form select[name='tour']").append("<option value='0'>-Select-</option>");
                         for (var i = 0; i < records.length; i++) {
-                            $(".book-form select[name='tour']").append("<option data-price='" + records[i].price + "' data-childprice='" + records[i].price_child_without_bed + "' data-childpricebed='" + records[i].price_child_with_bed + "' value='" + records[i].id + "'>" + records[i].title + "</option>");
+                            $(".book-form select[name='tour']").append(
+                                "<option " +
+                                    "data-price='" + records[i].price + "' " +
+                                    "data-childprice='" + records[i].price_child_without_bed + "' " +
+                                    "data-childpricebed='" + records[i].price_child_with_bed + "' " +
+                                    "data-gst_rate_per='" + records[i].gst_id + "' " +
+                                    "data-tcs_rate_per='" + records[i].tcs_id + "' " +
+                                    "value='" + records[i].id + "'>" +
+                                    records[i].title +
+                                "</option>"
+                            );
                         }
                     }
                 },
@@ -292,9 +306,14 @@
             var price = $(this).find('option:selected').attr('data-price');
             var childPrice = $(this).find('option:selected').attr('data-childprice');
             var childPriceWithBed = $(this).find('option:selected').attr('data-childpricebed');
+            var gstRate = $(this).find('option:selected').attr('data-gst_rate_per');
+            var tcsRate = $(this).find('option:selected').attr('data-tcs_rate_per');
+
             $("#tour_price").val(price);
             $("#price_child_with_bed").val(childPriceWithBed);
             $("#price_child_without_bed").val(childPrice);
+            $("#gst_rate_per").val(gstRate);
+            $("#tcs_rate_per").val(tcsRate);
             $("#amount").html("<i class='fa fa-indian-rupee'></i>" + toCurrencyString(price) + " / Per Person");
             
             // Calculate initial amount based on current values
@@ -307,11 +326,15 @@
             var price = selectedOption.attr('data-price');
             var childPrice = selectedOption.attr('data-childprice');
             var childPriceWithBed = selectedOption.attr('data-childpricebed');
+            var gstRate = selectedOption.attr('data-gst_rate_per');
+            var tcsRate = selectedOption.attr('data-tcs_rate_per');
             
             // Update hidden fields
             $("#tour_price").val(price);
             $("#price_child_with_bed").val(childPriceWithBed);
             $("#price_child_without_bed").val(childPrice);
+            $("#gst_rate_per").val(gstRate);
+            $("#tcs_rate_per").val(tcsRate);
             
             // Show the tour price
             $(".book-form .tour_amount").css('display', 'block');
