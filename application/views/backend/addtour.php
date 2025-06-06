@@ -357,9 +357,10 @@
                         <div class="col-md-12">
                           <label class="form-label">Tour Description / Itinerary</label>
                           <!-- <textarea name="tour_description" class="form-control" rows="4"><?=(isset($record))?$record['tour_description']:''?></textarea> -->
-                           <div class="quill-editor-default" style="height:200px;overflow: auto;">
+                           <div class="quill-editor-default" id="itinerary_editor" style="height:200px;overflow: auto;">
                               <?=(isset($record))?$record['itinerary']:""?>
                             </div>
+                            <input type="hidden" name="itinerary" id="itinerary_input" />
                         </div>
                       </div>
                     </div>
@@ -393,6 +394,11 @@
     };
 
     $(document).ready(function(){
+      // Add this before form submission
+      $('#addtour').on('submit', function(e) {
+        var itinerary = $("#addtour .ql-editor").html();
+        $('#itinerary_input').val(itinerary);
+      });
       // Initialize form based on category_id
       initFormByCategory();
       
