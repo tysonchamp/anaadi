@@ -88,3 +88,4 @@ defined('IMAGE_UPLOAD_PATH')	OR define('IMAGE_UPLOAD_PATH', $_SERVER['DOCUMENT_R
 defined('INSTAGRAM')			OR define('INSTAGRAM', "https://www.instagram.com/anaaditours");
 defined('TWITTER')				OR define('TWITTER', "https://x.com/Anaaditours");
 defined('YOUTUBE')				OR define('YOUTUBE', "https://www.youtube.com/channel/UCt0CCoAj9SPluE_Do91QjRA");
+defined('FACEBOOK')				OR define('FACEBOOK', "https://www.facebook.com/share/1BRxa3aDXi/?mibextid=wwXIfr");

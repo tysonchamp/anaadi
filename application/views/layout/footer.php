@@ -12,7 +12,7 @@
 		      <a href="<?=TWITTER?>"><img src="<?=base_url('assets/img/social/twitter.svg')?>"></a>
 		      <a href="<?=YOUTUBE?>"><img src="<?=base_url('assets/img/social/youtube.svg')?>"></a>
 		      <a href="<?=INSTAGRAM?>"><img src="<?=base_url('assets/img/social/instagram.svg')?>"></a>
-			  <a href="<?=INSTAGRAM?>"><img src="<?=base_url('assets/img/social/facebook.svg')?>"></a>
+			  <a href="<?=FACEBOOK?>"><img src="<?=base_url('assets/img/social/facebook.svg')?>"></a>
 		    </div>
 		</div>
 	    

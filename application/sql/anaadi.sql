@@ -212,6 +212,18 @@ CREATE TABLE `tbl_exclusion` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_fixed_date_tours`
+--
+
+CREATE TABLE `tbl_fixed_date_tours` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_gallery`
 --
 
@@ -554,6 +566,12 @@ ALTER TABLE `tbl_exclusion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_fixed_date_tours`
+--
+ALTER TABLE `tbl_fixed_date_tours`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_gallery`
 --
 ALTER TABLE `tbl_gallery`
@@ -718,6 +736,12 @@ ALTER TABLE `tbl_customize`
 -- AUTO_INCREMENT for table `tbl_exclusion`
 --
 ALTER TABLE `tbl_exclusion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_fixed_date_tours`
+--
+ALTER TABLE `tbl_fixed_date_tours`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
