@@ -92,9 +92,28 @@
                             <input type="hidden" id="tcs_rate_per" value="0" >
                         </div>
 
+                        <?php
+                        $fixed_dates = [];
+                        if (isset($tour['fixed_dates']) && !empty($tour['fixed_dates'])) {
+                            $decoded = json_decode($tour['fixed_dates'], true);
+                            if (is_array($decoded) && count($decoded) > 0) {
+                                $fixed_dates = $decoded;
+                            }
+                        }
+                        ?>
+
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16" for="departure_date">Departure Date:</label>
-                            <input type="datetime-local" id="departure_date" name="departure_date">
+                            <?php if (!empty($fixed_dates)) { ?>
+                                <select id="departure_date" name="departure_date" class="form-select">
+                                    <option value="">-Select Date-</option>
+                                    <?php foreach ($fixed_dates as $date): ?>
+                                        <option value="<?= htmlspecialchars($date) ?>"><?= htmlspecialchars($date) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php } else { ?>
+                                <input type="datetime-local" id="departure_date" name="departure_date">
+                            <?php } ?>
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16" for="return_date">Return Date (Optional):</label>
@@ -105,9 +124,9 @@
                             <label class="p-1 mb-1 fs-16">Meals</label>
                             <select class="form-select" id="meals" name="meals">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 1) ? "selected" : "" ?> value="CP">CP</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="MAP">MAP</option>
-                                <option <?= (isset($tour) && count($tour) > 0 && $tour['id'] == 2) ? "selected" : "" ?> value="AP">AP</option>
+                                <?php foreach ($meals as $meal): ?>
+                                    <option value="<?= $meal['name'] ?>" <?= (isset($tour) && count($tour) > 0 && $tour['meal_id'] == $meal['name']) ? "selected" : "" ?>><?= $meal['name'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
@@ -335,6 +354,8 @@
             $("#price_child_without_bed").val(childPrice);
             $("#gst_rate_per").val(gstRate);
             $("#tcs_rate_per").val(tcsRate);
+
+            // fixed_dates
             
             // Show the tour price
             $(".book-form .tour_amount").css('display', 'block');

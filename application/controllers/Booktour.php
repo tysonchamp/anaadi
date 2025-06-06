@@ -19,6 +19,7 @@ class Booktour extends CI_Controller
         $this->load->model('tourcategory_model');
         $this->load->model('Booknow_model');
         $this->load->model('Tourtypes_model');
+        $this->load->model('meals_model');
         $this->load->library('form_validation');
         $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
         $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
@@ -30,6 +31,7 @@ class Booktour extends CI_Controller
         }
         $data['india_states'] = $this->tourcategory_model->getByCategoryId(1);
         $data['tour_types'] = $this->Tourtypes_model->getAll(); // Get all tour types
+        $data['meals'] = $this->meals_model->getAll(); // Get all meal options
 
         $this->load->view('layout/header', $data);
         $this->load->view('front/booktour', $data);
