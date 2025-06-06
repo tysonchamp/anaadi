@@ -79,6 +79,7 @@
                                         data-childpricebed="<?= $tour['price_child_with_bed'] ?>" 
                                         data-gst_rate_per="<?= $tour['gst_id'] ?>" 
                                         data-tcs_rate_per="<?= $tour['tcs_id'] ?>" 
+                                        data-fixed_dates="<?= isset($tour['fixed_dates']) ? htmlspecialchars(urlencode($tour['fixed_dates'])) : '' ?>"
                                         value="<?= $tour['id'] ?>"
                                     >
                                         <?= $tour['title'] ?>
@@ -294,6 +295,7 @@
                                     "data-childpricebed='" + records[i].price_child_with_bed + "' " +
                                     "data-gst_rate_per='" + records[i].gst_id + "' " +
                                     "data-tcs_rate_per='" + records[i].tcs_id + "' " +
+                                    "data-fixed_dates='" + (records[i].fixed_dates ? encodeURIComponent(JSON.stringify(records[i].fixed_dates)) : "") + "' " +
                                     "value='" + records[i].id + "'>" +
                                     records[i].title +
                                 "</option>"
@@ -313,6 +315,27 @@
             }, 2000);
             return true;
         });
+
+        // Helper to update departure date input based on fixed_dates
+        function updateDepartureDateInput(fixedDates) {
+            var $container = $("#departure_date").closest(".form-group");
+            if (!Array.isArray(fixedDates)) {
+                try { fixedDates = JSON.parse(fixedDates); } catch(e) { fixedDates = []; }
+            }
+            if (fixedDates && fixedDates.length > 0) {
+                var selectHtml = '<select id="departure_date" name="departure_date" class="form-select">';
+                selectHtml += '<option value="">-Select Date-</option>';
+                for (var i = 0; i < fixedDates.length; i++) {
+                    var date = fixedDates[i];
+                    selectHtml += '<option value="' + $('<div>').text(date).html() + '">' + $('<div>').text(date).html() + '</option>';
+                }
+                selectHtml += '</select>';
+                $container.find("#departure_date").replaceWith(selectHtml);
+            } else {
+                var inputHtml = '<input type="datetime-local" id="departure_date" name="departure_date">';
+                $container.find("#departure_date").replaceWith(inputHtml);
+            }
+        }
 
         $(".book-form select[name='tour']").change(function() {
             $(".book-form .tour_amount").css('display', 'inline');
@@ -337,6 +360,17 @@
             
             // Calculate initial amount based on current values
             calculateAmount();
+
+            // Handle fixed_dates for departure_date input
+            var selectedOption = $(this).find('option:selected');
+            var fixedDatesRaw = selectedOption.attr('data-fixed_dates');
+            var fixedDates = [];
+            if (fixedDatesRaw) {
+                try {
+                    fixedDates = JSON.parse(decodeURIComponent(fixedDatesRaw));
+                } catch (e) { fixedDates = []; }
+            }
+            updateDepartureDateInput(fixedDates);
         });
 
         // Initialize price fields on page load if a tour is pre-selected
@@ -356,6 +390,14 @@
             $("#tcs_rate_per").val(tcsRate);
 
             // fixed_dates
+            var fixedDatesRaw = selectedOption.attr('data-fixed_dates');
+            var fixedDates = [];
+            if (fixedDatesRaw) {
+                try {
+                    fixedDates = JSON.parse(decodeURIComponent(fixedDatesRaw));
+                } catch (e) { fixedDates = []; }
+            }
+            updateDepartureDateInput(fixedDates);
             
             // Show the tour price
             $(".book-form .tour_amount").css('display', 'block');
