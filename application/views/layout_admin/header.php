@@ -167,6 +167,11 @@
               <i class="bi bi-list"></i><span>Insurance</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/Airticket')?>">
+              <i class="bi bi-list"></i><span>Air Tickets</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Components Nav -->
 
