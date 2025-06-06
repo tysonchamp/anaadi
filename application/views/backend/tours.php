@@ -5,11 +5,11 @@
         <div class="col-lg-12 p-0">
           <div class="row">
           <?php 
-            if (isset($records) && is_array($records) && isset($records[0])): 
-              $category = $records[0]['category']; 
-            else:
+            // if (isset($records) && is_array($records) && isset($records[0])): 
+              // $category = $records[0]['category']; 
+            // else:
               $category = 'World';
-            endif;
+            // endif;
           ?>
             <div class="card">
               <div class="card-body">
