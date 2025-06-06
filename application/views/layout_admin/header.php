@@ -147,7 +147,34 @@
               <i class="bi bi-list"></i><span>Inclusion</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/FixedDateTour')?>">
+              <i class="bi bi-list"></i><span>Fixed Dates of Tours</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Visa')?>">
+              <i class="bi bi-list"></i><span>Visa</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Transfer')?>">
+              <i class="bi bi-list"></i><span>Transfer</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Insurance')?>">
+              <i class="bi bi-list"></i><span>Insurance</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tour-master" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Tour Master</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tour-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="<?=base_url('admin/Tourcategory/continents')?>">
               <i class="bi bi-list"></i><span>Tour Continents</span>
@@ -163,26 +190,6 @@
               <i class="bi bi-list"></i><span>Tour Types</span>
             </a>
           </li>
-          <li>
-            <a href="<?=base_url('admin/Tours/getIndia')?>">
-              <i class="bi bi-list"></i><span>India</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tours')?>">
-              <i class="bi bi-list"></i><span>World</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Services')?>">
-              <i class="bi bi-list"></i><span>Services</span>
-            </a>
-          </li>
-          <!-- <li>
-            <a href="<?=base_url('admin/Customers')?>">
-              <i class="bi bi-people"></i><span>Customers</span>
-            </a>
-          </li> -->
         </ul>
       </li><!-- End Components Nav -->
 
@@ -193,67 +200,6 @@
         <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           
           <li>
-            <a href="<?=base_url('admin/Gst')?>">
-              <i class="bi bi-list"></i><span>Gst</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Accomodation')?>">
-              <i class="bi bi-list"></i><span>Accomodation</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Activities')?>">
-              <i class="bi bi-list"></i><span>Activities</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Exclusion')?>">
-              <i class="bi bi-list"></i><span>Exclusion</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Meals')?>">
-              <i class="bi bi-list"></i><span>Meals</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Places')?>">
-              <i class="bi bi-list"></i><span>Arrival & Deperture Place</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tcs')?>">
-              <i class="bi bi-list"></i><span>Tcs</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Age_range')?>">
-              <i class="bi bi-list"></i><span>Age Range</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Inclusion')?>">
-              <i class="bi bi-list"></i><span>Inclusion</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="<?=base_url('admin/Tourcategory/continents')?>">
-              <i class="bi bi-list"></i><span>Tour Continents</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tourcategory')?>">
-              <i class="bi bi-list"></i><span>Tour Category</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tourtypes')?>">
-              <i class="bi bi-list"></i><span>Tour Types</span>
-            </a>
-          </li>
-          <li>
             <a href="<?=base_url('admin/Tours/getIndia')?>">
               <i class="bi bi-list"></i><span>India</span>
             </a>
@@ -263,16 +209,6 @@
               <i class="bi bi-list"></i><span>World</span>
             </a>
           </li>
-          <li>
-            <a href="<?=base_url('admin/Services')?>">
-              <i class="bi bi-list"></i><span>Services</span>
-            </a>
-          </li>
-          <!-- <li>
-            <a href="<?=base_url('admin/Customers')?>">
-              <i class="bi bi-people"></i><span>Customers</span>
-            </a>
-          </li> -->
         </ul>
       </li><!-- End Components Nav -->
 
@@ -306,6 +242,16 @@
               <i class="bi bi-list"></i><span>Testimonial</span>
             </a>
           </li>
+          <li>
+            <a href="<?=base_url('admin/Services')?>">
+              <i class="bi bi-list"></i><span>Services</span>
+            </a>
+          </li>
+          <!-- <li>
+            <a href="<?=base_url('admin/Customers')?>">
+              <i class="bi bi-people"></i><span>Customers</span>
+            </a>
+          </li> -->
         </ul>
       </li>
       <li class="nav-item">
