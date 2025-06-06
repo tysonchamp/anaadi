@@ -145,7 +145,7 @@
                       <div class="card-body row g-3">
                         <div class="col-md-6">
                           <label class="form-label">Accommodations</label>
-                          <select name="accomodations" class="form-select select2">
+                          <select name="accomodations" class="form-select select2" multiple="multiple">
                             <option value="">-Select-</option>
                             <?php if(isset($accomodation_list)) { foreach($accomodation_list as $row) { ?>
                               <option value="<?=$row['name']?>" <?=(isset($record) && $record['accomodations'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
