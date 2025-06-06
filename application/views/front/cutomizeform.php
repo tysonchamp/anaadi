@@ -294,21 +294,27 @@
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="visa" name="visa">
                                         <option <?= ($message['visa']['value'] == "0")  ? "selected" : "" ?> value="0">Visa</option>
-                                        <option <?= ($message['visa']['value'] == "Required")  ? "selected" : "" ?> value="Required">Required</option>
-                                        <option <?= ($message['visa']['value'] == "Not Required")  ? "selected" : "" ?> value="Not Required">Not Required</option>
+                                        <?php if(isset($visa_options) && !empty($visa_options)): ?>
+                                            <?php foreach($visa_options as $visa): ?>
+                                                <option <?= ($message['visa']['value'] == $visa['title']) ? "selected" : "" ?> value="<?= htmlspecialchars($visa['title']) ?>"><?= htmlspecialchars($visa['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="visa" name="visa">
                                         <option value="0">Visa</option>
-                                        <option value="Required">Required</option>
-                                        <option value="Not Required">Not Required</option>
+                                        <?php if(isset($visa_options) && !empty($visa_options)): ?>
+                                            <?php foreach($visa_options as $visa): ?>
+                                                <option value="<?= htmlspecialchars($visa['title']) ?>"><?= htmlspecialchars($visa['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } ?>
                             
-                            <!-- Airfare (Optional) - Fixed the "Not Included" option -->
+                            <!-- Airfare (Optional) -->
                             <?php
                             if ($this->session->flashdata('item')) {
                                 $message = $this->session->flashdata('item');
@@ -316,16 +322,22 @@
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="Airfare" name="Airfare">
                                         <option <?= ($message['Airfare']['value'] == "0")  ? "selected" : "" ?> value="0">Airfare</option>
-                                        <option <?= ($message['Airfare']['value'] == "Included")  ? "selected" : "" ?> value="Included">Included</option>
-                                        <option <?= ($message['Airfare']['value'] == "Not Included")  ? "selected" : "" ?> value="Not Included">Not Included</option>
+                                        <?php if(isset($airfare_options) && !empty($airfare_options)): ?>
+                                            <?php foreach($airfare_options as $air): ?>
+                                                <option <?= ($message['Airfare']['value'] == $air['title']) ? "selected" : "" ?> value="<?= htmlspecialchars($air['title']) ?>"><?= htmlspecialchars($air['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="Airfare" name="Airfare">
                                         <option value="0">Airfare</option>
-                                        <option value="Included">Included</option>
-                                        <option value="Not Included">Not Included</option>
+                                        <?php if(isset($airfare_options) && !empty($airfare_options)): ?>
+                                            <?php foreach($airfare_options as $air): ?>
+                                                <option value="<?= htmlspecialchars($air['title']) ?>"><?= htmlspecialchars($air['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } ?>
@@ -338,18 +350,22 @@
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="meals" name="meals">
                                         <option <?=($message['meals']['value'] == "0")  ? "selected" : "" ?> value="0">Meals</option>
-                                        <option <?=($message['meals']['value'] == "CP")  ? "selected" : "" ?> value="CP">CP</option>
-                                        <option <?=($message['meals']['value'] == "MAP")  ? "selected" : "" ?> value="MAP">MAP</option>
-                                        <option <?=($message['meals']['value'] == "AP")  ? "selected" : "" ?> value="AP">AP</option>
+                                        <?php if(isset($meals_options) && !empty($meals_options)): ?>
+                                            <?php foreach($meals_options as $meal): ?>
+                                                <option <?=($message['meals']['value'] == $meal['name']) ? "selected" : "" ?> value="<?= htmlspecialchars($meal['name']) ?>"><?= htmlspecialchars($meal['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="meals" name="meals">
                                         <option value="0">Meals</option>
-                                        <option value="CP">CP</option>
-                                        <option value="MAP">MAP</option>
-                                        <option value="AP">AP</option>
+                                        <?php if(isset($meals_options) && !empty($meals_options)): ?>
+                                            <?php foreach($meals_options as $meal): ?>
+                                                <option value="<?= htmlspecialchars($meal['name']) ?>"><?= htmlspecialchars($meal['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } ?>
@@ -361,16 +377,22 @@
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="Transfers" name="Transfers">
                                         <option <?=($message['Transfers']['value'] == "0")  ? "selected" : "" ?> value="0">Transfers</option>
-                                        <option <?=($message['Transfers']['value'] == "Private")  ? "selected" : "" ?> value="Private">Private</option>
-                                        <option <?=($message['Transfers']['value'] == "SIC")  ? "selected" : "" ?> value="SIC">SIC</option>
+                                        <?php if(isset($transfer_options) && !empty($transfer_options)): ?>
+                                            <?php foreach($transfer_options as $transfer): ?>
+                                                <option <?=($message['Transfers']['value'] == $transfer['title']) ? "selected" : "" ?> value="<?= htmlspecialchars($transfer['title']) ?>"><?= htmlspecialchars($transfer['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } else { ?>
                                 <div class="form-group col-6 mb-2">
                                     <select class="form-select" id="Transfers" name="Transfers">
                                         <option value="0">Transfers</option>
-                                        <option value="Private">Private</option>
-                                        <option value="SIC">SIC</option>
+                                        <?php if(isset($transfer_options) && !empty($transfer_options)): ?>
+                                            <?php foreach($transfer_options as $transfer): ?>
+                                                <option value="<?= htmlspecialchars($transfer['title']) ?>"><?= htmlspecialchars($transfer['title']) ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
                                 </div>
                             <?php } ?>

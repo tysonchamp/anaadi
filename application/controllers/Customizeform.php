@@ -9,6 +9,11 @@ class Customizeform extends CI_Controller {
         $this->load->model('category_model');
         $this->load->model('tourcategory_model');
         $this->load->model('Tourtypes_model'); // Added tour types model
+        // Load new models
+        $this->load->model('Visa_model');
+        $this->load->model('Airticket_model');
+        $this->load->model('Meals_model');
+        $this->load->model('Transfer_model');
         // Add CSRF token name to header for AJAX requests
         header('X-CSRF-Token: ' . $this->security->get_csrf_hash());
     }
@@ -21,6 +26,11 @@ class Customizeform extends CI_Controller {
         $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
         $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
         $data['tour_types'] = $this->Tourtypes_model->getAll(); // Get all tour types
+        // Fetch options from models
+        $data['visa_options'] = $this->Visa_model->getAll();
+        $data['airfare_options'] = $this->Airticket_model->getAll();
+        $data['meals_options'] = $this->Meals_model->getAll();
+        $data['transfer_options'] = $this->Transfer_model->getAll();
         
         $this->load->view('layout/header', $data);
         $this->load->view('front/cutomizeform', $data);
