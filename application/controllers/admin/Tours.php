@@ -470,14 +470,11 @@ class Tours extends CI_Controller
                 $result = $this->tours_model->addNew($recordInfo);
                 if($result > 0)
                 {
-                    $response["error"] = 0;
-                    $response["error_message"] = "";
-                    $response["success_message"] = "Record added successfully";
+                    $this->session->set_flashdata("success", "Record added successfully");
                 } 
                 else 
                 {
-                    $response["error"] = 1;
-                    $response["error_message"] = "Record add failed.";
+                    $this->session->set_flashdata("error", "Record add failed.");
                 }
             }    
         }
@@ -486,27 +483,29 @@ class Tours extends CI_Controller
             $result = $this->tours_model->checkRecordExists1($title, $id);
             if( $result )
             {
-                $response["error"] = 1;
-                $response["error_message"] = "Record already exists";
-                $response["success_message"] = "";
+                $this->session->set_flashdata("error", "Record already exists");
             }
             else
             {
                 $result = $this->tours_model->updateRecord($recordInfo, $id);
                 if($result > 0)
                 {
-                    $response["error"] = 0;
-                    $response["error_message"] = "";
-                    $response["success_message"] = "Record updated successfully";
+                    $this->session->set_flashdata("success", "Record updated successfully");
                 } 
                 else 
                 {
-                    $response["error"] = 1;
-                    $response["error_message"] = "Record update failed.";
+                    $this->session->set_flashdata("error", "Record update failed.");
                 }
             }                
-        }            
-        die(json_encode($response));
+        }
+
+        // Redirect based on category_id after update/add
+        $category_id = isset($category_id) ? $category_id : $this->input->post('category_id');
+        if ($category_id == 1) {
+            redirect('admin/Tours/addtour/India');
+        } else {
+            redirect('admin/Tours/addtour/World');
+        }
     }
 
     public function deleteRecord()
