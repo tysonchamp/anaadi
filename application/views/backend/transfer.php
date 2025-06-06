@@ -33,8 +33,10 @@
                       <td><?= $i++; ?></td>
                       <td><?= htmlspecialchars($row['title']); ?></td>
                       <td>
-                        <button class="btn btn-sm btn-info edit-record" record-data="<?= $row['id']; ?>" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                        <button class="btn btn-sm btn-danger delete-record" record-data="<?= $row['id']; ?>" title="Delete"><i class="bi bi-trash"></i></button>
+                        <div class="d-flex justify-content-center">
+                          <a title="Edit Record" href="javascript:void(0)" record-data="<?= $row['id']; ?>" class="edit-record fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
+                          <a title="Delete Record" href="javascript:void(0)" record-data="<?= $row['id']; ?>" class="delete-record fs-6 text-danger float-right mx-2"><i class="bi bi-trash-fill"></i></a>
+                        </div>
                       </td>
                     </tr>
                   <?php } ?>

@@ -97,6 +97,48 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Tours</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          
+          <li>
+            <a href="<?=base_url('admin/Tours/getIndia')?>">
+              <i class="bi bi-list"></i><span>India</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tours')?>">
+              <i class="bi bi-list"></i><span>World</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tour-master" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Tour Master</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tour-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="<?=base_url('admin/Tourcategory/continents')?>">
+              <i class="bi bi-list"></i><span>Tour Continents</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tourcategory')?>">
+              <i class="bi bi-list"></i><span>Tour Category</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/Tourtypes')?>">
+              <i class="bi bi-list"></i><span>Tour Types</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#master-table" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -170,48 +212,6 @@
           <li>
             <a href="<?=base_url('admin/Airticket')?>">
               <i class="bi bi-list"></i><span>Air Tickets</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tour-master" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Tour Master</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tour-master" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="<?=base_url('admin/Tourcategory/continents')?>">
-              <i class="bi bi-list"></i><span>Tour Continents</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tourcategory')?>">
-              <i class="bi bi-list"></i><span>Tour Category</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tourtypes')?>">
-              <i class="bi bi-list"></i><span>Tour Types</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Tours</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          
-          <li>
-            <a href="<?=base_url('admin/Tours/getIndia')?>">
-              <i class="bi bi-list"></i><span>India</span>
-            </a>
-          </li>
-          <li>
-            <a href="<?=base_url('admin/Tours')?>">
-              <i class="bi bi-list"></i><span>World</span>
             </a>
           </li>
         </ul>
