@@ -163,19 +163,39 @@
                         </div>
                         <div class="col-md-6">
                           <label class="form-label">Transfers</label>
-                          <input type="text" name="transfers" class="form-control" value="<?=(isset($record))?$record['transfers']:''?>" maxlength="255">
+                          <select name="transfers" class="form-select select2">
+                            <option value="">-Select-</option>
+                            <?php if(isset($transfer_list)) { foreach($transfer_list as $row) { ?>
+                              <option value="<?=$row['title']?>" <?=(isset($record) && $record['transfers'] == $row['title'])?'selected':''?>><?=$row['title']?></option>
+                            <?php }} ?>
+                          </select>
                         </div>
                         <div class="col-md-4">
                           <label class="form-label">VISA</label>
-                          <input type="text" name="visa" class="form-control" value="<?=(isset($record))?$record['visa']:''?>" maxlength="255">
+                          <select name="visa" class="form-select select2">
+                            <option value="">-Select-</option>
+                            <?php if(isset($visa_list)) { foreach($visa_list as $row) { ?>
+                              <option value="<?=$row['title']?>" <?=(isset($record) && $record['visa'] == $row['title'])?'selected':''?>><?=$row['title']?></option>
+                            <?php }} ?>
+                          </select>
                         </div>
                         <div class="col-md-4">
                           <label class="form-label">Air Ticket</label>
-                          <input type="text" name="air_ticket" class="form-control" value="<?=(isset($record))?$record['air_ticket']:''?>" maxlength="255">
+                          <select name="air_ticket" class="form-select select2">
+                            <option value="">-Select-</option>
+                            <?php if(isset($airticket_list)) { foreach($airticket_list as $row) { ?>
+                              <option value="<?=$row['title']?>" <?=(isset($record) && $record['air_ticket'] == $row['title'])?'selected':''?>><?=$row['title']?></option>
+                            <?php }} ?>
+                          </select>
                         </div>
                         <div class="col-md-4">
                           <label class="form-label">Travel Insurance</label>
-                          <input type="text" name="travel_insurance" class="form-control" value="<?=(isset($record))?$record['travel_insurance']:''?>" maxlength="255">
+                          <select name="travel_insurance" class="form-select select2">
+                            <option value="">-Select-</option>
+                            <?php if(isset($insurance_list)) { foreach($insurance_list as $row) { ?>
+                              <option value="<?=$row['title']?>" <?=(isset($record) && $record['travel_insurance'] == $row['title'])?'selected':''?>><?=$row['title']?></option>
+                            <?php }} ?>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -249,8 +269,12 @@
                           <input type="date" name="package_validity_to" class="form-control" value="<?=(isset($record))?$record['package_validity_to']:''?>">
                         </div>
                         <div class="col-md-12">
-                          <label class="form-label">Fixed Date Tours (comma separated)</label>
-                          <input type="text" name="fixed_dates" class="form-control" value="<?=(isset($record))?$record['fixed_dates']:''?>" maxlength="500">
+                          <label class="form-label">Fixed Date Tours</label>
+                          <select name="fixed_date_tours[]" class="form-select select2" multiple="multiple">
+                            <?php if(isset($fixeddatetour_list)) { foreach($fixeddatetour_list as $row) { ?>
+                              <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['fixed_date_tours']) && in_array($row['id'], is_array($record['fixed_date_tours']) ? $record['fixed_date_tours'] : json_decode($record['fixed_date_tours'],true))) echo 'selected'; ?>><?=$row['date']?></option>
+                            <?php }} ?>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -428,6 +452,14 @@
         width: '100%',
         placeholder: 'Select options',
         allowClear: true
+      });
+      // Ensure select2 is initialized for dynamically added fields as well
+      $(document).ajaxComplete(function() {
+        $('.select2').select2({
+          width: '100%',
+          placeholder: 'Select options',
+          allowClear: true
+        });
       });
     });
   </script>

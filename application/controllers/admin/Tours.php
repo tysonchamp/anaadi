@@ -25,6 +25,11 @@ class Tours extends CI_Controller
         $this->load->model('inclusion_model');
         $this->load->model('exclusion_model');
         $this->load->model('age_range_model');
+        $this->load->model('airticket_model');
+        $this->load->model('transfer_model');
+        $this->load->model('insurance_model');
+        $this->load->model('visa_model');
+        $this->load->model('FixedDateTour_model');
     }
 
     /**
@@ -111,6 +116,11 @@ class Tours extends CI_Controller
             $data['inclusion_list'] = $this->inclusion_model->getAll();
             $data['exclusion_list'] = $this->exclusion_model->getAll();
             $data['age_range_list'] = $this->age_range_model->getAll();
+            $data['airticket_list'] = $this->airticket_model->getAll();
+            $data['transfer_list'] = $this->transfer_model->getAll();
+            $data['insurance_list'] = $this->insurance_model->getAll();
+            $data['visa_list'] = $this->visa_model->getAll();
+            $data['fixeddatetour_list'] = $this->FixedDateTour_model->getAll();
             $this->load->view('layout_admin/header', $data);
             $this->load->view('backend/addtour', $data);
             $this->load->view('layout_admin/footer');
