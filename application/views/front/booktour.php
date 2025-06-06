@@ -362,6 +362,8 @@
             var adultPrice = parseFloat($("#tour_price").val()) || 0;
             var childPriceWithoutBed = parseFloat($("#price_child_without_bed").val()) || 0;
             var childPriceWithBed = parseFloat($("#price_child_with_bed").val()) || 0;
+            var gstRate = parseFloat($("#gst_rate_per").val()) || 0;
+            var tcsRate = parseFloat($("#tcs_rate_per").val()) || 0;
             
             // Get quantities
             var adultsQty = parseInt($("#adults").val()) || 0;
@@ -375,7 +377,7 @@
             
             // Calculate grand total
             var grandTotal = adultTotal + childWithoutBedTotal + childWithBedTotal;
-            
+
             // Update the display
             function toCurrencyString(price) {
                 return price.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g, '$1,');
@@ -392,6 +394,22 @@
             if (childrenWithBedQty > 0) {
                 breakdown += "<div>Children (With Bed): " + childrenWithBedQty + " × ₹" + toCurrencyString(childPriceWithBed) + " = ₹" + toCurrencyString(childWithBedTotal) + "</div>";
             }
+            
+            // Add GST and TCS to the breakdown
+            // var gstRate = 18; // GST rate in percentage
+            // var tcsRate = 5; // TCS rate in percentage
+            var gstAmount = grandTotal * (gstRate / 100);
+            var tcsAmount = grandTotal * (tcsRate / 100);
+            breakdown += "<div>GST (" + gstRate + "%): ₹" + toCurrencyString(gstAmount) + "</div>";
+            breakdown += "<div>TCS (" + tcsRate + "%): ₹" + toCurrencyString(tcsAmount) + "</div>";
+            // var totalWithGSTAndTCS = grandTotal + gstAmount + tcsAmount;
+            // breakdown += "<div>Total with GST and TCS: ₹" + toCurrencyString(totalWithGSTAndTCS) + "</div>";
+            
+            // Calculate GST and TCS
+            var gstAmount = grandTotal * (gstRate / 100);
+            var tcsAmount = grandTotal * (tcsRate / 100);
+            grandTotal += gstAmount + tcsAmount;
+            
             if (breakdown !== "") {
                 breakdown += "<div class='fw-bold mt-2'>Total: ₹" + toCurrencyString(grandTotal) + "</div>";
             }
