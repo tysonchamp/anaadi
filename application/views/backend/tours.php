@@ -53,7 +53,9 @@
                     <tr>
                       <th scope="row"><?= ($index+1) ?></th>
                       <td><?=$row['category']?></td>
-                      <td><?=$row['tourcategory']?></td>
+                      <td>
+                        <?=$row['tourcategory']?>
+                      </td>
                       <td><?=$row['title']?></td>
                       <td><?=$row['duration_nights']?> Nights, <?=$row['duration_days']?> Days</td>
                       <td><?=$row['price']?></td>

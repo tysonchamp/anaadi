@@ -333,7 +333,8 @@ class Tours extends CI_Controller
         {
             $response["error"] = 1;
             $response["error_message"] = $this->form_validation->error_string();
-            die(json_encode($response));
+            // die(json_encode($response));
+            $this->session->set_flashdata("error", $response["error_message"]);
         }
 
         $target_folder = IMAGE_UPLOAD_PATH."tours/";
@@ -343,7 +344,8 @@ class Tours extends CI_Controller
         {
             $response["error"] = 1;
             $response["error_message"] = $result;
-            die(json_encode($response));
+            // die(json_encode($response));
+            $this->session->set_flashdata("error", $response["error_message"]);
         }
         
         if( $id == "" || $result == "valid" )
@@ -371,7 +373,8 @@ class Tours extends CI_Controller
                 {
                     $response["error"] = 1;
                     $response["error_message"] = "Image upload failed";
-                    die(json_encode($response));
+                    // die(json_encode($response));
+                    $this->session->set_flashdata("error", $response["error_message"]);
                 }
             }
         }
@@ -462,8 +465,7 @@ class Tours extends CI_Controller
         {
             if( $this->tours_model->checkRecordExists($title) )
             {
-                $response["error"] = 1;
-                $response["error_message"] = "Record already exists.";
+                $this->session->set_flashdata("error", "Record already exists.");
             }
             else
             {
@@ -499,9 +501,12 @@ class Tours extends CI_Controller
             }                
         }
 
-        // Redirect based on category_id after update/add
+        // Redirect logic
         $category_id = isset($category_id) ? $category_id : $this->input->post('category_id');
-        if ($category_id == 1) {
+        if ($id != "") {
+            // Editing, redirect to edit page for this record
+            redirect('admin/Tours/edittour/' . $id);
+        } else if ($category_id == 1) {
             redirect('admin/Tours/addtour/India');
         } else {
             redirect('admin/Tours/addtour/World');
