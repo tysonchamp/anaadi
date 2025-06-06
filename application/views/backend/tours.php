@@ -1,10 +1,16 @@
-  <main id="main" class="main">
+<main id="main" class="main">
 
     <section class="section dashboard">
         
         <div class="col-lg-12 p-0">
           <div class="row">
-          <?php $category = $records[0]['category']; ?>
+          <?php 
+            if (isset($records) && is_array($records) && isset($records[0])): 
+              $category = $records[0]['category']; 
+            else:
+              $category = 'World';
+            endif;
+          ?>
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Tours <a type="button" href="<?=base_url('admin/Tours/addtour/'.$category)?>" class="new-tour btn btn-sm btn-primary float-right">Add Tour <i class="bi bi-plus-circle ms-1"></i></a></h5>
@@ -82,11 +88,12 @@
             </div>
 
           </div>
-        </div><!-- End Left side columns -->
+          
 
-      </div>
-    </section>
-
-  </main><!-- End #main -->
-
+          </div><!-- End Left side columns -->
+  
+        </div>
+      </section>
+  
+    </main><!-- End #main -->
   
