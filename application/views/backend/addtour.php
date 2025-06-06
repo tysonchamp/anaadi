@@ -145,7 +145,7 @@
                       <div class="card-body row g-3">
                         <div class="col-md-6">
                           <label class="form-label">Accommodations</label>
-                          <select name="accomodations" class="form-select select2" multiple="multiple">
+                          <select name="accomodations[]" id="accomodations" class="form-select select2" multiple="multiple">
                             <option value="">-Select-</option>
                             <?php if(isset($accomodation_list)) { foreach($accomodation_list as $row) { ?>
                               <option value="<?=$row['name']?>" <?=(isset($record) && $record['accomodations'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
@@ -232,16 +232,28 @@
                         <div class="col-md-6">
                           <label class="form-label">Inclusions</label>
                           <select name="inclusions[]" id="inclusions" class="form-select select2" multiple="multiple">
-                            <?php if(isset($inclusion_list)) { foreach($inclusion_list as $row) { ?>
-                              <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['inclusions']) && in_array($row['id'], is_array($record['inclusions']) ? $record['inclusions'] : json_decode($record['inclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
+                            <?php if(isset($inclusion_list)) { 
+                              // Prepare selected names array
+                              $selected_inclusions = [];
+                              if(isset($record) && isset($record['inclusions'])) {
+                                $selected_inclusions = is_array($record['inclusions']) ? $record['inclusions'] : json_decode($record['inclusions'],true);
+                              }
+                            foreach($inclusion_list as $row) { ?>
+                              <option value="<?=$row['name']?>" <?php if(isset($selected_inclusions) && in_array($row['name'], $selected_inclusions)) echo 'selected'; ?>><?=$row['name']?></option>
                             <?php }} ?>
                           </select>
                         </div>
                         <div class="col-md-6">
                           <label class="form-label">Exclusions</label>
                           <select name="exclusions[]" id="exclusions" class="form-select select2" multiple="multiple">
-                            <?php if(isset($exclusion_list)) { foreach($exclusion_list as $row) { ?>
-                              <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['exclusions']) && in_array($row['id'], is_array($record['exclusions']) ? $record['exclusions'] : json_decode($record['exclusions'],true))) echo 'selected'; ?>><?=$row['name']?></option>
+                            <?php if(isset($exclusion_list)) { 
+                              // Prepare selected names array
+                              $selected_exclusions = [];
+                              if(isset($record) && isset($record['exclusions'])) {
+                                $selected_exclusions = is_array($record['exclusions']) ? $record['exclusions'] : json_decode($record['exclusions'],true);
+                              }
+                            foreach($exclusion_list as $row) { ?>
+                              <option value="<?=$row['name']?>" <?php if(isset($selected_exclusions) && in_array($row['name'], $selected_exclusions)) echo 'selected'; ?>><?=$row['name']?></option>
                             <?php }} ?>
                           </select>
                         </div>
@@ -270,7 +282,7 @@
                         </div>
                         <div class="col-md-12">
                           <label class="form-label">Fixed Date Tours</label>
-                          <select name="fixed_date_tours[]" class="form-select select2" multiple="multiple">
+                          <select name="fixed_date_tours" class="form-select select2">
                             <?php if(isset($fixeddatetour_list)) { foreach($fixeddatetour_list as $row) { ?>
                               <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['fixed_date_tours']) && in_array($row['id'], is_array($record['fixed_date_tours']) ? $record['fixed_date_tours'] : json_decode($record['fixed_date_tours'],true))) echo 'selected'; ?>><?=$row['date']?></option>
                             <?php }} ?>
