@@ -67,7 +67,7 @@
                   <td><div class="d-flex justify-content-center">
                     <?php if( isset($user['user_type']) && $user['user_type'] == 'Admin' ){?>
                     <a title="Edit Record" href="<?=base_url('admin/Tours/edittour/'.$row['id'])?>" class="fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
-                    <a title="Delete Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="delete-record fs-6 text-danger float-right mx-2"><i class="bi bi-trash-fill"></i></a>
+                    <a title="Delete Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="delete-inrecord fs-6 text-danger float-right mx-2"><i class="bi bi-trash-fill"></i></a>
                     <?php } else { ?>
                       <a title="Edit Record" href="javascript:void(0)" record-data="<?=$row['id']?>" class="fs-6 text-warning float-right mx-2"><i class="bi bi-pencil-fill"></i></a>
                     <?php } ?>
@@ -89,3 +89,44 @@
 
 </main><!-- End #main -->
 
+<script>
+  $(document).ready(function() {
+    
+    //delete manaufacturer
+    $(".delete-inrecord").click(function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var result = confirm("Are you sure to delete?");
+		if (result==false) {
+		   return true;
+		} 		
+
+		let id = $(this).attr('record-data');
+        let url = "<?php echo base_url('admin/Tours')?>/deleteRecord/"+id;
+        
+        $.ajax({
+		    url: url,
+		    method: 'DELETE',
+		    contentType: 'application/json',
+		    success: function(data) {
+		        var d = JSON.parse(data);
+                //console.log(d);
+                if( d.error == 1 )
+                {
+                	$(".showalert").append("<div class='alert alert-danger mt-1 mb-0'>"+d.error_message+"</div>");
+                }
+                else
+                {
+                	$(".showalert").append("<div class='alert alert-success mt-1 mb-0'>"+d.success_message+"</div>");
+                	setTimeout(function(){
+                		window.location.reload();
+                	}, 500);
+                }
+		    },
+		    error: function(request,msg,error) {
+		       	console.log(error);
+		    }
+		});
+    });
+  });
+</script>
