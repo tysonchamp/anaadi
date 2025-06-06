@@ -74,12 +74,55 @@
                     </div>
                     <div class="about-item-wrap position-relative">
                         <span class="d-block w-100 fs-16 text-dark">Starting Location: <b><?=$tour['start_location']?></b></span>
-                        <span class="d-block w-100 fs-16 text-dark">Trip Destination: <b><?=$tour['destination_location']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Arrival Location: <b><?=$tour['arrival_location']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Destination Location: <b><?=$tour['destination_location']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Tour Starts (Place): <b><?=$tour['tour_start_place']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Tour Ends (Place): <b><?=$tour['tour_end_place']?></b></span>
                         <span class="d-block w-100 fs-16 text-dark">Covered Locations: <b><?=$tour['covered_locations']?></b></span>
-                        <span class="d-block w-100 fs-16 text-dark">Accommodations: <b><?=$tour['accomodations']?></b></span>
-                        <span class="d-block w-100 fs-16 text-dark">Activities: <b><?=$tour['activities']?></b></span>
-
-                        <span class="price_block shadow"><i class="fa-solid fa-indian-rupee-sign me-1"></i><?=$tour['price']?> / Per Person</span>
+                        <span class="d-block w-100 fs-16 text-dark">Duration: <b><?=$tour['duration_days']?> Days / <?=$tour['duration_nights']?> Nights</b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Min. Adults: <b><?=$tour['min_adults']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Accommodations: 
+        <b>
+            <?php
+            if (!empty($tour['accomodations'])) {
+                $acc = json_decode($tour['accomodations'], true);
+                if (is_array($acc)) {
+                    echo implode(', ', $acc);
+                } else {
+                    echo $tour['accomodations'];
+                }
+            }
+            ?>
+        </b>
+    </span>
+    <span class="d-block w-100 fs-16 text-dark">Meals: <b><?=$tour['meals']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Transfers: <b><?=$tour['transfers']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">VISA: <b><?=$tour['visa']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Air Ticket: <b><?=$tour['air_ticket']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Travel Insurance: <b><?=$tour['travel_insurance']?></b></span>
+    <!-- <span class="d-block w-100 fs-16 text-dark">GST: <b><?=$tour['gst_id']?></b></span> -->
+    <!-- <span class="d-block w-100 fs-16 text-dark">TCS: <b><?=$tour['tcs_id']?></b></span> -->
+    <span class="d-block w-100 fs-16 text-dark">Price Per Adult: <b><?=$tour['price']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Child Price (with bed): <b><?=$tour['price_child_with_bed']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Child Price (without bed): <b><?=$tour['price_child_without_bed']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Infant Price (without bed): <b><?=$tour['price_infant_without_bed']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Booking Validity: <b><?=$tour['booking_validity_from']?> to <?=$tour['booking_validity_to']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Package Validity: <b><?=$tour['package_validity_from']?> to <?=$tour['package_validity_to']?></b></span>
+    <span class="d-block w-100 fs-16 text-dark">Fixed Date Tours: 
+        <b>
+            <?php
+            if (!empty($tour['fixed_dates'])) {
+                $fixed_dates = json_decode($tour['fixed_dates'], true);
+                if (is_array($fixed_dates)) {
+                    echo implode(', ', $fixed_dates);
+                } else {
+                    echo $tour['fixed_dates'];
+                }
+            }
+            ?>
+        </b>
+    </span>
+    <span class="price_block shadow"><i class="fa-solid fa-indian-rupee-sign me-1"></i><?=$tour['price']?> / Per Person</span>
                     </div>
                     <div class="itinerary mb-2 mt-4 fs-16 text-dark text-left w-100">
                         <?=$tour['itinerary']?>
