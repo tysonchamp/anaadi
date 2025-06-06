@@ -147,10 +147,32 @@
                           <label class="form-label">Accommodations</label>
                           <select name="accomodations[]" id="accomodations" class="form-select select2" multiple="multiple">
                             <option value="">-Select-</option>
-                            <?php if(isset($accomodation_list)) { foreach($accomodation_list as $row) { ?>
-                              <option value="<?=$row['name']?>" <?=(isset($record) && $record['accomodations'] == $row['name'])?'selected':''?>><?=$row['name']?></option>
+                            <?php
+                              // Ensure accomodations is always an array
+                              $selected_accomodations = [];
+                              if (isset($record) && isset($record['accomodations'])) {
+                                if (is_array($record['accomodations'])) {
+                                  $selected_accomodations = $record['accomodations'];
+                                } else {
+                                  // Try JSON decode first, fallback to comma-separated
+                                  $decoded = json_decode($record['accomodations'], true);
+                                  if (is_array($decoded)) {
+                                    $selected_accomodations = $decoded;
+                                  } else {
+                                    $selected_accomodations = array_map('trim', explode(',', $record['accomodations']));
+                                  }
+                                }
+                              }
+                              if(isset($accomodation_list)) {
+                                foreach($accomodation_list as $row) { ?>
+                                  <option 
+                                    value="<?=$row['name']?>" 
+                                    <?php echo (in_array($row['name'], $selected_accomodations) ? 'selected' : '' ) ?>
+                                  >
+                                    <?=$row['name']?>
+                                  </option>
                             <?php }} ?>
-                          </select>
+                        </select>
                         </div>
                         <div class="col-md-6">
                           <label class="form-label">Meals</label>
@@ -282,10 +304,36 @@
                         </div>
                         <div class="col-md-12">
                           <label class="form-label">Fixed Date Tours</label>
-                          <select name="fixed_date_tours" class="form-select select2">
-                            <?php if(isset($fixeddatetour_list)) { foreach($fixeddatetour_list as $row) { ?>
-                              <option value="<?=$row['id']?>" <?php if(isset($record) && isset($record['fixed_date_tours']) && in_array($row['id'], is_array($record['fixed_date_tours']) ? $record['fixed_date_tours'] : json_decode($record['fixed_date_tours'],true))) echo 'selected'; ?>><?=$row['date']?></option>
-                            <?php }} ?>
+                          <select name="fixed_date_tours[]" class="form-select select2" multiple="multiple">
+                              <?php
+                                // Prepare selected dates array robustly
+                                $selected_fixed_dates = [];
+                                if (isset($record) && isset($record['fixed_dates'])) {
+                                  if (is_array($record['fixed_dates'])) {
+                                    $selected_fixed_dates = $record['fixed_dates'];
+                                  } else {
+                                    $decoded = json_decode($record['fixed_dates'], true);
+                                    if (is_array($decoded)) {
+                                      $selected_fixed_dates = $decoded;
+                                    } else {
+                                      // Remove brackets/quotes if present, then explode
+                                      $clean = trim($record['fixed_dates'], "[]\"");
+                                      $selected_fixed_dates = array_map('trim', explode(',', str_replace('"', '', $clean)));
+                                    }
+                                  }
+                                }
+                                // Ensure all values are trimmed strings
+                                $selected_fixed_dates = array_map('trim', $selected_fixed_dates);
+
+                                if (isset($fixeddatetour_list)) {
+                                  foreach ($fixeddatetour_list as $row) { ?>
+                                    <option
+                                      value="<?=$row['date']?>"
+                                      <?php if (in_array($row['date'], $selected_fixed_dates)) echo 'selected'; ?>
+                                    >
+                                      <?=$row['date']?>
+                                    </option>
+                              <?php }} ?>
                           </select>
                         </div>
                       </div>
