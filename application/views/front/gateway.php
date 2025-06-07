@@ -70,7 +70,7 @@
                             
                             <div class="text-center" id="booking-btns">
                                 <button id="rzp-button1" class="btn btn-primary">Pay Now</button>
-                                <button id="payLater" class="btn btn-secondary">Pay Later</button>
+                                <a href="<?= base_url() ?>Booktour/thankyou/paylater" class="btn btn-secondary">Pay Later</a>
                             </div>
 
                             <!-- Hidden form for payment verification -->

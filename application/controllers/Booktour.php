@@ -393,6 +393,20 @@ class Booktour extends CI_Controller
         $this->load->view('layout/footer');
     }
     
+    public function thankyou($string)
+    {
+        $this->load->model('Booknow_model');
+        $this->load->model('Tours_model');
+        
+        $data['page_title'] = 'Payment Success';
+        $data['domestic_tours'] = $this->tours_model->getMenuByCategoryId(1);
+        $data['international_tours'] = $this->tours_model->getMenuByCategoryId(2);
+        
+        $this->load->view('layout/header', $data);
+        $this->load->view('front/thankyou', $data);
+        $this->load->view('layout/footer');
+    }
+    
     public function payment_failed($booking_id)
     {
         $this->load->model('Booknow_model');
