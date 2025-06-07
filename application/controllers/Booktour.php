@@ -46,10 +46,10 @@ class Booktour extends CI_Controller
         $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[128]');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[200]');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[200]');
-        $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
-        $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[200]');
+        // $this->form_validation->set_rules('typeof_tour', 'Typeof_tour', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('country', 'Country', 'trim|required|max_length[250]');
+        // $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[250]');
         
         $category = $this->input->post('category', true);
         if ($category == 2) { // If World is selected

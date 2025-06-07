@@ -1,14 +1,14 @@
 <div class="breadcumb-wrapper" data-bg-src="<?=base_url()?>assets/img/bg/subscribe_bg_1.png">
     <div class="container">
         <div class="breadcumb-content">
-            <h3 class="breadcumb-title">Payment Gateway</h3>
+            <h3 class="breadcumb-title">Payment Option</h3>
         </div>
     </div>
 </div>
 <div class="overflow-hidden space" id="gallery-sec">
     <div class="container">
         <div class="title-area mb-30 text-center">
-            <span class="sub-title">Complete Your Payment</span>
+            <span class="sub-title">Thank You For Booking with Us</span>
             <h2 class="sec-title">Booking Summary</h2>
         </div>
         <div class="row gy-4">
@@ -39,18 +39,18 @@
                         <div class="payment-section mt-4">
                             <div class="price-details mb-4">
                                 <h5>Payment Details</h5>
-                                <div class="d-flex justify-content-between">
+                                <!-- <div class="d-flex justify-content-between">
                                     <p>Tour Price:</p>
                                     <p>₹<?= $bookingData['price'] ?></p>
-                                </div>
+                                </div> -->
                                 <div class="d-flex justify-content-between">
-                                    <p><strong>Total Amount:</strong></p>
+                                    <p><strong>Tour Package Cost:</strong></p>
                                     <p><strong>₹<?= $bookingData['price'] ?></strong></p>
                                 </div>
                             </div>
                             
                             <div class="text-center">
-                                <button id="rzp-button1" class="btn btn-primary">Pay Now</button>
+                                <button id="rzp-button1" class="btn btn-primary">Pay Now in Advance</button>
                             </div>
 
                             <!-- Hidden form for payment verification -->

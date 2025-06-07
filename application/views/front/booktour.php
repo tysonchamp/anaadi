@@ -40,7 +40,23 @@
                         <div id="error_div" class="col-12">
                         </div>
                       
-                        <h4 class="sec-title pe-xl-5 me-xl-5 heading"> Tour Booking </h4>
+                        
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading">Customer Information</h4>
+                        <hr>
+                        <div class="col-12 form-group mb-2">
+                            <label class="p-1 mb-1 fs-16">Name</label>
+                            <input type="text" class="form-control" name="name" id="name4" placeholder="" required>
+                        </div>
+                        <div class="col-6 form-group mb-2">
+                            <label class="p-1 mb-1 fs-16">Email</label>
+                            <input type="email" class="form-control" name="email" id="email4" placeholder="" required>
+                        </div>
+                        <div class="col-6 form-group mb-2">
+                            <label class="p-1 mb-1 fs-16">Phone</label>
+                            <input type="number" class="form-control" name="phone" id="phone4" placeholder="" required>
+                        </div>
+
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading"> Tour Information </h4>
                         <hr>
 
                         <div class="form-group col-6 mb-2">
@@ -154,27 +170,15 @@
                         </div>
 
                         
-                    <h4 class="sec-title pe-xl-5 me-xl-5 heading">Tour Booking</h4>
-                    <hr>
-                        <div class="col-12 form-group mb-2">
-                            <label class="p-1 mb-1 fs-16">Name</label>
-                            <input type="text" class="form-control" name="name" id="name4" placeholder="" required>
-                        </div>
-                        <div class="col-6 form-group mb-2">
-                            <label class="p-1 mb-1 fs-16">Email</label>
-                            <input type="email" class="form-control" name="email" id="email4" placeholder="" required>
-                        </div>
-                        <div class="col-6 form-group mb-2">
-                            <label class="p-1 mb-1 fs-16">Phone</label>
-                            <input type="number" class="form-control" name="phone" id="phone4" placeholder="" required>
-                        </div>
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading">Basic Information</h4>
+                        <hr>
                         <div class="col-12 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Address</label>
-                            <input type="text" class="form-control" name="address" id="address4" placeholder="" required>
+                            <input type="text" class="form-control" name="address" id="address4" placeholder="">
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Type of Tour</label>
-                            <select class="form-select" id="typeof_tour" name="typeof_tour" required>
+                            <select class="form-select" id="typeof_tour" name="typeof_tour">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
                                 <?php if(!empty($tour_types)): ?>
                                     <?php foreach($tour_types as $type): ?>
@@ -184,22 +188,19 @@
                             </select>
                         </div>
                         <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">Country</label>
-
-                            <select class="form-select" name="country" required>
+                            <label class="p-1 mb-1 fs-16">State</label>
+                            <select class="form-select" name="country">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
                                 <?php if(!empty($india_states)): ?>
                                     <?php foreach($india_states as $state): ?>
                                         <option value="<?= $state['id'] ?>"><?= $state['country'] ?></option>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
-
                             </select>
-
                         </div>
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16"> City:</label>
-                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3" required>
+                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
                         </div>
                         <div class="form-btn col-12 mt-24"><button id="booktour" type="submit" class="th-btn">Book Now</button></div>
                     </div>

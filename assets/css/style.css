@@ -35117,5 +35117,8 @@ span.select2-selection.select2-selection--single:focus {
 }
 
 .swiper-slide .destination-box3{ position: relative !important; }
-.swiper-slide{ overflow: hidden !important; border-radius: 30px !important;}
+.swiper-slide{ 
+  overflow: hidden !important; 
+  /* border-radius: 30px !important; */
+}
 .swiper-slide:hover .overlay-lightbox{ background-color: rgba(0,0,0,0.4);}
