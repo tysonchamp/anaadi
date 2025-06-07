@@ -129,8 +129,22 @@
                     </div>
                     <div class="w-100 mt-4">
                         <h2 class="box-title">Included and Excluded</h2>
-                        <?php $inclusions = json_decode($tour['inclusions']);
-                        $exclusions = json_decode($tour['exclusions']);?>
+                        <?php
+                        // Provide a default valid JSON array string if the tour data is empty or not set
+                        $inclusions_json = !empty($tour['inclusions']) ? $tour['inclusions'] : '[]';
+                        $exclusions_json = !empty($tour['exclusions']) ? $tour['exclusions'] : '[]';
+
+                        $inclusions = json_decode($inclusions_json, true);
+                        $exclusions = json_decode($exclusions_json, true);
+
+                        // Ensure $inclusions and $exclusions are arrays, even if json_decode fails
+                        if (!is_array($inclusions)) {
+                            $inclusions = [];
+                        }
+                        if (!is_array($exclusions)) {
+                            $exclusions = [];
+                        }
+                        ?>
 
                         <div class="destination-checklist">
                             <div class="checklist style2 style4">

@@ -3,7 +3,7 @@
   <footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><a class="text-warning" href="https://anaadi.co">Anaadi Tours & Travels</a></strong>. All Rights Reserved
-         Designed by <a class="text-warning" href="https://jvmtech.in/"><strong>JVM TECH SOLUTIONS</strong></a>
+         <!-- Designed by <a class="text-warning" href="https://jvmtech.in/"><strong>JVM TECH SOLUTIONS</strong></a> -->
     </div>
   </footer><!-- End Footer -->
 

@@ -109,7 +109,9 @@
 							<p class="copyright-text">Copyright 2025 <a href="<?=base_url()?>">Anaadi Tours and Travels</a>. All Rights Reserved.</p>
 						</div>
 						<div class="col-md-6 text-end d-none d-md-block">
-							<div class="footer-card"><span class="title text-dark">Design and Developed By <a target="_blank" class="text-theme" href="https://jvmtech.in">JVM TECH SOLUTIONS</a></span></div>
+							<div class="footer-card">
+								<!-- <span class="title text-dark">Design and Developed By <a target="_blank" class="text-theme" href="https://jvmtech.in">JVM TECH SOLUTIONS</a></span> -->
+							</div>
 						</div>
 					</div>
 				</div>
