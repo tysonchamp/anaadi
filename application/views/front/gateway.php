@@ -20,7 +20,7 @@
 <div class="breadcumb-wrapper" data-bg-src="<?=base_url()?>assets/img/bg/subscribe_bg_1.png">
     <div class="container">
         <div class="breadcumb-content">
-            <h3 class="breadcumb-title">Payment Option</h3>
+            <h3 class="breadcumb-title">Booking Summary</h3>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
                                     <p><strong>Email:</strong> <?= $bookingData['email'] ?></p>
                                     <p><strong>Phone:</strong> <?= $bookingData['phone'] ?></p>
                                     <p><strong>Departure Date:</strong> <?= $bookingData['departure_date'] ?></p>
-                                    <p><strong>Return Date:</strong> <?= $bookingData['return_date'] ?></p>
+                                    <!-- <p><strong>Return Date:</strong> <?= $bookingData['return_date'] ?></p> -->
                                 </div>
                                 <div class="col-md-6">
                                     <!-- <p><strong>Duration:</strong> <?= $bookingData['howmany_days'] ?> Days, <?= $bookingData['howmany_night'] ?> Nights</p> -->
@@ -69,8 +69,8 @@
                             </div>
                             
                             <div class="text-center" id="booking-btns">
-                                <button id="rzp-button1" class="btn btn-primary">Pay Now in Advance</button>
-                                <button id="print-button" class="btn btn-secondary">Print a Copy</button>
+                                <button id="rzp-button1" class="btn btn-primary">Pay Now</button>
+                                <button id="payLater" class="btn btn-secondary">Pay Later</button>
                             </div>
 
                             <!-- Hidden form for payment verification -->

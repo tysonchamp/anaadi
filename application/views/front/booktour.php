@@ -41,7 +41,7 @@
                         </div>
                       
                         
-                        <h4 class="sec-title pe-xl-5 me-xl-5 heading">Customer Information</h4>
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3">Customer Information</h4>
                         <hr>
                         <div class="col-12 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Name</label>
@@ -56,7 +56,7 @@
                             <input type="number" class="form-control" name="phone" id="phone4" placeholder="" required>
                         </div>
 
-                        <h4 class="sec-title pe-xl-5 me-xl-5 heading"> Tour Information </h4>
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3"> Tour Information </h4>
                         <hr>
 
                         <div class="form-group col-6 mb-2">
@@ -120,7 +120,7 @@
                         ?>
 
                         <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16" for="departure_date">Departure Date:</label>
+                            <label class="p-1 mb-1 fs-16" for="departure_date">Start Date:</label>
                             <?php if (!empty($fixed_dates)) { ?>
                                 <select id="departure_date" name="departure_date" class="form-select">
                                     <option value="">-Select Date-</option>
@@ -132,10 +132,10 @@
                                 <input type="datetime-local" id="departure_date" name="departure_date">
                             <?php } ?>
                         </div>
-                        <div class="form-group col-6 mb-2">
+                        <!-- <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16" for="return_date">Return Date (Optional):</label>
                             <input type="datetime-local" id="return_date" name="return_date">
-                        </div>
+                        </div> -->
 
                         <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Meals</label>
@@ -170,7 +170,7 @@
                         </div>
 
                         
-                        <h4 class="sec-title pe-xl-5 me-xl-5 heading">Basic Information</h4>
+                        <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3">Basic Information</h4>
                         <hr>
                         <div class="col-12 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">Address</label>
