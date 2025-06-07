@@ -55,6 +55,25 @@
                             <label class="p-1 mb-1 fs-16">Phone</label>
                             <input type="number" class="form-control" name="phone" id="phone4" placeholder="" required>
                         </div>
+                        <div class="col-12 form-group mb-2">
+                            <label class="p-1 mb-1 fs-16">Address</label>
+                            <input type="text" class="form-control" name="address" id="address4" placeholder="">
+                        </div>
+                        <div class="form-group col-6 mb-2">
+                            <label class="p-1 mb-1 fs-16">State</label>
+                            <select class="form-select" name="country">
+                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
+                                <?php if(!empty($india_states)): ?>
+                                    <?php foreach($india_states as $state): ?>
+                                        <option value="<?= $state['id'] ?>"><?= $state['country'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <div class="form-group col-6 mb-2">
+                            <label class="p-1 mb-1 fs-16"> City:</label>
+                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
+                        </div>
 
                         <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3"> Tour Information </h4>
                         <hr>
@@ -137,7 +156,7 @@
                             <input type="datetime-local" id="return_date" name="return_date">
                         </div> -->
 
-                        <div class="form-group col-6 mb-2">
+                        <!-- <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Meals</label>
                             <select class="form-select" id="meals" name="meals">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
@@ -145,7 +164,7 @@
                                     <option value="<?= $meal['name'] ?>" <?= (isset($tour) && count($tour) > 0 && $tour['meal_id'] == $meal['name']) ? "selected" : "" ?>><?= $meal['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                        </div>
+                        </div> -->
 
                         <div class="col-6 form-group mb-2">
                             <label class="p-1 mb-1 fs-16">No. of Adults</label>
@@ -170,13 +189,9 @@
                         </div>
 
                         
-                        <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3">Basic Information</h4>
-                        <hr>
-                        <div class="col-12 form-group mb-2">
-                            <label class="p-1 mb-1 fs-16">Address</label>
-                            <input type="text" class="form-control" name="address" id="address4" placeholder="">
-                        </div>
-                        <div class="form-group col-6 mb-2">
+                        <!-- <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3">Basic Information</h4>
+                        <hr> -->
+                        <!-- <div class="form-group col-6 mb-2">
                             <label class="p-1 mb-1 fs-16">Type of Tour</label>
                             <select class="form-select" id="typeof_tour" name="typeof_tour">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
@@ -186,22 +201,7 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16">State</label>
-                            <select class="form-select" name="country">
-                                <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
-                                <?php if(!empty($india_states)): ?>
-                                    <?php foreach($india_states as $state): ?>
-                                        <option value="<?= $state['id'] ?>"><?= $state['country'] ?></option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-6 mb-2">
-                            <label class="p-1 mb-1 fs-16"> City:</label>
-                            <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
-                        </div>
+                        </div> -->
                         <div class="form-btn col-12 mt-24"><button id="booktour" type="button" class="th-btn">Book Now</button></div>
                     </div>
                     <p class="form-messages mb-0 mt-3"></p>
