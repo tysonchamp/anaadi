@@ -1,3 +1,22 @@
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #booking-summary, #booking-summary * {
+    visibility: visible;
+  }
+  #booking-summary {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  #booking-btns {
+    display: none !important;
+  }
+}
+</style>
 <div class="breadcumb-wrapper" data-bg-src="<?=base_url()?>assets/img/bg/subscribe_bg_1.png">
     <div class="container">
         <div class="breadcumb-content">
@@ -13,7 +32,7 @@
         </div>
         <div class="row gy-4">
             <div class="col-lg-8 offset-lg-2">
-                <div class="card">
+                <div class="card" id="booking-summary">
                     <div class="card-body">
                         <div class="booking-details mb-4">
                             <h4 class="mb-3"><?= $tour['title'] ?></h4>
@@ -49,8 +68,9 @@
                                 </div>
                             </div>
                             
-                            <div class="text-center">
+                            <div class="text-center" id="booking-btns">
                                 <button id="rzp-button1" class="btn btn-primary">Pay Now in Advance</button>
+                                <button id="print-button" class="btn btn-secondary">Print a Copy</button>
                             </div>
 
                             <!-- Hidden form for payment verification -->
@@ -102,4 +122,9 @@ document.getElementById('rzp-button1').onclick = function(e){
     rzp1.open();
     e.preventDefault();
 }
+
+document.getElementById('print-button').onclick = function() {
+    window.print();
+};
+
 </script>

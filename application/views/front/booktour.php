@@ -202,7 +202,7 @@
                             <label class="p-1 mb-1 fs-16"> City:</label>
                             <input type="text" name="city" id="city" value="" placeholder="Enter city name" class="form-control mt-3">
                         </div>
-                        <div class="form-btn col-12 mt-24"><button id="booktour" type="submit" class="th-btn">Book Now</button></div>
+                        <div class="form-btn col-12 mt-24"><button id="booktour" type="button" class="th-btn">Book Now</button></div>
                     </div>
                     <p class="form-messages mb-0 mt-3"></p>
                 </form>
@@ -609,4 +609,16 @@
             // loadIndiaStates(1);
         }
     });
+
+    $("#booktour").click(function(e) {
+        e.preventDefault(); // Prevent default button action
+
+        // Perform any client-side validation if needed here before confirm
+
+        if (confirm("Are you sure you want to book this tour?")) {
+            // If confirmed, submit the form
+            $("form.ajax-book").submit();
+        }
+    });
+
 </script>
