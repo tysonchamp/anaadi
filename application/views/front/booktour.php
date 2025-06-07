@@ -78,7 +78,7 @@
                         <h4 class="sec-title pe-xl-5 me-xl-5 heading mt-3"> Tour Information </h4>
                         <hr>
 
-                        <div class="form-group col-6 mb-2">
+                        <div class="form-group col-6 mb-2" <?php echo (isset($tour) && count($tour) > 0) ? "style='display: none;'" : ""; ?>>
                             <label class="p-1 mb-1 fs-16">Category</label>
                             <select class="form-select" id="tour_category" name="category">
                                 <option <?= (isset($tour) && count($tour) > 0) ? "" : "selected" ?> value="0">-Select-</option>
@@ -86,14 +86,14 @@
                                 <option <?= (isset($tour) && count($tour) > 0 && $tour['category_id'] == 2) ? "selected" : "" ?> value="2">World</option>
                             </select>
                         </div>
-                        <div class="form-group col-6 mb-2" id="continent_container" style="display: none;">
+                        <div class="form-group col-6 mb-2" id="continent_container" <?php echo (isset($tour) && count($tour) > 0) ? "style='display: none;'" : "style='display: none;'"; ?>>
                             <label class="p-1 mb-1 fs-16">Continent</label>
                             <select class="form-select" id="continent_id" name="continent">
                                 <option value="0">-Select Continent-</option>
                             </select>
                             <span class="text-danger continent-error" style="display: none;">Please select a continent</span>
                         </div>
-                        <div class="form-group col-6 mb-2">
+                        <div class="form-group col-6 mb-2" <?php echo (isset($tour) && count($tour) > 0) ? "style='display: none;'" : ""; ?>>
                             <label class="p-1 mb-1 fs-16">Country/State</label>
                             <select class="form-select" id="tourcategory" name="tourcategory">
                                 <option value="0">-Select-</option>
@@ -603,7 +603,9 @@
         }
         
         if ($('#tour_category').val() == 2) {
-            $('#continent_container').show();
+            <?php if(!(isset($tour) && count($tour) > 0)): ?>
+                $('#continent_container').show();
+            <?php endif ?>
             loadContinents();
         } else if ($('#tour_category').val() == 1) {
             // loadIndiaStates(1);

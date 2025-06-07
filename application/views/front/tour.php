@@ -82,53 +82,54 @@
                         <span class="d-block w-100 fs-16 text-dark">Duration: <b><?=$tour['duration_days']?> Days / <?=$tour['duration_nights']?> Nights</b></span>
                         <span class="d-block w-100 fs-16 text-dark">Min. Adults: <b><?=$tour['min_adults']?></b></span>
                         <span class="d-block w-100 fs-16 text-dark">Accommodations: 
-        <b>
-            <?php
-            if (!empty($tour['accomodations'])) {
-                $acc = json_decode($tour['accomodations'], true);
-                if (is_array($acc)) {
-                    echo implode(', ', $acc);
-                } else {
-                    echo $tour['accomodations'];
-                }
-            }
-            ?>
-        </b>
-    </span>
-    <span class="d-block w-100 fs-16 text-dark">Meals: <b><?=$tour['meals']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Transfers: <b><?=$tour['transfers']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">VISA: <b><?=$tour['visa']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Air Ticket: <b><?=$tour['air_ticket']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Travel Insurance: <b><?=$tour['travel_insurance']?></b></span>
-    <!-- <span class="d-block w-100 fs-16 text-dark">GST: <b><?=$tour['gst_id']?></b></span> -->
-    <!-- <span class="d-block w-100 fs-16 text-dark">TCS: <b><?=$tour['tcs_id']?></b></span> -->
-    <span class="d-block w-100 fs-16 text-dark">Price Per Adult: <b><?=$tour['price']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Child Price (with bed): <b><?=$tour['price_child_with_bed']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Child Price (without bed): <b><?=$tour['price_child_without_bed']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Infant Price (without bed): <b><?=$tour['price_infant_without_bed']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Booking Validity: <b><?=$tour['booking_validity_from']?> to <?=$tour['booking_validity_to']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Package Validity: <b><?=$tour['package_validity_from']?> to <?=$tour['package_validity_to']?></b></span>
-    <span class="d-block w-100 fs-16 text-dark">Fixed Date Tours: 
-        <b>
-            <?php
-            if (!empty($tour['fixed_dates'])) {
-                $fixed_dates = json_decode($tour['fixed_dates'], true);
-                if (is_array($fixed_dates)) {
-                    echo implode(', ', $fixed_dates);
-                } else {
-                    echo $tour['fixed_dates'];
-                }
-            }
-            ?>
-        </b>
-    </span>
-    <span class="price_block shadow"><i class="fa-solid fa-indian-rupee-sign me-1"></i><?=$tour['price']?> / Per Person</span>
+                            <b>
+                                <?php
+                                if (!empty($tour['accomodations'])) {
+                                    $acc = json_decode($tour['accomodations'], true);
+                                    if (is_array($acc)) {
+                                        echo implode(', ', $acc);
+                                    } else {
+                                        echo $tour['accomodations'];
+                                    }
+                                }
+                                ?>
+                            </b>
+                        </span>
+                        <span class="d-block w-100 fs-16 text-dark">Meals: <b><?=$tour['meals']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Transfers: <b><?=$tour['transfers']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">VISA: <b><?=$tour['visa']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Air Ticket: <b><?=$tour['air_ticket']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Travel Insurance: <b><?=$tour['travel_insurance']?></b></span>
+                        <!-- <span class="d-block w-100 fs-16 text-dark">GST: <b><?=$tour['gst_id']?></b></span> -->
+                        <!-- <span class="d-block w-100 fs-16 text-dark">TCS: <b><?=$tour['tcs_id']?></b></span> -->
+                        <!-- <span class="d-block w-100 fs-16 text-dark">Price Per Adult: <b><?=$tour['price']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Child Price (with bed): <b><?=$tour['price_child_with_bed']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Child Price (without bed): <b><?=$tour['price_child_without_bed']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Infant Price (without bed): <b><?=$tour['price_infant_without_bed']?></b></span> -->
+                        <span class="d-block w-100 fs-16 text-dark">Booking Validity: <b><?=$tour['booking_validity_from']?> to <?=$tour['booking_validity_to']?></b></span>
+                        <span class="d-block w-100 fs-16 text-dark">Package Validity: <b><?=$tour['package_validity_from']?> to <?=$tour['package_validity_to']?></b></span>
+                        <!-- <span class="d-block w-100 fs-16 text-dark">Fixed Date Tours: 
+                            <b>
+                                <?php
+                                if (!empty($tour['fixed_dates'])) {
+                                    $fixed_dates = json_decode($tour['fixed_dates'], true);
+                                    if (is_array($fixed_dates)) {
+                                        echo implode(', ', $fixed_dates);
+                                    } else {
+                                        echo $tour['fixed_dates'];
+                                    }
+                                }
+                                ?>
+                            </b>
+                        </span> -->
+
+                        <span class="price_block shadow"><i class="fa-solid fa-indian-rupee-sign me-1"></i><?=$tour['price']?> / Per Person</span>
                     </div>
                     <div class="itinerary mb-2 mt-4 fs-16 text-dark text-left w-100">
                         <?=$tour['itinerary']?>
                     </div>
                     <div class="w-100 mt-4">
-                        <h2 class="box-title">Included and Excluded</h2>
+                        <h2 class="box-title">Included</h2>
                         <?php
                         // Provide a default valid JSON array string if the tour data is empty or not set
                         $inclusions_json = !empty($tour['inclusions']) ? $tour['inclusions'] : '[]';
@@ -147,13 +148,19 @@
                         ?>
 
                         <div class="destination-checklist">
-                            <div class="checklist style2 style4">
+                            <div class="checklist style4">
                                 <ul>
                                     <?php foreach($inclusions as $item){?>
                                     <li><?=$item?></li>
                                     <?php } ?>
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-100 mt-4">
+                        <h2 class="box-title">Excluded</h2>
+                        <div class="destination-checklist">
                             <div class="checklist style5">
                                 <ul>
                                     <?php foreach($exclusions as $item){?>

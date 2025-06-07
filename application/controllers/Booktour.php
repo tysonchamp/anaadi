@@ -52,9 +52,9 @@ class Booktour extends CI_Controller
         // $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[250]');
         
         $category = $this->input->post('category', true);
-        if ($category == 2) { // If World is selected
-            $this->form_validation->set_rules('continent', 'Continent', 'trim|required|max_length[250]');
-        }
+        // if ($category == 2) { // If World is selected
+        //     $this->form_validation->set_rules('continent', 'Continent', 'trim|required|max_length[250]');
+        // }
         
         $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required|max_length[250]');
         $this->form_validation->set_rules('return_date', 'Return Date', 'trim|max_length[250]');

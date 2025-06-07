@@ -373,9 +373,9 @@ select, .form-control, .form-select, textarea, input {
     text-align: center;
     margin: auto;
     padding: 10px;
-    color: #000;
+    color: #fff;
     font-size: 15px;
-    background-color: #FFDC00;
+    background-color: #d62d20;
 }
 
 #whatsapp-widget-mobile .btn:nth-child(1){
