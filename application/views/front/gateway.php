@@ -50,7 +50,7 @@
                                     <p><strong>Children (With Bed):</strong> <?= $bookingData['children_withbed'] ?></p>
                                     <p><strong>Children (Without Bed):</strong> <?= $bookingData['children'] ?></p>
                                     <!-- <p><strong>Hotel:</strong> <?= $bookingData['hotel'] ?></p> -->
-                                    <p><strong>Meals:</strong> <?= $bookingData['meals'] ?></p>
+                                    <!-- <p><strong>Meals:</strong> <?= $bookingData['meals'] ?></p> -->
                                 </div>
                             </div>
                         </div>
