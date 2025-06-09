@@ -28,56 +28,56 @@
         <div class="row mt-3">
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-primary">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Tours/getIndia'); ?>">
                 <i class="bi bi-geo-alt-fill fs-1 text-primary mb-2"></i>
                 <h5 class="card-title fw-bold">Tour Packages (India)</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_tours_india; ?></p>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-info">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Tours'); ?>">
                 <i class="bi bi-globe2 fs-1 text-info mb-2"></i>
                 <h5 class="card-title fw-bold">Tour Packages (World)</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_tours_world; ?></p>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-success">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Booking?status=paid'); ?>">
                 <i class="bi bi-cash-stack fs-1 text-success mb-2"></i>
                 <h5 class="card-title fw-bold">Bookings (Paid)</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_bookings_paid; ?></p>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-warning">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Booking'); ?>">
                 <i class="bi bi-cash fs-1 text-warning mb-2"></i>
                 <h5 class="card-title fw-bold">Bookings (Unpaid)</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_bookings_unpaid; ?></p>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-secondary">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Booking/customize'); ?>">
                 <i class="bi bi-pencil-square fs-1 text-secondary mb-2"></i>
                 <h5 class="card-title fw-bold">Customize Tour Requests</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_customize_requests; ?></p>
-              </div>
+              </a>
             </div>
           </div>
           <div class="col-md-3 mb-3">
             <div class="card bg-light text-dark border-dark">
-              <div class="card-body text-center">
+              <a class="card-body text-center" href="<?php echo base_url('admin/Contact'); ?>">
                 <i class="bi bi-envelope-fill fs-1 text-dark mb-2"></i>
                 <h5 class="card-title fw-bold">Contact Enquiries</h5>
                 <p class="card-text fs-3 mb-0"><?php echo $total_contact_enquiries; ?></p>
-              </div>
+              </a>
             </div>
           </div>
         </div>

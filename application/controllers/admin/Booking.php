@@ -27,9 +27,10 @@ class Booking extends CI_Controller
         }
         else
         {
+            $status = isset($_GET['status']) ? $_GET['status'] : 'pending';
             $data['user'] = $this->session->userdata();
             $data['page_title'] = "Booknow";
-            $data['records'] = $this->Booking_model->getAll();
+            $data['records'] = $this->Booking_model->getAll_by_status($status);
 
             $this->load->view('layout_admin/header', $data);
             $this->load->view('backend/booking', $data);

@@ -264,21 +264,21 @@
           <i class="bi bi-layout-text-window-reverse"></i><span>Booking Information</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          
-          
           <li>
             <a href="<?=base_url('admin/Booking')?>">
-              <i class="bi bi-person-lines-fill"></i><span>Package Booked</span>
+              <i class="bi bi-person-lines-fill"></i><span>Package Booked (Unpaid)</span>
             </a>
           </li>
-         
-          
+          <li>
+            <a href="<?=base_url('admin/Booking?status=paid')?>">
+              <i class="bi bi-person-lines-fill"></i><span>Package Booked (Paid)</span>
+            </a>
+          </li>
           <li>
             <a href="<?=base_url('admin/Booking/customize')?>">
               <i class="bi bi-person-lines-fill"></i><span>Customize Tour Requests</span>
             </a>
           </li>
-         
         </ul>
       </li>
       <li class="nav-item">
